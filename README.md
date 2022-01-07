@@ -253,12 +253,12 @@ DismissLink {
 navigator.dismiss()
 ```
 
-> Important Note: The 2 ways of dismissing supports `DismissDestination`.
+> Important Note: You have 4 options in dismissing the current view.
 > for more details, see [DismissDestination](#dismissdestination)
 
 ### DismissDestination
 
-Defines the type of dismiss operation.
+`DismissDestination` Defines the type of dismiss operation.
 
 ```swift
 public enum DismissDestination {
@@ -275,6 +275,17 @@ public enum DismissDestination {
     // Dismiss current presented sheet
     case dismissSheet
 }
+```
+
+You can pass your option to `DismissLink` or `Navigator.dismiss()`
+
+```swift
+DismissLink(to: .root) {
+    Label("Back", systemImage: "chevron.backward")
+            .foregroundColor(.blue)
+}
+
+navigator.dismiss(to: .root)
 ```
 
 ### Navigation Bar
