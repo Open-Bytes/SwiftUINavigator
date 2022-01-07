@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-/// The transition type for the whole NavigatorView.
+/// Defines the supported transition types.
 public enum NavigatorTransitionType {
     /// Transitions won't be animated.
     case none
@@ -40,7 +40,6 @@ public enum NavigatorTransitionType {
     }
 
 }
-
 public struct NavigatorTransition {
     public let push: AnyTransition
     public let pop: AnyTransition

@@ -6,6 +6,27 @@
 
 **SwiftUINavigator** is a lightweight, flexible, and super easy library which makes `SwiftUI` navigation a trivial task.
 
+# Table of contents
+
+- [Why?](#why)
+    - [SwiftUI Limitations](#swiftui-limitations)
+    - [ SwiftUINavigator is Awesome](#swiftuinavigator-is-awesome)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+    - [NavigatorView](#navigatorview)
+    - [Navigator](#navigator)
+    - [NavigatorLink](#navigatorlink)
+    - [Dismissing (Navigation Back)](#dismissing-navigation-back)
+    - [DismissDestination](#dismissdestination)
+    - [Navigation Bar](#navigation-bar)
+    - [Transitions](#transitions)
+    - [Navigation Types](#navigation-types)
+    - [Navigation Transition Types](#navigation-transition-types)
+    - [License](#license)
+- [Contribution](#clap-contribution)
+- [License](#license)
+
 ## Why?
 
 Let's first explore the limitation of SwiftUI then explore the awesome features **SwiftUINavigator** provides.
@@ -36,9 +57,9 @@ In SwiftUI, there are a lot of limitations:
 - [X] Dismiss to a specific view using its ID.
 - [X] Navigation Bars are built-in the library
 
-### 📲 Requirements
+### Requirements
 
-- iOS 14+
+- iOS 13+
 - Swift 5.3+
 
 ## Installation
@@ -144,7 +165,7 @@ NavigatorView(
 ```
 
 > **Important Note**: the second initializers supports a `Navigator` instance. This is important
-> in if you need to nest a `NavigatorView` other than the main one in the root view of the app.
+> if you need to nest a `NavigatorView` other than the main one in the root view of the app.
 > In this case, pass the instance of `EnvironmentObject` as follows:
 
 ```swift
@@ -301,6 +322,8 @@ public enum NavigationType {
 ```
 
 ### Navigation Transition Types
+
+`NavigatorTransitionType` enum defines the supported transition types.
 
 ```swift
 public enum NavigatorTransitionType {
