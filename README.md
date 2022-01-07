@@ -10,7 +10,7 @@
 
 - [Why?](#why)
     - [SwiftUI Limitations](#swiftui-limitations)
-    - [ SwiftUINavigator is Awesome](#swiftuinavigator-is-awesome)
+    - [ SwiftUINavigator is awesome](#swiftuinavigator-is-awesome)
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -43,7 +43,7 @@ In SwiftUI, there are a lot of limitations:
 - [ ] Can not navigate programmatically.
 - [ ] Customizing the navigation bar is not trivial.
 
-### SwiftUINavigator is Awesome
+### SwiftUINavigator is awesome
 
 `SwiftUINavigator` has a lot of awesome features. Here's some of these features:
 
