@@ -165,7 +165,9 @@ NavigatorView(
 ```
 
 > **Important Note**: the second initializers supports a `Navigator` instance. This is important
-> if you need to nest a `NavigatorView` other than the root one.
+> if you need to nest a `NavigatorView` other than the root one. 
+> Keep in mind that if you didn't pass the `Navigator` instance, 
+> it will work, but it's recommended to pass it for consistent behavior is the whole app.
 > In this case, you should pass the instance of `Navigator` using the `EnvironmentObject` as follows:
 
 ```swift
