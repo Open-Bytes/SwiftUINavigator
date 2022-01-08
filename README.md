@@ -1,4 +1,6 @@
-<p align="center"><a href="https://github.com/Open-Bytes/SwiftUINavigator"><img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/logo/logo_white.png?raw=true" alt="SwiftUINavigator Logo" width="450" height="250" border="#1111"/></a></p>
+<p align="center"><a href="https://github.com/Open-Bytes/SwiftUINavigator">
+<img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/logo/logo_white.png?raw=true" alt="SwiftUINavigator Logo" width="450" height="250" border="#1111"/>
+</a></p>
 
 The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/MhmoudAlim) 
 </br>
@@ -10,8 +12,15 @@ The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/Mhmo
 
 **SwiftUINavigator** is a lightweight, flexible, and super easy library which makes `SwiftUI` navigation a trivial task.
 
+
+<p align="center"><a href="https://github.com/Open-Bytes/SwiftUINavigator">
 <img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/demo.gif?raw=true" alt="SwiftUINavigator Demo" width="450" height="450" border="#1111"/>
-<img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/diagram.png?raw=true" alt="SwiftUINavigator Diagram" width="450" height="450" border="#1111"/>
+</a></p>
+
+<p align="center"><a href="https://github.com/Open-Bytes/SwiftUINavigator">
+<img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/diagram.png?raw=true" alt="SwiftUINavigator Diagram" width="550" height="550" border="#1111"/>
+</a></p>
+
 
 # Table of contents
 
