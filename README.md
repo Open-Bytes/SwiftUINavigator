@@ -10,7 +10,8 @@ The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/Mhmo
 
 **SwiftUINavigator** is a lightweight, flexible, and super easy library which makes `SwiftUI` navigation a trivial task.
 
-<img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/demo.gif?raw=true" alt="SwiftUINavigator Logo" width="450" height="450" border="#1111"/>
+<img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/demo.gif?raw=true" alt="SwiftUINavigator Demo" width="450" height="450" border="#1111"/>
+<img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/diagram.png?raw=true" alt="SwiftUINavigator Diagram" width="450" height="450" border="#1111"/>
 
 # Table of contents
 
