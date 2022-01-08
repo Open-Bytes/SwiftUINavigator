@@ -1,4 +1,4 @@
-<p align="center"><a href="https://github.com/Open-Bytes/SwiftUINavigator"><img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/logo/logo_white.png?raw=true" alt="SwiftUINavigator Logo" width="400" height="200" border="#1111"/></a></p>
+<p align="center"><a href="https://github.com/Open-Bytes/SwiftUINavigator"><img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/logo/logo_white.png?raw=true" alt="SwiftUINavigator Logo" width="450" height="250" border="#1111"/></a></p>
 
 The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/MhmoudAlim) 
 </br>
@@ -354,6 +354,11 @@ public enum NavigatorTransitionType {
     case custom(push: AnyTransition, pop: AnyTransition)
 }
 ```
+
+## Demo Project
+
+[DemoApp](https://github.com/Open-Bytes/SwiftUINavigator/blob/master/Demo/DemoApp.swift)
+is an e-commerce app demonstrates the complete usage of the library.
 
 ## :clap: Contribution
 
