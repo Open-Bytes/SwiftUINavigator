@@ -1,4 +1,5 @@
 <p align="center"><a href="https://github.com/Open-Bytes/SwiftUINavigator"><img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/logo/logo_white.png?raw=true" alt="SwiftUINavigator Logo" width="450" height="250" border="#1111"/></a></p>
+<img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/demo.gif?raw=true" alt="SwiftUINavigator Logo" width="400" height="400" border="#1111"/>
 
 The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/MhmoudAlim) 
 </br>
