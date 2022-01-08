@@ -74,7 +74,7 @@ In SwiftUI, there are a lot of limitations:
 https://github.com/Open-Bytes/SwiftUINavigator.git
 ```
 
-## Usage
+## :zap: Usage
 
 1. Import `SwiftUINavigator`.
 
