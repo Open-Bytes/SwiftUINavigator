@@ -4,6 +4,8 @@
 
 import SwiftUI
 
+/// DismissLink is a view which dismisses the current view when tapped.
+/// It's a wapper for `Navigator.dismiss()`
 public struct DismissLink<Label: View>: View {
     private let destination: DismissDestination
     private let label: () -> Label

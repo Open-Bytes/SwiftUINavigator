@@ -18,6 +18,7 @@ The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/Mhmo
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#zap-usage)
+    - [Main Components](#main-components)
     - [NavigatorView](#navigatorview)
     - [Navigator](#navigator)
     - [NavigatorLink](#navigatorlink)
@@ -139,10 +140,19 @@ navigator.dismiss()
 > For more details about dismissing,
 > see [Dismissing (Navigation Back)](#dismissing-navigation-back)
 
+### Main Components
+
+|               **Component**               |                                                                        **Description**                                                                                                                             | 
+| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
+|       [NavigatorView](#navigatorview)     |   `NavigatorView` is the alternative of SwiftUI NavigationView implementing <br> stack-based navigation with mote control and flexibility <br> in handling the navigation                                          | 
+|       [Navigator](#navigator)             |   The `Navigator` class is the heart of the library. It's injected to any view as `EnvironmentObject`.                                                                                                             | 
+|       [NavigatorLink](#navigatorlink)     |   The alternative of NavigationLink. It's a wrapper of Navigator. <br> When clicked, it will navigate to the destination view with the specified navigation type.                                                  | 
+|       [DismissLink](https://github.com/Open-Bytes/SwiftUINavigator/blob/master/SwiftUINavigator/Sources/SwiftUINavigator/DismissLink.swift)  |   DismissLink is a view which dismisses the current view when tapped. It's a wapper for `Navigator.dismiss()`   | 
+
 ### NavigatorView
 
 `NavigatorView` is the alternative of SwiftUI NavigationView implementing stack-based navigation with mote control and
-flexibility in handling more the navigation login
+flexibility in handling the navigation
 
 #### The public initializers
 
