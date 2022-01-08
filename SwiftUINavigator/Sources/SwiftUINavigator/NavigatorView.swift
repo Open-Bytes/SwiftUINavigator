@@ -5,8 +5,8 @@
 import SwiftUI
 
 /// The alternative of SwiftUI NavigationView implementing
-/// stack-based navigation with mote control and flexibility in handling more
-/// the navigation login
+/// stack-based navigation with mote control and flexibility in handling
+/// the navigation
 public struct NavigatorView<Root>: View where Root: View {
     @ObservedObject private var navigator: Navigator
     private let rootView: Root
