@@ -17,7 +17,7 @@ The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/Mhmo
     - [ SwiftUINavigator is awesome](#swiftuinavigator-is-awesome)
 - [Requirements](#requirements)
 - [Installation](#installation)
-- [Usage](#usage)
+- [Usage](#zap-usage)
     - [NavigatorView](#navigatorview)
     - [Navigator](#navigator)
     - [NavigatorLink](#navigatorlink)
