@@ -27,7 +27,7 @@ The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/Mhmo
     - [Transitions](#transitions)
     - [Navigation Types](#navigation-types)
     - [Navigation Transition Types](#navigation-transition-types)
-    - [License](#license)
+- [License](#license)
 - [Demo Project](#demo-project)
 - [Contribution](#clap-contribution)
 - [License](#license)
