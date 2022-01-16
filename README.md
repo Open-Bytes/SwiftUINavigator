@@ -319,8 +319,23 @@ navigator.dismiss(to: .root)
 
 ### Navigation Bar
 
-Sine we don't use SwiftUI's `NavgationView`, the default navigation bar won't be displayed. To show the navigation bar
-you can use the library built-in bars or customize one.
+The navigation bar is built-in in the library, and it's displayed by default in any pushed view. 
+And you have the full control of hiding or showing it
+
+#### Control Nav Bar For All Views
+
+```swift
+NavigatorView(showDefaultNavBar: false)
+```
+
+#### Control Nav Bar For a Single View
+
+```swift
+navigator.push(CartScreen(), showDefaultNavBar: false)
+```
+
+In case you need a custom nav bar, you can disable the default one and implement your own one
+or use the built-in with your customizations
 
 ```swift
 SomeView()
