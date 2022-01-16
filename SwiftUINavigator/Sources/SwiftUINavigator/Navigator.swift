@@ -94,7 +94,7 @@ extension Navigator {
             _ element: Element,
             withId identifier: String? = nil,
             addToBackStack: Bool = true,
-            showDefaultNavBar: Bool = true) {
+            showDefaultNavBar: Bool? = nil) {
         withAnimation(easeAnimation) {
             navigationType = .push
             let id = identifier == nil ? UUID().uuidString : identifier!
@@ -111,11 +111,11 @@ extension Navigator {
         }
     }
 
-    private func canShowDefaultNavBar(_ canShow: Bool) -> Bool {
-        guard canShow else {
-            return false
+    private func canShowDefaultNavBar(_ canShowInSingleView: Bool?) -> Bool {
+        guard let canShowInSingleView = canShowInSingleView else {
+            return showDefaultNavBar
         }
-        return showDefaultNavBar
+        return canShowInSingleView
     }
 
 }
