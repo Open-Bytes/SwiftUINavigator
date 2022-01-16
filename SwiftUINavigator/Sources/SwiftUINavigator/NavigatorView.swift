@@ -27,21 +27,23 @@ public struct NavigatorView<Root>: View where Root: View {
     public init(
             transition: NavigatorTransitionType = .default,
             easeAnimation: Animation = .easeOut(duration: 0.2),
+            showDefaultNavBar: Bool = true,
             @ViewBuilder rootView: () -> Root) {
-        navigator = Navigator(easeAnimation: easeAnimation)
-        self.rootView = rootView()
         self.transition = transition.transition
+        navigator = Navigator(easeAnimation: easeAnimation, showDefaultNavBar: showDefaultNavBar)
+        self.rootView = rootView()
         type = .root
     }
 
     public init(
             navigator: Navigator,
             transition: NavigatorTransitionType = .default,
-            easeAnimation: Animation = .easeOut(duration: 0.2),
+            showDefaultNavBar: Bool,
             @ViewBuilder rootView: () -> Root) {
-        self.rootView = rootView()
         self.navigator = navigator
         self.transition = transition.transition
+        navigator.showDefaultNavBar = showDefaultNavBar
+        self.rootView = rootView()
         type = .child
     }
 
@@ -59,35 +61,33 @@ public struct NavigatorView<Root>: View where Root: View {
         }
     }
 
+
     private func BodySheetContent() -> some View {
-       Group {
-           if #available(iOS 14.0, *) {
-               Content()
-                       .sheet(
-                               isPresented: $navigator.presentSheet,
-                               onDismiss: {
-                                   navigator.dismissSheet()
-                               }) {
-                           LazyView(navigator.sheetView)
-                       }
-                       .fullScreenCover(
-                               isPresented: $navigator.presentFullSheetView,
-                               onDismiss: {
-                                   navigator.dismissSheet()
-                               }) {
-                           LazyView(navigator.sheetView)
-                       }
-           } else {
-               Content()
-                       .sheet(
-                               isPresented: $navigator.presentSheet,
-                               onDismiss: {
-                                   navigator.dismissSheet()
-                               }) {
-                           LazyView(navigator.sheetView)
-                       }
-           }
-       }
+        Group {
+            if #available(iOS 14.0, *) {
+                SheetView()
+                        .fullScreenCover(
+                                isPresented: $navigator.presentFullSheetView,
+                                onDismiss: {
+                                    navigator.dismissSheet()
+                                }) {
+                            LazyView(navigator.sheetView)
+                        }
+            } else {
+                SheetView()
+            }
+        }
+    }
+
+    private func SheetView() -> some View {
+        Content()
+                .sheet(
+                        isPresented: $navigator.presentSheet,
+                        onDismiss: {
+                            navigator.dismissSheet()
+                        }) {
+                    LazyView(navigator.sheetView)
+                }
     }
 
     private func Content() -> some View {

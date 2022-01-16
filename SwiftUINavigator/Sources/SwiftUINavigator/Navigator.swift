@@ -16,6 +16,7 @@ public class Navigator: ObservableObject {
     @Published var presentSheet: Bool = false
     @Published var presentFullSheetView: Bool = false
     var sheetView: AnyView? = nil
+    var showDefaultNavBar: Bool = true
 
     private var backStack = BackStack() {
         didSet {
@@ -26,8 +27,9 @@ public class Navigator: ObservableObject {
         presentSheet || presentFullSheetView
     }
 
-    public init(easeAnimation: Animation) {
+    public init(easeAnimation: Animation, showDefaultNavBar: Bool = true) {
         self.easeAnimation = easeAnimation
+        self.showDefaultNavBar = showDefaultNavBar
     }
 }
 
@@ -54,15 +56,15 @@ extension Navigator {
             _ element: Element,
             type: NavigationType = .push()) {
         switch type {
-        case let .push(id, addToBackStack):
-            self.push(element, withId: id, addToBackStack: addToBackStack)
+        case let .push(id, addToBackStack, showDefaultNavBar):
+            self.push(element, withId: id, addToBackStack: addToBackStack, showDefaultNavBar: showDefaultNavBar)
         case .sheet:
             self.presentSheet(element)
         case .fullSheet:
             if #available(iOS 14.0, *) {
                 self.presentFullSheet(element)
             } else {
-              return
+                return
             }
         }
     }
@@ -80,6 +82,10 @@ extension Navigator {
         }
     }
 
+}
+
+extension Navigator {
+
     /// Navigates to a view.
     /// - Parameters:
     ///   - element: The destination view.
@@ -87,18 +93,34 @@ extension Navigator {
     public func push<Element: View>(
             _ element: Element,
             withId identifier: String? = nil,
-            addToBackStack: Bool = true) {
+            addToBackStack: Bool = true,
+            showDefaultNavBar: Bool = true) {
         withAnimation(easeAnimation) {
             navigationType = .push
             let id = identifier == nil ? UUID().uuidString : identifier!
+
+            let view = canShowDefaultNavBar(showDefaultNavBar) ?
+                    AnyView(element.navBar()) :
+                    AnyView(element)
             let element = BackStackElement(
                     id: id,
-                    wrappedElement: AnyView(element),
+                    wrappedElement: view,
                     type: isPresentingSheet ? .sheet : .screen,
                     addToBackStack: addToBackStack)
             backStack.push(element)
         }
     }
+
+    private func canShowDefaultNavBar(_ canShow: Bool) -> Bool {
+        guard canShow else {
+            return false
+        }
+        return showDefaultNavBar
+    }
+
+}
+
+extension Navigator {
 
     public func presentSheet<Content: View>(_ content: Content) {
         createSheetView(content)
@@ -121,7 +143,7 @@ extension Navigator {
         }
 
         // Pass self as a Navigator to allow dismissing from the sheet
-        sheetView = AnyView(NavigatorView(navigator: self) {
+        sheetView = AnyView(NavigatorView(navigator: self, showDefaultNavBar: false) {
             content
         })
         let element = BackStackElement(
@@ -144,6 +166,7 @@ extension Navigator {
         sheetView = nil
     }
 
+    // TODO: improve doc
     /// Pop back stack.
     /// - Parameter to: The destination type of the transition operation.
     public func dismiss(

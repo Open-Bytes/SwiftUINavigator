@@ -57,21 +57,6 @@ struct ProductDetailScreen: View {
                 .onAppear(perform: {
                     setup()
                 })
-                .navBar(
-                        style: .normal,
-                        titleView: {
-                            Text(item.title).bold().eraseToAnyView
-                        },
-                        leadingView: {
-                            DismissLink {
-                                HStack {
-                                    Image(systemName: "chevron.backward").foregroundColor(.blue)
-                                    Text("Back").foregroundColor(.blue)
-                                }
-                                }.buttonStyle(PlainButtonStyle())
-                                    .eraseToAnyView
-                        }
-                )
     }
 
     private func setup() {
@@ -178,7 +163,7 @@ struct ProductDetailScreen: View {
     }
 
     private func navigateToCartScreen() {
-        navigator.push(CartScreen())
+        navigator.push(CartScreen(), showDefaultNavBar: false)
     }
 
     private func AddToCartButton() -> some View {

@@ -23,18 +23,6 @@ struct CartScreen: View {
                 CheckoutButton()
             }
         }
-                .navBar(
-                        style: .normal,
-                        leadingView: {
-                            DismissLink {
-                                HStack {
-                                    Image(systemName: "chevron.backward").foregroundColor(.blue)
-                                    Text("Back").foregroundColor(.blue)
-                                }
-                            }.buttonStyle(PlainButtonStyle())
-                                    .eraseToAnyView
-                        }
-                )
     }
 
     private func Header() -> some View {
