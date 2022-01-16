@@ -331,8 +331,14 @@ NavigatorView(showDefaultNavBar: false)
 #### Control Nav Bar For a Single View
 
 ```swift
-navigator.push(CartScreen(), showDefaultNavBar: false)
+navigator.navigate(SomeView(), type: .push(showDefaultNavBar: false))
+
+// OR
+
+navigator.push(SomeView(), showDefaultNavBar: false)
 ```
+
+> Note: The option you select for a single view overrides the selected option in `NavigatorView`
 
 In case you need a custom nav bar, you can disable the default one and implement your own one
 or use the built-in with your customizations
@@ -347,7 +353,7 @@ SomeView()
         )
 ```
 
-> `NavBarStyle` supports `normal` and `large navigation bars.
+> Note: `style` parameter of type `NavBarStyle` supports `normal` and `large` navigation bars.
 
 ### Transitions
 
