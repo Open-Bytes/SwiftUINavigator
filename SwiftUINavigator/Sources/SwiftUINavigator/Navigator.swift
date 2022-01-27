@@ -9,29 +9,26 @@ import SwiftUI
 
 public class Navigator: ObservableObject {
     var lastNavigationType = NavigationDirection.push
-    /// Customizable animation to apply in pop and push transitions
     private let easeAnimation: Animation
-    @Published var sheetRoot: BackStackElement?
     @Published var currentView: BackStackElement?
-    @Published var lastView: BackStackElement?
     @Published var presentSheet: Bool = false
     @Published var presentFullSheetView: Bool = false
-    var sheetView: AnyView? = nil
+    var sheet: AnyView? = nil
     var showDefaultNavBar: Bool = true
+    private var root: Navigator?
 
     private var backStack = BackStack() {
         didSet {
-            lastView = currentView
             currentView = backStack.peek()
         }
     }
-    var isPresentingSheet: Bool {
-        sheetView != nil
-    }
 
-    public init(easeAnimation: Animation, showDefaultNavBar: Bool = true) {
+    public init(root: Navigator? = nil,
+                easeAnimation: Animation,
+                showDefaultNavBar: Bool = true) {
         self.easeAnimation = easeAnimation
         self.showDefaultNavBar = showDefaultNavBar
+        self.root = root
     }
 }
 
@@ -109,7 +106,7 @@ extension Navigator {
             let element = BackStackElement(
                     id: id,
                     wrappedElement: view,
-                    type: isPresentingSheet ? .sheet : .screen,
+                    type: .screen,
                     addToBackStack: addToBackStack)
             backStack.push(element)
         }
@@ -134,36 +131,28 @@ extension Navigator {
 
     public func presentSheet<Content: View>(_ content: Content, showDefaultNavBar: Bool = false) {
         let view = addNavBar(content, showDefaultNavBar: showDefaultNavBar)
-        createSheetView(view)
+        createSheet(view)
         presentSheet = true
     }
 
     @available(iOS 14.0, *)
     public func presentFullSheet<Content: View>(_ content: Content, showDefaultNavBar: Bool? = nil) {
         let view = addNavBar(content, showDefaultNavBar: showDefaultNavBar)
-        createSheetView(view)
+        createSheet(view)
         presentFullSheetView = true
     }
 
-    private func createSheetView<Content: View>(_ content: Content) {
-        if let tmp = currentView {
-            sheetRoot = BackStackElement(
-                    id: tmp.id,
-                    wrappedElement: tmp.wrappedElement,
-                    type: tmp.type,
-                    addToBackStack: tmp.addToBackStack)
-        }
-
-        // Pass self as a Navigator to allow dismissing from the sheet
-        sheetView = AnyView(NavigatorView(navigator: self, showDefaultNavBar: showDefaultNavBar) {
+    private func createSheet<Content: View>(_ content: Content) {
+        let navigator = Navigator(
+                root: self,
+                easeAnimation: easeAnimation,
+                showDefaultNavBar: showDefaultNavBar)
+        let navigatorView = NavigatorView(
+                navigator: navigator,
+                showDefaultNavBar: showDefaultNavBar) {
             content
-        })
-        let element = BackStackElement(
-                id: UUID().uuidString,
-                wrappedElement: AnyView(content),
-                type: .sheet,
-                addToBackStack: true)
-        backStack.push(element)
+        }
+        sheet = AnyView(navigatorView)
     }
 
 }
@@ -171,16 +160,16 @@ extension Navigator {
 extension Navigator {
 
     public func dismissSheet() {
-        backStack.popSheet()
+        root?.dismissSheet()
         presentSheet = false
         presentFullSheetView = false
-        sheetView = nil
-        sheetRoot = nil
+        sheet = nil
     }
 
-    // TODO: improve doc
-    /// Pop back stack.
-    /// - Parameter to: The destination type of the transition operation.
+    /// Navigate back to a view in the back stack
+    /// - Parameters:
+    ///   - destination: the view to dismiss to
+    ///   - delay: time to navigate after
     public func dismiss(
             to destination: DismissDestination = .previous,
             delay: TimeInterval) {
@@ -190,9 +179,7 @@ extension Navigator {
     }
 
     public func dismiss(to destination: DismissDestination = .previous) {
-        lastNavigationType = isPresentingSheet ? .none : .pop
-
-        if backStack.isSheetEmpty {
+        if backStack.isEmpty {
             dismissSheet()
             return
         }

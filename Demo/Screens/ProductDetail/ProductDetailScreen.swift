@@ -163,7 +163,7 @@ struct ProductDetailScreen: View {
     }
 
     private func navigateToCartScreen() {
-        navigator.push(CartScreen())
+        navigator.navigate(CartScreen())
     }
 
     private func AddToCartButton() -> some View {

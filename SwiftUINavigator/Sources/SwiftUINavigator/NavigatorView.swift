@@ -11,13 +11,6 @@ public struct NavigatorView<Root>: View where Root: View {
     @ObservedObject private var navigator: Navigator
     private let rootView: Root
     private let transition: NavigatorTransition
-    private var canShowSheets: Bool {
-        switch type {
-        case .root: return true
-        case .sheet: return false
-        }
-    }
-    private let type: ViewType
 
     /// Creates a NavigatorView.
     /// - Parameters:
@@ -32,10 +25,9 @@ public struct NavigatorView<Root>: View where Root: View {
         self.transition = transition.transition
         navigator = Navigator(easeAnimation: easeAnimation, showDefaultNavBar: showDefaultNavBar)
         self.rootView = rootView()
-        type = .root
     }
 
-    public init(
+    init(
             navigator: Navigator,
             transition: NavigatorTransitionType = .default,
             showDefaultNavBar: Bool,
@@ -44,17 +36,12 @@ public struct NavigatorView<Root>: View where Root: View {
         self.transition = transition.transition
         navigator.showDefaultNavBar = showDefaultNavBar
         self.rootView = rootView()
-        type = .sheet
     }
 
     public var body: some View {
         ZStack {
             Group {
-                if canShowSheets {
-                    BodySheetContent()
-                } else {
-                    Content()
-                }
+                BodyContent()
             }
                     .transition(transition.transition(of: navigator.lastNavigationType))
                     .environmentObject(navigator)
@@ -62,7 +49,7 @@ public struct NavigatorView<Root>: View where Root: View {
     }
 
 
-    private func BodySheetContent() -> some View {
+    private func BodyContent() -> some View {
         Group {
             if #available(iOS 14.0, *) {
                 SheetView()
@@ -71,7 +58,7 @@ public struct NavigatorView<Root>: View where Root: View {
                                 onDismiss: {
                                     onDismissSheet()
                                 }) {
-                            LazyView(navigator.sheetView)
+                            LazyView(navigator.sheet)
                         }
             } else {
                 SheetView()
@@ -86,22 +73,13 @@ public struct NavigatorView<Root>: View where Root: View {
                         onDismiss: {
                             onDismissSheet()
                         }) {
-                    LazyView(navigator.sheetView)
+                    LazyView(navigator.sheet)
                 }
     }
 
     private func Content() -> some View {
         Group {
-            // Show sheet root in case this is the root navigator view & there's a sheet
-            // presented
-            if type.isRoot && navigator.isPresentingSheet {
-                SheetRoot()
-            }
-            // This case when the sheet is dismissing. We should keep the last view as is until
-            // it's dismissed.
-            else if type.isSheet, !navigator.isPresentingSheet, let view = navigator.lastView {
-                CurrentView(view)
-            } else if let view = navigator.currentView {
+            if let view = navigator.currentView {
                 CurrentView(view)
             } else {
                 RootView()
@@ -119,42 +97,12 @@ public struct NavigatorView<Root>: View where Root: View {
         view.wrappedElement.id(view.id)
     }
 
-    private func SheetRoot() -> some View {
-        Group {
-            if let view = navigator.sheetRoot {
-                CurrentView(view)
-            } else {
-                RootView()
-            }
-        }
-    }
-
 }
 
 extension NavigatorView {
 
     private func onDismissSheet() {
-        guard navigator.isPresentingSheet else {
-            return
-        }
         navigator.dismissSheet()
-    }
-
-}
-
-extension NavigatorView {
-
-    enum ViewType {
-        case root
-        case sheet
-
-        var isRoot: Bool {
-            self == .root
-        }
-
-        var isSheet: Bool {
-            self == .sheet
-        }
     }
 
 }
