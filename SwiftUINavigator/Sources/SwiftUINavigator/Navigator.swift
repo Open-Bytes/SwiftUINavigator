@@ -131,20 +131,19 @@ extension Navigator {
 
     public func presentSheet<Content: View>(_ content: Content, showDefaultNavBar: Bool = false) {
         let view = addNavBar(content, showDefaultNavBar: showDefaultNavBar)
-        createSheet(view)
-        presentSheet = true
+        presentSheet(view, type: .normal)
     }
 
     @available(iOS 14.0, *)
     public func presentFullSheet<Content: View>(_ content: Content, showDefaultNavBar: Bool? = nil) {
         let view = addNavBar(content, showDefaultNavBar: showDefaultNavBar)
-        createSheet(view)
-        presentFullSheetView = true
+        presentSheet(view, type: .full)
     }
 
-    private func createSheet<Content: View>(_ content: Content) {
+    private func presentSheet<Content: View>(_ content: Content, type: SheetType) {
+        let root = root ?? self
         let navigator = Navigator(
-                root: self,
+                root: root,
                 easeAnimation: easeAnimation,
                 showDefaultNavBar: showDefaultNavBar)
         let navigatorView = NavigatorView(
@@ -152,9 +151,24 @@ extension Navigator {
                 showDefaultNavBar: showDefaultNavBar) {
             content
         }
-        sheet = AnyView(navigatorView)
+        root.sheet = AnyView(navigatorView)
+
+        switch type {
+        case .normal:
+            root.presentSheet = true
+        case .full:
+            root.presentFullSheetView = true
+        }
     }
 
+}
+
+extension Navigator {
+
+    enum SheetType {
+        case normal
+        case full
+    }
 }
 
 extension Navigator {
