@@ -87,7 +87,8 @@ struct ProductsScreen: View {
             ForEach(items, id: \.uuid) { item in
                 NavigatorLink(
                         destination: ProductDetailScreen(item: item),
-                        type: selectedNavigationType) {
+                        type: selectedNavigationType,
+                        showDefaultNavBar: true) {
                     // When this view is clicked, it will trigger the navigation
                     ProductItemView(item: item)
                 }.buttonStyle(PlainButtonStyle())

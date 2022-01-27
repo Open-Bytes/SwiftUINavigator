@@ -8,11 +8,12 @@
 import SwiftUI
 
 public class Navigator: ObservableObject {
-    var navigationType = NavigationDirection.push
+    var lastNavigationType = NavigationDirection.push
     /// Customizable animation to apply in pop and push transitions
     private let easeAnimation: Animation
     @Published var sheetRoot: BackStackElement?
     @Published var currentView: BackStackElement?
+    @Published var lastView: BackStackElement?
     @Published var presentSheet: Bool = false
     @Published var presentFullSheetView: Bool = false
     var sheetView: AnyView? = nil
@@ -20,11 +21,12 @@ public class Navigator: ObservableObject {
 
     private var backStack = BackStack() {
         didSet {
+            lastView = currentView
             currentView = backStack.peek()
         }
     }
     var isPresentingSheet: Bool {
-        presentSheet || presentFullSheetView
+        sheetView != nil
     }
 
     public init(easeAnimation: Animation, showDefaultNavBar: Bool = true) {
@@ -100,7 +102,7 @@ extension Navigator {
             addToBackStack: Bool = true,
             showDefaultNavBar: Bool? = nil) {
         withAnimation(easeAnimation) {
-            navigationType = .push
+            lastNavigationType = .push
             let id = identifier == nil ? UUID().uuidString : identifier!
 
             let view = addNavBar(element, showDefaultNavBar: showDefaultNavBar)
@@ -169,11 +171,11 @@ extension Navigator {
 extension Navigator {
 
     public func dismissSheet() {
-        sheetRoot = nil
         backStack.popSheet()
         presentSheet = false
         presentFullSheetView = false
         sheetView = nil
+        sheetRoot = nil
     }
 
     // TODO: improve doc
@@ -188,9 +190,14 @@ extension Navigator {
     }
 
     public func dismiss(to destination: DismissDestination = .previous) {
-        withAnimation(easeAnimation) {
-            navigationType = isPresentingSheet ? .none : .pop
+        lastNavigationType = isPresentingSheet ? .none : .pop
 
+        if backStack.isSheetEmpty {
+            dismissSheet()
+            return
+        }
+
+        withAnimation(easeAnimation) {
             switch destination {
             case .root:
                 backStack.popToRoot()
@@ -201,12 +208,6 @@ extension Navigator {
             case .dismissSheet:
                 dismissSheet()
             }
-        }
-
-        // Dismiss the sheet only if there are no elements in back stack to allow navigating back
-        // inside the sheet
-        if backStack.isEmpty {
-            dismissSheet()
         }
     }
 

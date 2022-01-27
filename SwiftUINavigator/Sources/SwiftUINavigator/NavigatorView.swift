@@ -14,7 +14,7 @@ public struct NavigatorView<Root>: View where Root: View {
     private var canShowSheets: Bool {
         switch type {
         case .root: return true
-        case .child: return false
+        case .sheet: return false
         }
     }
     private let type: ViewType
@@ -44,7 +44,7 @@ public struct NavigatorView<Root>: View where Root: View {
         self.transition = transition.transition
         navigator.showDefaultNavBar = showDefaultNavBar
         self.rootView = rootView()
-        type = .child
+        type = .sheet
     }
 
     public var body: some View {
@@ -56,7 +56,7 @@ public struct NavigatorView<Root>: View where Root: View {
                     Content()
                 }
             }
-                    .transition(transition.transition(of: navigator.navigationType))
+                    .transition(transition.transition(of: navigator.lastNavigationType))
                     .environmentObject(navigator)
         }
     }
@@ -69,7 +69,7 @@ public struct NavigatorView<Root>: View where Root: View {
                         .fullScreenCover(
                                 isPresented: $navigator.presentFullSheetView,
                                 onDismiss: {
-                                    navigator.dismissSheet()
+                                    onDismissSheet()
                                 }) {
                             LazyView(navigator.sheetView)
                         }
@@ -84,7 +84,7 @@ public struct NavigatorView<Root>: View where Root: View {
                 .sheet(
                         isPresented: $navigator.presentSheet,
                         onDismiss: {
-                            navigator.dismissSheet()
+                            onDismissSheet()
                         }) {
                     LazyView(navigator.sheetView)
                 }
@@ -94,8 +94,13 @@ public struct NavigatorView<Root>: View where Root: View {
         Group {
             // Show sheet root in case this is the root navigator view & there's a sheet
             // presented
-            if canShowSheets && navigator.isPresentingSheet {
+            if type.isRoot && navigator.isPresentingSheet {
                 SheetRoot()
+            }
+            // This case when the sheet is dismissing. We should keep the last view as is until
+            // it's dismissed.
+            else if type.isSheet, !navigator.isPresentingSheet, let view = navigator.lastView {
+                CurrentView(view)
             } else if let view = navigator.currentView {
                 CurrentView(view)
             } else {
@@ -123,13 +128,33 @@ public struct NavigatorView<Root>: View where Root: View {
             }
         }
     }
+
+}
+
+extension NavigatorView {
+
+    private func onDismissSheet() {
+        guard navigator.isPresentingSheet else {
+            return
+        }
+        navigator.dismissSheet()
+    }
+
 }
 
 extension NavigatorView {
 
     enum ViewType {
         case root
-        case child
+        case sheet
+
+        var isRoot: Bool {
+            self == .root
+        }
+
+        var isSheet: Bool {
+            self == .sheet
+        }
     }
 
 }

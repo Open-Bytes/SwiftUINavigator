@@ -29,6 +29,14 @@ struct BackStack {
         views.isEmpty
     }
 
+    var isSheetEmpty: Bool {
+        guard let last = peek() else {
+            return false
+        }
+        return last.type == .sheet ? true : false
+    }
+
+
     func peekScreen() -> BackStackElement? {
         views.last {
             $0.type == .screen
