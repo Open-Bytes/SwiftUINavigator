@@ -9,12 +9,26 @@
 import SwiftUI
 import SwiftUINavigator
 
+class ProductsVM: ObservableObject {
+    @Published var navigationOption: NavigationOption = .push
+    @Published var selectedNavigationOptions: [ChipGroup.Item] = []
+}
+
+enum NavigationOption: String {
+    case push = "1"
+    case sheet = "2"
+    case fullSheet = "3"
+
+    static func from(_ value: String) -> NavigationOption {
+        NavigationOption(rawValue: value) ?? .push
+    }
+}
+
 struct ProductsScreen: View {
+    @ObservedObject var vm: ProductsVM = ProductsVM()
     var cart: Cart = .shared
     private let items: [Product]
     @EnvironmentObject private var navigator: Navigator
-    @State var selectedNavigationOptions: [ChipGroup.Item] = []
-    @State var navigationOption: NavigationOption = .push
 
     init(items: [Product]) {
         self.items = items
@@ -89,7 +103,7 @@ struct ProductsScreen: View {
     }
 
     private var selectedNavigationType: NavigationType {
-        switch navigationOption {
+        switch vm.navigationOption {
         case .push:
             return .push(addToBackStack: true)
         case .sheet:
@@ -107,9 +121,9 @@ extension ProductsScreen {
     private func NavigationOptionsView() -> some View {
         ChipGroup(
                 items: navigationOptions,
-                selectedItems: $selectedNavigationOptions
+                selectedItems: $vm.selectedNavigationOptions
         ) { item in
-            navigationOption = .from(item.id)
+            vm.navigationOption = .from(item.id)
         }
     }
 
@@ -121,14 +135,6 @@ extension ProductsScreen {
         ]
     }
 
-    enum NavigationOption: String {
-        case push = "1"
-        case sheet = "2"
-        case fullSheet = "3"
 
-        static func from(_ value: String) -> NavigationOption {
-            NavigationOption(rawValue: value) ?? .push
-        }
-    }
 }
 

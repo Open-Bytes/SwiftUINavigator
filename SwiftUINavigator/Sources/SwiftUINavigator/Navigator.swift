@@ -54,15 +54,19 @@ extension Navigator {
     ///   - identifier: The ID of the destination view (used to easily come back to it if needed).
     public func navigate<Element: View>(
             _ element: Element,
-            type: NavigationType = .push()) {
+            type: NavigationType = .push(),
+            showDefaultNavBar: Bool? = nil) {
         switch type {
-        case let .push(id, addToBackStack, showDefaultNavBar):
-            self.push(element, withId: id, addToBackStack: addToBackStack, showDefaultNavBar: showDefaultNavBar)
+        case let .push(id, addToBackStack):
+            self.push(
+                    element, withId: id,
+                    addToBackStack: addToBackStack,
+                    showDefaultNavBar: showDefaultNavBar)
         case .sheet:
-            self.presentSheet(element)
+            self.presentSheet(element, showDefaultNavBar: showDefaultNavBar ?? false)
         case .fullSheet:
             if #available(iOS 14.0, *) {
-                self.presentFullSheet(element)
+                self.presentFullSheet(element, showDefaultNavBar: showDefaultNavBar)
             } else {
                 return
             }
@@ -99,9 +103,7 @@ extension Navigator {
             navigationType = .push
             let id = identifier == nil ? UUID().uuidString : identifier!
 
-            let view = canShowDefaultNavBar(showDefaultNavBar) ?
-                    AnyView(element.navBar()) :
-                    AnyView(element)
+            let view = addNavBar(element, showDefaultNavBar: showDefaultNavBar)
             let element = BackStackElement(
                     id: id,
                     wrappedElement: view,
@@ -109,6 +111,12 @@ extension Navigator {
                     addToBackStack: addToBackStack)
             backStack.push(element)
         }
+    }
+
+    private func addNavBar<Element: View>(_ element: Element, showDefaultNavBar: Bool?) -> AnyView {
+        canShowDefaultNavBar(showDefaultNavBar) ?
+                AnyView(element.navBar()) :
+                AnyView(element)
     }
 
     private func canShowDefaultNavBar(_ canShowInSingleView: Bool?) -> Bool {
@@ -122,14 +130,16 @@ extension Navigator {
 
 extension Navigator {
 
-    public func presentSheet<Content: View>(_ content: Content) {
-        createSheetView(content)
+    public func presentSheet<Content: View>(_ content: Content, showDefaultNavBar: Bool = false) {
+        let view = addNavBar(content, showDefaultNavBar: showDefaultNavBar)
+        createSheetView(view)
         presentSheet = true
     }
 
     @available(iOS 14.0, *)
-    public func presentFullSheet<Content: View>(_ content: Content) {
-        createSheetView(content)
+    public func presentFullSheet<Content: View>(_ content: Content, showDefaultNavBar: Bool? = nil) {
+        let view = addNavBar(content, showDefaultNavBar: showDefaultNavBar)
+        createSheetView(view)
         presentFullSheetView = true
     }
 
@@ -143,7 +153,7 @@ extension Navigator {
         }
 
         // Pass self as a Navigator to allow dismissing from the sheet
-        sheetView = AnyView(NavigatorView(navigator: self, showDefaultNavBar: false) {
+        sheetView = AnyView(NavigatorView(navigator: self, showDefaultNavBar: showDefaultNavBar) {
             content
         })
         let element = BackStackElement(
