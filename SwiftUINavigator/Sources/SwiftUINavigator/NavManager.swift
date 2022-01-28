@@ -34,10 +34,6 @@ public class NavManager: ObservableObject {
 
 extension NavManager {
 
-    /// Navigates to a view.
-    /// - Parameters:
-    ///   - element: The destination view.
-    ///   - identifier: The ID of the destination view (used to easily come back to it if needed).
     public func navigate<Element: View>(
             _ element: Element,
             type: NavigationType,
@@ -48,10 +44,6 @@ extension NavManager {
         }
     }
 
-    /// Navigates to a view.
-    /// - Parameters:
-    ///   - element: The destination view.
-    ///   - identifier: The ID of the destination view (used to easily come back to it if needed).
     public func navigate<Element: View>(
             _ element: Element,
             type: NavigationType,
@@ -77,7 +69,6 @@ extension NavManager {
 
 extension NavManager {
 
-
     public func push<Element: View>(
             _ element: Element,
             withId identifier: String?,
@@ -87,10 +78,6 @@ extension NavManager {
         }
     }
 
-    /// Navigates to a view.
-    /// - Parameters:
-    ///   - element: The destination view.
-    ///   - identifier: The ID of the destination view (used to easily come back to it if needed).
     public func push<Element: View>(
             _ element: Element,
             withId identifier: String?,
@@ -188,10 +175,6 @@ extension NavManager {
         sheet = nil
     }
 
-    /// Navigate back to a view in the back stack
-    /// - Parameters:
-    ///   - destination: the view to dismiss to
-    ///   - delay: time to navigate after
     public func dismiss(
             to destination: DismissDestination,
             delay: TimeInterval) {
