@@ -8,23 +8,29 @@ import SwiftUI
 /// stack-based navigation with mote control and flexibility in handling
 /// the navigation
 public struct NavigatorView<Root>: View where Root: View {
-    @ObservedObject private var navigator: Navigator
+    @ObservedObject private var manager: NavManager
+    private var navigator: Navigator
     private let rootView: Root
     private let transition: NavigatorTransition
 
     /// Creates a NavigatorView.
     /// - Parameters:
-    ///   - transitionType: The type of transition to apply between views in every push and pop operation.
-    ///   - animation: The easing function to apply to every push and pop operation.
+    ///   - transition: The type of transition to apply between views in every push and pop operation.
+    ///   - easeAnimation: The easing function to apply to every push and pop operation.
+    ///   - showDefaultNavBar: if false, no nav bar will be displayed.
     ///   - rootView: The very first view in the Navigation.
     public init(
             transition: NavigatorTransitionType = .default,
             easeAnimation: Animation = .easeOut(duration: 0.2),
             showDefaultNavBar: Bool = true,
             @ViewBuilder rootView: () -> Root) {
-        self.transition = transition.transition
-        navigator = Navigator(easeAnimation: easeAnimation, showDefaultNavBar: showDefaultNavBar)
-        self.rootView = rootView()
+        let navigator = Navigator.instance(
+                easeAnimation: easeAnimation,
+                showDefaultNavBar: showDefaultNavBar)
+        self.init(navigator: navigator,
+                transition: transition,
+                showDefaultNavBar: showDefaultNavBar,
+                rootView: rootView)
     }
 
     init(
@@ -34,8 +40,9 @@ public struct NavigatorView<Root>: View where Root: View {
             @ViewBuilder rootView: () -> Root) {
         self.navigator = navigator
         self.transition = transition.transition
-        navigator.showDefaultNavBar = showDefaultNavBar
         self.rootView = rootView()
+        manager = navigator.manager
+        manager.showDefaultNavBar = showDefaultNavBar
     }
 
     public var body: some View {
@@ -43,22 +50,21 @@ public struct NavigatorView<Root>: View where Root: View {
             Group {
                 BodyContent()
             }
-                    .transition(transition.transition(of: navigator.lastNavigationType))
+                    .transition(transition.transition(of: manager.lastNavigationType))
                     .environmentObject(navigator)
         }
     }
-
 
     private func BodyContent() -> some View {
         Group {
             if #available(iOS 14.0, *) {
                 SheetView()
                         .fullScreenCover(
-                                isPresented: $navigator.presentFullSheetView,
+                                isPresented: $manager.presentFullSheetView,
                                 onDismiss: {
                                     onDismissSheet()
                                 }) {
-                            LazyView(navigator.sheet)
+                            LazyView(manager.sheet)
                         }
             } else {
                 SheetView()
@@ -69,17 +75,17 @@ public struct NavigatorView<Root>: View where Root: View {
     private func SheetView() -> some View {
         Content()
                 .sheet(
-                        isPresented: $navigator.presentSheet,
+                        isPresented: $manager.presentSheet,
                         onDismiss: {
                             onDismissSheet()
                         }) {
-                    LazyView(navigator.sheet)
+                    LazyView(manager.sheet)
                 }
     }
 
     private func Content() -> some View {
         Group {
-            if let view = navigator.currentView {
+            if let view = manager.currentView {
                 CurrentView(view)
             } else {
                 RootView()
@@ -88,9 +94,7 @@ public struct NavigatorView<Root>: View where Root: View {
     }
 
     private func RootView() -> some View {
-        rootView
-                .id("ROOT")
-                .environmentObject(navigator)
+        rootView.id("ROOT")
     }
 
     private func CurrentView(_ view: BackStackElement) -> some View {

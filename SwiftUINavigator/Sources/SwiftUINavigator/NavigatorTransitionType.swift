@@ -49,7 +49,7 @@ public struct NavigatorTransition {
         self.pop = pop
     }
 
-    func transition(of type: Navigator.NavigationDirection) -> AnyTransition {
+    func transition(of type: NavManager.NavigationDirection) -> AnyTransition {
         switch type {
         case .push:
             return push

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1BCAC5155B344C8293B32C57 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC6E29FD5B62D71DE6DB9 /* Navigator.swift */; };
 		1BCAC6E200E87D7A087CEF7C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC27F1DD06BAAD7837886 /* SceneDelegate.swift */; };
 		1BCACAB8AE546C3592F044D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC766AD646B0EAA329E74 /* AppDelegate.swift */; };
 		1BCACC536C4A9621D93D59C2 /* ChipGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC987EECE855C5630A7BF /* ChipGroup.swift */; };
@@ -45,7 +46,7 @@
 		F2EA004A2787667D00482152 /* NavigatorTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA00402787667D00482152 /* NavigatorTransitionType.swift */; };
 		F2EA004B2787667D00482152 /* DismissLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA00412787667D00482152 /* DismissLink.swift */; };
 		F2EA004C2787667D00482152 /* NavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA00422787667D00482152 /* NavigationType.swift */; };
-		F2EA004D2787667D00482152 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA00432787667D00482152 /* Navigator.swift */; };
+		F2EA004D2787667D00482152 /* NavManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA00432787667D00482152 /* NavManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 /* Begin PBXFileReference section */
 		1BCAC1821A545A71DC94A0CE /* FlexibleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleView.swift; sourceTree = "<group>"; };
 		1BCAC27F1DD06BAAD7837886 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		1BCAC6E29FD5B62D71DE6DB9 /* Navigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		1BCAC766AD646B0EAA329E74 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1BCAC987EECE855C5630A7BF /* ChipGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChipGroup.swift; sourceTree = "<group>"; };
 		C9BA2E602587CA26004DAEEE /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,7 +128,7 @@
 		F2EA00402787667D00482152 /* NavigatorTransitionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorTransitionType.swift; sourceTree = "<group>"; };
 		F2EA00412787667D00482152 /* DismissLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissLink.swift; sourceTree = "<group>"; };
 		F2EA00422787667D00482152 /* NavigationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationType.swift; sourceTree = "<group>"; };
-		F2EA00432787667D00482152 /* Navigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
+		F2EA00432787667D00482152 /* NavManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,7 +335,8 @@
 				F2EA00402787667D00482152 /* NavigatorTransitionType.swift */,
 				F2EA00412787667D00482152 /* DismissLink.swift */,
 				F2EA00422787667D00482152 /* NavigationType.swift */,
-				F2EA00432787667D00482152 /* Navigator.swift */,
+				F2EA00432787667D00482152 /* NavManager.swift */,
+				1BCAC6E29FD5B62D71DE6DB9 /* Navigator.swift */,
 			);
 			name = SwiftUINavigator;
 			path = Sources/SwiftUINavigator;
@@ -534,12 +537,13 @@
 				F2EA00462787667D00482152 /* LargeNavBar.swift in Sources */,
 				F2EA00472787667D00482152 /* NavigatorLink.swift in Sources */,
 				F2EA00442787667D00482152 /* BackStack.swift in Sources */,
-				F2EA004D2787667D00482152 /* Navigator.swift in Sources */,
+				F2EA004D2787667D00482152 /* NavManager.swift in Sources */,
 				F2EA004C2787667D00482152 /* NavigationType.swift in Sources */,
 				F2EA00482787667D00482152 /* NavigatorView.swift in Sources */,
 				F2EA004B2787667D00482152 /* DismissLink.swift in Sources */,
 				F2EA00452787667D00482152 /* NavBar.swift in Sources */,
 				F2EA00492787667D00482152 /* LazyView.swift in Sources */,
+				1BCAC5155B344C8293B32C57 /* Navigator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
