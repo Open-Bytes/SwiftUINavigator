@@ -27,7 +27,7 @@ public class NavManager: ObservableObject {
 
     public init(root: NavManager? = nil,
                 easeAnimation: Animation,
-                showDefaultNavBar: Bool = true) {
+                showDefaultNavBar: Bool) {
         self.easeAnimation = easeAnimation
         self.showDefaultNavBar = showDefaultNavBar
         self.root = root
@@ -162,7 +162,8 @@ extension NavManager {
                 showDefaultNavBar: showDefaultNavBar)
         let navigator = Navigator.instance(
                 manager: manager,
-                easeAnimation: easeAnimation)
+                easeAnimation: easeAnimation,
+                showDefaultNavBar: showDefaultNavBar)
         let navigatorView = NavigatorView(
                 navigator: navigator,
                 showDefaultNavBar: showDefaultNavBar) {

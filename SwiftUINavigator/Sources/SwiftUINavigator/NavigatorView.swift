@@ -26,7 +26,8 @@ public struct NavigatorView<Root>: View where Root: View {
             showDefaultNavBar: Bool = true,
             @ViewBuilder rootView: () -> Root) {
         let navigator = Navigator.instance(
-                easeAnimation: easeAnimation)
+                easeAnimation: easeAnimation,
+                showDefaultNavBar: showDefaultNavBar)
         self.init(navigator: navigator,
                 transition: transition,
                 showDefaultNavBar: showDefaultNavBar,
@@ -42,7 +43,6 @@ public struct NavigatorView<Root>: View where Root: View {
         self.transition = transition.transition
         self.rootView = rootView()
         manager = navigator.manager
-        manager.showDefaultNavBar = showDefaultNavBar
     }
 
     public var body: some View {

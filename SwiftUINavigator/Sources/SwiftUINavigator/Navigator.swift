@@ -65,8 +65,9 @@ public class Navigator: ObservableObject, NavigatorProtocol {
 
     static func instance(
             manager: NavManager? = nil,
-            easeAnimation: Animation) -> Navigator {
-        let manager = manager ?? NavManager(easeAnimation: easeAnimation)
+            easeAnimation: Animation,
+            showDefaultNavBar: Bool) -> Navigator {
+        let manager = manager ?? NavManager(easeAnimation: easeAnimation, showDefaultNavBar: showDefaultNavBar)
         return Navigator(manager: manager)
     }
 
