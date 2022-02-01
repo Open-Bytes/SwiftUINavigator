@@ -14,6 +14,8 @@ public struct CustomSheetOptions {
     let isDismissable: Bool
 }
 
+/// A customizable bottom sheet.
+/// You can control the height, minHeight, and dismissing of the sheet.
 public struct BottomSheet<Content: View>: View {
     @Binding var isPresented: Bool
     private let onDismiss: (() -> Void)?
@@ -99,11 +101,21 @@ struct BottomSheetView_Previews: PreviewProvider {
 }
 
 public extension View {
+    /// A modifier to present a customizable bottom sheet
+    ///
+    /// - Parameters:
+    ///   - isPresented: if true, the sheet will be displayed
+    ///   - height: the height of the sheet
+    ///   - minHeight: the min height. When dragged down, this height will be used
+    ///   - isDismissable: if true, the user can drag the sheet to dismiss
+    ///   - onDismiss: called when the sheet is dismissed
+    ///   - content: the content view
+    /// - Returns: a view
     func bottomSheet<Content: View>(
             isPresented: Binding<Bool>,
             height: CGFloat,
-            minHeight: CGFloat,
-            isDismissable: Bool,
+            minHeight: CGFloat = 0,
+            isDismissable: Bool = true,
             onDismiss: (() -> Void)? = nil,
             @ViewBuilder content: @escaping () -> Content
     ) -> some View {
