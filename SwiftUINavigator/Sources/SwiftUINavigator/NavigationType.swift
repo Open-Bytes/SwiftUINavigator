@@ -2,7 +2,7 @@
 // Created by Shaban Kamel on 25/12/2021.
 //
 
-import Foundation
+import SwiftUI
 
 public enum NavigationType {
     /// Regular navigation type.
@@ -15,4 +15,7 @@ public enum NavigationType {
     /// Present a full sheet
     @available(iOS 14.0, *)
     case fullSheet
+
+    /// Present a custom sheet
+    case customSheet(height: CGFloat, minHeight: CGFloat = 0, isDragDismissable: Bool = true)
 }

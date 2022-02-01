@@ -51,6 +51,7 @@ struct ProductDetailScreen: View {
                     .padding(.bottom, 70)
         }
                 .padding(.horizontal, 16)
+                .background(Color.white)
                 .sheet(isPresented: $showShareSheet) {
                     SharingSheet()
                 }
@@ -163,7 +164,7 @@ struct ProductDetailScreen: View {
     }
 
     private func navigateToCartScreen() {
-        navigator.navigate(CartScreen())
+        navigator.navigate(CartScreen(), type: .customSheet(height: 500), showDefaultNavBar: true)
     }
 
     private func AddToCartButton() -> some View {

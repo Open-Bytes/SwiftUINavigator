@@ -12,10 +12,12 @@ public class NavManager: ObservableObject {
     private let easeAnimation: Animation
     @Published var currentView: BackStackElement?
     @Published var presentSheet: Bool = false
-    @Published var presentFullSheetView: Bool = false
+    @Published var presentFullSheet: Bool = false
+    @Published var presentCustomSheet: Bool = false
     var sheet: AnyView? = nil
     var showDefaultNavBar: Bool = true
     private var root: NavManager?
+    var customSheetOptions = CustomSheetOptions(height: 0, minHeight: 0, isDismissable: false)
 
     private var backStack = BackStack() {
         didSet {
@@ -50,19 +52,27 @@ extension NavManager {
             showDefaultNavBar: Bool?) {
         switch type {
         case let .push(id, addToBackStack):
-            self.push(
+            push(
                     element, withId: id,
                     addToBackStack: addToBackStack,
                     showDefaultNavBar: showDefaultNavBar)
         case .sheet:
-            self.presentSheet(element, showDefaultNavBar: showDefaultNavBar ?? false)
+            presentSheet(element, showDefaultNavBar: showDefaultNavBar ?? false)
         case .fullSheet:
             if #available(iOS 14.0, *) {
-                self.presentFullSheet(element, showDefaultNavBar: showDefaultNavBar)
+                presentFullSheet(element, showDefaultNavBar: showDefaultNavBar)
             } else {
                 return
             }
+        case let .customSheet(height, minHeight, isDismissable):
+            presentCustomSheet(
+                    element,
+                    height: height,
+                    minHeight: minHeight,
+                    isDismissable: isDismissable,
+                    showDefaultNavBar: showDefaultNavBar ?? false)
         }
+
     }
 
 }
@@ -129,12 +139,25 @@ extension NavManager {
         presentSheet(view, type: .full)
     }
 
+    public func presentCustomSheet<Content: View>(
+            _ content: Content,
+            height: CGFloat,
+            minHeight: CGFloat,
+            isDismissable: Bool,
+            showDefaultNavBar: Bool) {
+        let view = addNavBar(content, showDefaultNavBar: showDefaultNavBar)
+        customSheetOptions = CustomSheetOptions(
+                height: height,
+                minHeight: minHeight,
+                isDismissable: isDismissable)
+        presentSheet(view, type: .custom)
+    }
+
     private func presentSheet<Content: View>(
             _ content: Content,
             type: SheetType) {
-        let root = root ?? self
         let manager = NavManager(
-                root: root,
+                root: self,
                 easeAnimation: easeAnimation,
                 showDefaultNavBar: showDefaultNavBar)
         let navigator = Navigator.instance(
@@ -146,16 +169,17 @@ extension NavManager {
                 showDefaultNavBar: showDefaultNavBar) {
             content
         }
-        root.sheet = AnyView(navigatorView)
+        sheet = AnyView(navigatorView)
 
         switch type {
         case .normal:
-            root.presentSheet = true
+            presentSheet = true
         case .full:
-            root.presentFullSheetView = true
+            presentFullSheet = true
+        case .custom:
+            presentCustomSheet = true
         }
     }
-
 }
 
 extension NavManager {
@@ -163,16 +187,17 @@ extension NavManager {
     enum SheetType {
         case normal
         case full
+        case custom
     }
 }
 
 extension NavManager {
 
     public func dismissSheet() {
-        root?.dismissSheet()
-        presentSheet = false
-        presentFullSheetView = false
-        sheet = nil
+        root?.presentSheet = false
+        root?.presentFullSheet = false
+        root?.presentCustomSheet = false
+        root?.sheet = nil
     }
 
     public func dismiss(
@@ -214,5 +239,6 @@ extension NavManager {
     }
 
 }
+
 
 

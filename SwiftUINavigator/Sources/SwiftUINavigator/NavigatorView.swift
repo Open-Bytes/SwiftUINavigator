@@ -12,7 +12,8 @@ public struct NavigatorView<Root>: View where Root: View {
     private var navigator: Navigator
     private let rootView: Root
     private let transition: NavigatorTransition
-
+    @State var isPresentingSheet: Bool = false
+    @State var isPresentingFullScreen: Bool = false
     /// Creates a NavigatorView.
     /// - Parameters:
     ///   - transition: The type of transition to apply between views in every push and pop operation.
@@ -60,7 +61,7 @@ public struct NavigatorView<Root>: View where Root: View {
             if #available(iOS 14.0, *) {
                 SheetView()
                         .fullScreenCover(
-                                isPresented: $manager.presentFullSheetView,
+                                isPresented: $manager.presentFullSheet,
                                 onDismiss: {
                                     onDismissSheet()
                                 }) {
@@ -74,6 +75,16 @@ public struct NavigatorView<Root>: View where Root: View {
 
     private func SheetView() -> some View {
         Content()
+                .bottomSheet(
+                        isPresented: $manager.presentCustomSheet,
+                        height: manager.customSheetOptions.height,
+                        minHeight: manager.customSheetOptions.minHeight,
+                        isDismissable: manager.customSheetOptions.isDismissable,
+                        onDismiss: {
+                            onDismissSheet()
+                        }) {
+                    LazyView(manager.sheet)
+                }
                 .sheet(
                         isPresented: $manager.presentSheet,
                         onDismiss: {

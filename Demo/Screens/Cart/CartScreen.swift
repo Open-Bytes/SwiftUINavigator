@@ -22,7 +22,7 @@ struct CartScreen: View {
                 FooterView()
                 CheckoutButton()
             }
-        }
+        }.background(Color.white)
     }
 
     private func Header() -> some View {

@@ -18,6 +18,7 @@ enum NavigationOption: String {
     case push = "1"
     case sheet = "2"
     case fullSheet = "3"
+    case customSheet = "4"
 
     static func from(_ value: String) -> NavigationOption {
         NavigationOption(rawValue: value) ?? .push
@@ -114,6 +115,10 @@ struct ProductsScreen: View {
                 return .fullSheet
             }
             return .sheet
+        case .customSheet:
+            return .customSheet(
+                    height: UIScreen.main.bounds.height * 0.75,
+                    isDragDismissable: true)
         }
     }
 }
@@ -132,7 +137,8 @@ extension ProductsScreen {
         [
             ChipGroup.Item(id: NavigationOption.push.rawValue, name: "Push"),
             ChipGroup.Item(id: NavigationOption.sheet.rawValue, name: "Sheet"),
-            ChipGroup.Item(id: NavigationOption.fullSheet.rawValue, name: "Full Sheet")
+            ChipGroup.Item(id: NavigationOption.fullSheet.rawValue, name: "Full Sheet"),
+            ChipGroup.Item(id: NavigationOption.customSheet.rawValue, name: "Custom Sheet")
         ]
     }
 

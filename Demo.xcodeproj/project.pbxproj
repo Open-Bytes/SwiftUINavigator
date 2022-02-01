@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1BCAC0ABBCF79973FD1AD387 /* View+OnDataChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCACA65F0B08F568B389C92 /* View+OnDataChange.swift */; };
+		1BCAC0D14C37484E27CCC423 /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC97FFD9D263674F06F86 /* BottomSheet.swift */; };
 		1BCAC5155B344C8293B32C57 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC6E29FD5B62D71DE6DB9 /* Navigator.swift */; };
 		1BCAC6E200E87D7A087CEF7C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC27F1DD06BAAD7837886 /* SceneDelegate.swift */; };
 		1BCACAB8AE546C3592F044D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC766AD646B0EAA329E74 /* AppDelegate.swift */; };
@@ -92,7 +94,9 @@
 		1BCAC27F1DD06BAAD7837886 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1BCAC6E29FD5B62D71DE6DB9 /* Navigator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		1BCAC766AD646B0EAA329E74 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1BCAC97FFD9D263674F06F86 /* BottomSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
 		1BCAC987EECE855C5630A7BF /* ChipGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChipGroup.swift; sourceTree = "<group>"; };
+		1BCACA65F0B08F568B389C92 /* View+OnDataChange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+OnDataChange.swift"; sourceTree = "<group>"; };
 		C9BA2E602587CA26004DAEEE /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9BA2E632587CA26004DAEEE /* DemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoApp.swift; sourceTree = "<group>"; };
 		C9BA2E672587CA29004DAEEE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -158,6 +162,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1BCAC51ECE714F612FF539E1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1BCACA65F0B08F568B389C92 /* View+OnDataChange.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1BCAC98F4A33312B2D5459C1 /* BottomSheet */ = {
+			isa = PBXGroup;
+			children = (
+				1BCAC97FFD9D263674F06F86 /* BottomSheet.swift */,
+			);
+			path = BottomSheet;
+			sourceTree = "<group>";
+		};
 		1BCACD094C5D28F754A6B1E2 /* ChipGroup */ = {
 			isa = PBXGroup;
 			children = (
@@ -337,6 +357,8 @@
 				F2EA00422787667D00482152 /* NavigationType.swift */,
 				F2EA00432787667D00482152 /* NavManager.swift */,
 				1BCAC6E29FD5B62D71DE6DB9 /* Navigator.swift */,
+				1BCAC98F4A33312B2D5459C1 /* BottomSheet */,
+				1BCAC51ECE714F612FF539E1 /* Extensions */,
 			);
 			name = SwiftUINavigator;
 			path = Sources/SwiftUINavigator;
@@ -544,6 +566,8 @@
 				F2EA00452787667D00482152 /* NavBar.swift in Sources */,
 				F2EA00492787667D00482152 /* LazyView.swift in Sources */,
 				1BCAC5155B344C8293B32C57 /* Navigator.swift in Sources */,
+				1BCAC0D14C37484E27CCC423 /* BottomSheet.swift in Sources */,
+				1BCAC0ABBCF79973FD1AD387 /* View+OnDataChange.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
