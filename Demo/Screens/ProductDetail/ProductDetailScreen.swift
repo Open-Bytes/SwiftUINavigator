@@ -15,7 +15,6 @@ struct ProductDetailScreen: View {
     let favorites: Favorites = .shared
     @State var isInCart: Bool = false
     @State var isFavorite: Bool = false
-    @State private var showShareSheet = false
     @EnvironmentObject private var navigator: Navigator
 
     init(item: Product) {
@@ -52,29 +51,14 @@ struct ProductDetailScreen: View {
         }
                 .padding(.horizontal, 16)
                 .background(Color.white)
-                .sheet(isPresented: $showShareSheet) {
-                    SharingSheet()
-                }
-                .onAppear(perform: {
+                .onAppear {
                     setup()
-                })
+                }
     }
 
     private func setup() {
         isInCart = cart.contains(item)
         isFavorite = favorites.contains(item)
-    }
-
-    private func SharingSheet() -> some View {
-        Group {
-            let text = "\(item.title)"
-                    + " - "
-                    + "$\(String(format: "%.2f", item.price))"
-                    + " | "
-                    + "\(item.description.prefix(100))"
-                    + "..."
-            ShareSheet(activityItems: [text])
-        }
     }
 
     private func ProductImage() -> some View {
@@ -134,7 +118,6 @@ struct ProductDetailScreen: View {
 
     private func ShareButton() -> some View {
         Button(action: {
-            self.showShareSheet = !showShareSheet
         }) {
             Image(systemName: "square.and.arrow.up")
                     .foregroundColor(Color.black)
@@ -164,7 +147,9 @@ struct ProductDetailScreen: View {
     }
 
     private func navigateToCartScreen() {
-        navigator.navigate(CartScreen(), type: .customSheet(height: 500), showDefaultNavBar: true)
+        navigator.navigate(type: .customSheet(height: 500), showDefaultNavBar: true) {
+            CartScreen()
+        }
     }
 
     private func AddToCartButton() -> some View {

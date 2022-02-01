@@ -162,8 +162,7 @@ extension NavManager {
                 showDefaultNavBar: showDefaultNavBar)
         let navigator = Navigator.instance(
                 manager: manager,
-                easeAnimation: easeAnimation,
-                showDefaultNavBar: showDefaultNavBar)
+                easeAnimation: easeAnimation)
         let navigatorView = NavigatorView(
                 navigator: navigator,
                 showDefaultNavBar: showDefaultNavBar) {

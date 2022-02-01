@@ -97,7 +97,9 @@ struct ProductsScreen: View {
                 // It's also possible to use Navigator object directly to navigate
                 if false {
                     ProductItemView(item: item).onTapGesture {
-                        navigator.navigate(ProductDetailScreen(item: item), type: selectedNavigationType)
+                        navigator.navigate(type: selectedNavigationType) {
+                            ProductDetailScreen(item: item)
+                        }
                     }.buttonStyle(PlainButtonStyle())
                 }
             }

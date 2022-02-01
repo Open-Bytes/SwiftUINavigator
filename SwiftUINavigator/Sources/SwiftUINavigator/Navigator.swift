@@ -6,35 +6,42 @@ import SwiftUI
 
 protocol NavigatorProtocol {
     func navigate<Element: View>(
-            _ element: Element,
             type: NavigationType,
             delay: TimeInterval,
-            showDefaultNavBar: Bool?)
+            showDefaultNavBar: Bool?,
+            _ element: () -> Element)
 
     func navigate<Element: View>(
-            _ element: Element,
             type: NavigationType,
-            showDefaultNavBar: Bool?)
+            showDefaultNavBar: Bool?,
+            _ element: () -> Element)
 
     func push<Element: View>(
-            _ element: Element,
             withId identifier: String?,
-            delay: TimeInterval)
+            delay: TimeInterval,
+            _ element: () -> Element)
 
     func push<Element: View>(
-            _ element: Element,
             withId identifier: String?,
             addToBackStack: Bool,
-            showDefaultNavBar: Bool?)
+            showDefaultNavBar: Bool?,
+            _ element: () -> Element)
 
     func presentSheet<Content: View>(
-            _ content: Content,
-            showDefaultNavBar: Bool)
+            showDefaultNavBar: Bool,
+            _ content: () -> Content)
+
+    func presentCustomSheet<Content: View>(
+            height: CGFloat,
+            minHeight: CGFloat,
+            isDismissable: Bool,
+            showDefaultNavBar: Bool,
+            _ content: () -> Content)
 
     @available(iOS 14.0, *)
     func presentFullSheet<Content: View>(
-            _ content: Content,
-            showDefaultNavBar: Bool?)
+            showDefaultNavBar: Bool?,
+            _ content: () -> Content)
 
     func dismissSheet()
 
@@ -58,11 +65,8 @@ public class Navigator: ObservableObject, NavigatorProtocol {
 
     static func instance(
             manager: NavManager? = nil,
-            easeAnimation: Animation,
-            showDefaultNavBar: Bool) -> Navigator {
-        let manager = manager ?? NavManager(
-                easeAnimation: easeAnimation,
-                showDefaultNavBar: showDefaultNavBar)
+            easeAnimation: Animation) -> Navigator {
+        let manager = manager ?? NavManager(easeAnimation: easeAnimation)
         return Navigator(manager: manager)
     }
 
@@ -73,12 +77,12 @@ public class Navigator: ObservableObject, NavigatorProtocol {
     ///   - delay: time to navigate after
     ///   - showDefaultNavBar: if false, no nav bar will be displayed.
     public func navigate<Element: View>(
-            _ element: Element,
             type: NavigationType = .push(),
             delay: TimeInterval,
-            showDefaultNavBar: Bool?) {
+            showDefaultNavBar: Bool?,
+            _ element: () -> Element) {
         manager.navigate(
-                element,
+                element(),
                 type: type,
                 delay: delay,
                 showDefaultNavBar: showDefaultNavBar)
@@ -90,11 +94,11 @@ public class Navigator: ObservableObject, NavigatorProtocol {
     ///   - type: the type of navigation
     ///   - showDefaultNavBar: if false, no nav bar will be displayed.
     public func navigate<Element: View>(
-            _ element: Element,
             type: NavigationType = .push(),
-            showDefaultNavBar: Bool? = nil) {
+            showDefaultNavBar: Bool? = nil,
+            _ element: () -> Element) {
         manager.navigate(
-                element,
+                element(),
                 type: type,
                 showDefaultNavBar: showDefaultNavBar)
     }
@@ -106,10 +110,10 @@ public class Navigator: ObservableObject, NavigatorProtocol {
     ///   - addToBackStack: if false, the view won't be added to the back stack
     ///   - showDefaultNavBar: if false, no nav bar will be displayed.
     public func push<Element: View>(
-            _ element: Element,
             withId identifier: String? = nil,
-            delay: TimeInterval) {
-        manager.push(element, withId: identifier, delay: delay)
+            delay: TimeInterval,
+            _ element: () -> Element) {
+        manager.push(element(), withId: identifier, delay: delay)
     }
 
     /// Navigates to a view.
@@ -119,11 +123,11 @@ public class Navigator: ObservableObject, NavigatorProtocol {
     ///   - addToBackStack: if false, the view won't be added to the back stack
     ///   - showDefaultNavBar: if false, no nav bar will be displayed.
     public func push<Element: View>(
-            _ element: Element,
             withId identifier: String? = nil,
             addToBackStack: Bool = true,
-            showDefaultNavBar: Bool? = nil) {
-        manager.push(element,
+            showDefaultNavBar: Bool? = nil,
+            _ element: () -> Element) {
+        manager.push(element(),
                 withId: identifier,
                 addToBackStack: addToBackStack,
                 showDefaultNavBar: showDefaultNavBar)
@@ -134,9 +138,27 @@ public class Navigator: ObservableObject, NavigatorProtocol {
     ///   - content: the view
     ///   - showDefaultNavBar: if false, no nav bar will be displayed.
     public func presentSheet<Content: View>(
-            _ content: Content,
-            showDefaultNavBar: Bool = false) {
-        manager.presentSheet(content, showDefaultNavBar: showDefaultNavBar)
+            showDefaultNavBar: Bool = false,
+            _ content: () -> Content) {
+        manager.presentSheet(content(), showDefaultNavBar: showDefaultNavBar)
+    }
+
+    /// Present a custom sheet
+    /// - Parameters:
+    ///   - content: the view
+    ///   - showDefaultNavBar: if false, no nav bar will be displayed.
+    public func presentCustomSheet<Content: View>(
+            height: CGFloat,
+            minHeight: CGFloat = 0,
+            isDismissable: Bool = true,
+            showDefaultNavBar: Bool = false,
+            _ content: () -> Content) {
+        manager.presentCustomSheet(
+                content(),
+                height: height,
+                minHeight: minHeight,
+                isDismissable: isDismissable,
+                showDefaultNavBar: showDefaultNavBar)
     }
 
     /// Present a full sheet
@@ -145,9 +167,9 @@ public class Navigator: ObservableObject, NavigatorProtocol {
     ///   - showDefaultNavBar: if false, no nav bar will be displayed.
     @available(iOS 14.0, *)
     public func presentFullSheet<Content: View>(
-            _ content: Content,
-            showDefaultNavBar: Bool? = nil) {
-        manager.presentFullSheet(content, showDefaultNavBar: showDefaultNavBar)
+            showDefaultNavBar: Bool? = nil,
+            _ content: () -> Content) {
+        manager.presentFullSheet(content(), showDefaultNavBar: showDefaultNavBar)
     }
 
     /// Dismiss the current displayed sheet

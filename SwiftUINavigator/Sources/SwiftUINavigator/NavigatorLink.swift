@@ -28,7 +28,9 @@ public struct NavigatorLink<Destination: View, Label: View>: View {
     public var body: some View {
         label()
                 .onTapGesture {
-                    navigator.navigate(destination(), type: type, showDefaultNavBar: showDefaultNavBar)
+                    navigator.navigate(type: type, showDefaultNavBar: showDefaultNavBar) {
+                        destination()
+                    }
                 }
     }
 }
