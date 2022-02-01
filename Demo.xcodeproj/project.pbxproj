@@ -20,7 +20,6 @@
 		F243D93D2779C64D00CD9FB5 /* Fake.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243D9242779C64D00CD9FB5 /* Fake.swift */; };
 		F243D93E2779C64D00CD9FB5 /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243D9262779C64D00CD9FB5 /* RatingView.swift */; };
 		F243D93F2779C64D00CD9FB5 /* AppTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243D9272779C64D00CD9FB5 /* AppTabBar.swift */; };
-		F243D9402779C64D00CD9FB5 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243D9282779C64D00CD9FB5 /* ShareSheet.swift */; };
 		F243D9412779C64D00CD9FB5 /* Array+Split.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243D92A2779C64D00CD9FB5 /* Array+Split.swift */; };
 		F243D9422779C64D00CD9FB5 /* SettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243D92D2779C64D00CD9FB5 /* SettingsScreen.swift */; };
 		F243D9432779C64D00CD9FB5 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243D92F2779C64D00CD9FB5 /* HomeScreen.swift */; };
@@ -105,7 +104,6 @@
 		F243D9242779C64D00CD9FB5 /* Fake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fake.swift; sourceTree = "<group>"; };
 		F243D9262779C64D00CD9FB5 /* RatingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		F243D9272779C64D00CD9FB5 /* AppTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppTabBar.swift; sourceTree = "<group>"; };
-		F243D9282779C64D00CD9FB5 /* ShareSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		F243D92A2779C64D00CD9FB5 /* Array+Split.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Split.swift"; sourceTree = "<group>"; };
 		F243D92D2779C64D00CD9FB5 /* SettingsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsScreen.swift; sourceTree = "<group>"; };
 		F243D92F2779C64D00CD9FB5 /* HomeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
@@ -247,7 +245,6 @@
 			children = (
 				F243D9262779C64D00CD9FB5 /* RatingView.swift */,
 				F243D9272779C64D00CD9FB5 /* AppTabBar.swift */,
-				F243D9282779C64D00CD9FB5 /* ShareSheet.swift */,
 				1BCACD094C5D28F754A6B1E2 /* ChipGroup */,
 			);
 			path = View;
@@ -541,7 +538,6 @@
 				F243D93E2779C64D00CD9FB5 /* RatingView.swift in Sources */,
 				F243D93D2779C64D00CD9FB5 /* Fake.swift in Sources */,
 				F243D9462779C64D00CD9FB5 /* ProductDetailScreen.swift in Sources */,
-				F243D9402779C64D00CD9FB5 /* ShareSheet.swift in Sources */,
 				F243D94A2779C64D00CD9FB5 /* Favorites.swift in Sources */,
 				1BCACC536C4A9621D93D59C2 /* ChipGroup.swift in Sources */,
 				1BCACF9BCA9FB8635673CDEC /* FlexibleView.swift in Sources */,
