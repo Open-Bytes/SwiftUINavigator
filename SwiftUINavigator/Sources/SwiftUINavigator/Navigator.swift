@@ -4,59 +4,7 @@
 
 import SwiftUI
 
-protocol NavigatorProtocol {
-    func navigate<Element: View>(
-            type: NavigationType,
-            delay: TimeInterval,
-            showDefaultNavBar: Bool?,
-            _ element: () -> Element)
-
-    func navigate<Element: View>(
-            type: NavigationType,
-            showDefaultNavBar: Bool?,
-            _ element: () -> Element)
-
-    func push<Element: View>(
-            withId identifier: String?,
-            delay: TimeInterval,
-            _ element: () -> Element)
-
-    func push<Element: View>(
-            withId identifier: String?,
-            addToBackStack: Bool,
-            showDefaultNavBar: Bool?,
-            _ element: () -> Element)
-
-    func presentSheet<Content: View>(
-            showDefaultNavBar: Bool,
-            _ content: () -> Content)
-
-    func presentCustomSheet<Content: View>(
-            height: CGFloat,
-            minHeight: CGFloat,
-            isDismissable: Bool,
-            showDefaultNavBar: Bool,
-            _ content: () -> Content)
-
-    @available(iOS 14.0, *)
-    func presentFullSheet<Content: View>(
-            showDefaultNavBar: Bool?,
-            _ content: () -> Content)
-
-    func dismissSheet()
-
-    /// Navigate back to a view in the back stack
-    /// - Parameters:
-    ///   - destination: the option for the view to dismiss to
-    ///   - delay: time to navigate after
-    func dismiss(
-            to destination: DismissDestination,
-            delay: TimeInterval)
-
-    func dismiss(to destination: DismissDestination)
-}
-
-public class Navigator: ObservableObject, NavigatorProtocol {
+public class Navigator: ObservableObject {
     let manager: NavManager
 
     init(manager: NavManager) {
