@@ -12,23 +12,29 @@ public struct NavigatorLink<Destination: View, Label: View>: View {
     private let type: NavigationType
     private let showDefaultNavBar: Bool?
     private let label: () -> Label
+    private let onDismissSheet: (() -> Void)?
     @EnvironmentObject private var navigator: Navigator
 
     public init(
             destination: @escaping @autoclosure () -> Destination,
             type: NavigationType = .push(),
             showDefaultNavBar: Bool? = nil,
+            onDismissSheet: (() -> Void)? = nil,
             label: @escaping () -> Label) {
         self.destination = destination
         self.type = type
         self.showDefaultNavBar = showDefaultNavBar
         self.label = label
+        self.onDismissSheet = onDismissSheet
     }
 
     public var body: some View {
         label()
                 .onTapGesture {
-                    navigator.navigate(type: type, showDefaultNavBar: showDefaultNavBar) {
+                    navigator.navigate(
+                            type: type,
+                            showDefaultNavBar: showDefaultNavBar,
+                            onDismissSheet: onDismissSheet) {
                         destination()
                     }
                 }

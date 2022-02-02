@@ -12,8 +12,7 @@ public struct NavigatorView<Root>: View where Root: View {
     private var navigator: Navigator
     private let rootView: Root
     private let transition: NavigatorTransition
-    @State var isPresentingSheet: Bool = false
-    @State var isPresentingFullScreen: Bool = false
+
     /// Creates a NavigatorView.
     /// - Parameters:
     ///   - transition: The type of transition to apply between views in every push and pop operation.
@@ -40,9 +39,9 @@ public struct NavigatorView<Root>: View where Root: View {
             showDefaultNavBar: Bool,
             @ViewBuilder rootView: () -> Root) {
         self.navigator = navigator
+        manager = navigator.manager
         self.transition = transition.transition
         self.rootView = rootView()
-        manager = navigator.manager
     }
 
     public var body: some View {
@@ -116,7 +115,8 @@ public struct NavigatorView<Root>: View where Root: View {
 extension NavigatorView {
 
     private func onDismissSheet() {
-        navigator.dismissSheet()
+        manager.onDismissSheet?()
+//        manager.onDismissSheet = nil
     }
 
 }

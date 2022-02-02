@@ -89,7 +89,10 @@ struct ProductsScreen: View {
                 NavigatorLink(
                         destination: ProductDetailScreen(item: item),
                         type: selectedNavigationType,
-                        showDefaultNavBar: true) {
+                        showDefaultNavBar: true,
+                        onDismissSheet: {
+                            print("Sheet dismissed.")
+                        }) {
                     // When this view is clicked, it will trigger the navigation
                     ProductItemView(item: item)
                 }.buttonStyle(PlainButtonStyle())
@@ -97,7 +100,11 @@ struct ProductsScreen: View {
                 // It's also possible to use Navigator object directly to navigate
                 if false {
                     ProductItemView(item: item).onTapGesture {
-                        navigator.navigate(type: selectedNavigationType) {
+                        navigator.navigate(
+                                type: selectedNavigationType,
+                                onDismissSheet: {
+                                    print("Sheet dismissed.")
+                                }) {
                             ProductDetailScreen(item: item)
                         }
                     }.buttonStyle(PlainButtonStyle())

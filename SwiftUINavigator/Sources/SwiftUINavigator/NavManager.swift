@@ -14,6 +14,7 @@ public class NavManager: ObservableObject {
     @Published var presentSheet: Bool = false
     @Published var presentFullSheet: Bool = false
     @Published var presentCustomSheet: Bool = false
+    var onDismissSheet: (() -> Void)? = nil
     var sheet: AnyView? = nil
     var showDefaultNavBar: Bool = true
     private var root: NavManager?
@@ -40,16 +41,22 @@ extension NavManager {
             _ element: Element,
             type: NavigationType,
             delay: TimeInterval,
-            showDefaultNavBar: Bool?) {
+            showDefaultNavBar: Bool?,
+            onDismissSheet: (() -> Void)?) {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            self.navigate(element, type: type, showDefaultNavBar: showDefaultNavBar)
+            self.navigate(
+                    element,
+                    type: type,
+                    showDefaultNavBar: showDefaultNavBar,
+                    onDismissSheet: onDismissSheet)
         }
     }
 
     public func navigate<Element: View>(
             _ element: Element,
             type: NavigationType,
-            showDefaultNavBar: Bool?) {
+            showDefaultNavBar: Bool?,
+            onDismissSheet: (() -> Void)?) {
         switch type {
         case let .push(id, addToBackStack):
             push(
@@ -57,10 +64,13 @@ extension NavManager {
                     addToBackStack: addToBackStack,
                     showDefaultNavBar: showDefaultNavBar)
         case .sheet:
-            presentSheet(element, showDefaultNavBar: showDefaultNavBar ?? false)
+            presentSheet(element,
+                    showDefaultNavBar: showDefaultNavBar ?? false,
+                    onDismiss: onDismissSheet)
         case .fullSheet:
             if #available(iOS 14.0, *) {
-                presentFullSheet(element, showDefaultNavBar: showDefaultNavBar)
+                presentFullSheet(element, showDefaultNavBar: showDefaultNavBar,
+                        onDismiss: onDismissSheet)
             } else {
                 return
             }
@@ -70,9 +80,9 @@ extension NavManager {
                     height: height,
                     minHeight: minHeight,
                     isDismissable: isDismissable,
-                    showDefaultNavBar: showDefaultNavBar ?? false)
+                    showDefaultNavBar: showDefaultNavBar ?? false,
+                    onDismiss: onDismissSheet)
         }
-
     }
 
 }
@@ -126,17 +136,19 @@ extension NavManager {
 
     public func presentSheet<Content: View>(
             _ content: Content,
-            showDefaultNavBar: Bool) {
+            showDefaultNavBar: Bool,
+            onDismiss: (() -> Void)?) {
         let view = addNavBar(content, showDefaultNavBar: showDefaultNavBar)
-        presentSheet(view, type: .normal)
+        presentSheet(view, type: .normal, onDismiss: onDismiss)
     }
 
     @available(iOS 14.0, *)
     public func presentFullSheet<Content: View>(
             _ content: Content,
-            showDefaultNavBar: Bool?) {
+            showDefaultNavBar: Bool?,
+            onDismiss: (() -> Void)?) {
         let view = addNavBar(content, showDefaultNavBar: showDefaultNavBar)
-        presentSheet(view, type: .full)
+        presentSheet(view, type: .full, onDismiss: onDismiss)
     }
 
     public func presentCustomSheet<Content: View>(
@@ -144,18 +156,21 @@ extension NavManager {
             height: CGFloat,
             minHeight: CGFloat,
             isDismissable: Bool,
-            showDefaultNavBar: Bool) {
+            showDefaultNavBar: Bool,
+            onDismiss: (() -> Void)?) {
         let view = addNavBar(content, showDefaultNavBar: showDefaultNavBar)
         customSheetOptions = CustomSheetOptions(
                 height: height,
                 minHeight: minHeight,
                 isDismissable: isDismissable)
-        presentSheet(view, type: .custom)
+        presentSheet(view, type: .custom, onDismiss: onDismiss)
     }
 
     private func presentSheet<Content: View>(
             _ content: Content,
-            type: SheetType) {
+            type: SheetType,
+            onDismiss: (() -> Void)?) {
+        onDismissSheet = onDismiss
         let manager = NavManager(
                 root: self,
                 easeAnimation: easeAnimation,
