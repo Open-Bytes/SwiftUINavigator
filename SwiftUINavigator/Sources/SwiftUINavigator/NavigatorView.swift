@@ -116,7 +116,7 @@ extension NavigatorView {
 
     private func onDismissSheet() {
         manager.onDismissSheet?()
-//        manager.onDismissSheet = nil
+        manager.onDismissSheet = nil
     }
 
 }
