@@ -2,7 +2,7 @@
 <img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/logo/logo_white.png?raw=true" alt="SwiftUINavigator Logo"/>
 </a></p>
 
-The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/MhmoudAlim) 
+The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/MhmoudAlim)
 </br>
 </br>
 
@@ -20,7 +20,6 @@ The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/Mhmo
 <p align="center"><a href="https://github.com/Open-Bytes/SwiftUINavigator">
 <img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/diagram.png?raw=true" alt="SwiftUINavigator Diagram" width="550" height="550" border="#1111"/>
 </a></p>
-
 
 # Table of contents
 
@@ -54,11 +53,17 @@ Let's first explore the limitation of SwiftUI then explore the awesome features 
 In SwiftUI, there are a lot of limitations:
 
 - [ ] Transition navigations can not be disabled or customized.
+
 - [ ] Can not ignore adding the view to the back stack.
+
 - [ ] No navigation back to root view.
+
 - [ ] Can not navigate to a view using a specific ID.
+
 - [ ] Inconsistent navigation when use `NavigationLinka`, `.sheet` and `.fullScreenCover`
+
 - [ ] Can not navigate programmatically.
+
 - [ ] Customizing the navigation bar is not trivial.
 
 ### SwiftUINavigator is awesome
@@ -66,13 +71,21 @@ In SwiftUI, there are a lot of limitations:
 `SwiftUINavigator` has a lot of awesome features. Here's some of these features:
 
 - [X] Custom navigation transitions
+
 - [X] Navigate to a view without adding it to the back stack.
+
 - [X] Direct navigation without links
+
 - [X] Direct navigation with links
+
 - [X] Present sheets without having to declare a sheet modifier.
+
 - [X] Dismiss to previous view.
+
 - [X] Dismiss to root view.
+
 - [X] Dismiss to a specific view using its ID.
+
 - [X] Navigation Bars are built-in the library
 
 ### Requirements
@@ -126,7 +139,9 @@ NavigatorLink(destination: SomeView()) {
 ```swift
 @EnvironmentObject private var navigator: Navigator
 
-navigator.navigate(SomeView())
+navigator.navigate {
+    SomeView()
+}
 ```
 
 > For more details about`Navigator`, see [Navigator](#navigator)
@@ -154,12 +169,17 @@ navigator.dismiss()
 
 ### Main Components
 
-|               **Component**               |                                                                        **Description**                                                                                                                             | 
-| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
-|       [NavigatorView](#navigatorview)     |   `NavigatorView` is the alternative of SwiftUI NavigationView implementing <br> stack-based navigation with mote control and flexibility <br> in handling the navigation                                          | 
-|       [Navigator](#navigator)             |   The `Navigator` class is the heart of the library. It's injected to any view as `EnvironmentObject`.                                                                                                             | 
-|       [NavigatorLink](#navigatorlink)     |   The alternative of NavigationLink. It's a wrapper of Navigator. <br> When clicked, it will navigate to the destination view with the specified navigation type.                                                  | 
-|       [DismissLink](https://github.com/Open-Bytes/SwiftUINavigator/blob/master/SwiftUINavigator/Sources/SwiftUINavigator/DismissLink.swift)  |   DismissLink is a view which dismisses the current view when tapped. It's a wapper for `Navigator.dismiss()`   | 
+|               **Component**               |                                                                        **
+Description**
+| | ----------------------------------------- |
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|       [NavigatorView](#navigatorview)     |   `NavigatorView` is the alternative of SwiftUI NavigationView
+implementing <br> stack-based navigation with mote control and flexibility <br> in handling the navigation |
+|       [Navigator](#navigator)             | The `Navigator` class is the heart of the library. It's injected to any
+view as `EnvironmentObject`. | |       [NavigatorLink](#navigatorlink)     | The alternative of NavigationLink. It's a
+wrapper of Navigator. <br> When clicked, it will navigate to the destination view with the specified navigation type. |
+|       [DismissLink](https://github.com/Open-Bytes/SwiftUINavigator/blob/master/SwiftUINavigator/Sources/SwiftUINavigator/DismissLink.swift)
+| DismissLink is a view which dismisses the current view when tapped. It's a wapper for `Navigator.dismiss()`   |
 
 ### NavigatorView
 
@@ -172,12 +192,7 @@ flexibility in handling the navigation
 public init(
         transition: NavigatorTransitionType = .default,
         easeAnimation: Animation = .easeOut(duration: 0.2),
-        @ViewBuilder rootView: () -> Root)
-
-public init(
-        navigator: Navigator,
-        transition: NavigatorTransitionType = .default,
-        easeAnimation: Animation = .easeOut(duration: 0.2),
+        showDefaultNavBar: Bool = true,
         @ViewBuilder rootView: () -> Root)
 ```
 
@@ -192,8 +207,8 @@ NavigatorView(
 ```
 
 > **Important Note**: the second initializers supports a `Navigator` instance. This is important
-> if you need to nest a `NavigatorView` other than the root one. 
-> Keep in mind that if you didn't pass the `Navigator` instance, 
+> if you need to nest a `NavigatorView` other than the root one.
+> Keep in mind that if you didn't pass the `Navigator` instance,
 > it will work, but it's recommended to pass it for consistent behavior is the whole app.
 > In this case, you should pass the instance of `Navigator` using the `EnvironmentObject` as follows:
 
@@ -221,9 +236,13 @@ You can use `Navigator` directly to navigate programmatically to any view with 3
 1. Push view (Regular Navigation)
 
 ```swift
-navigator.navigate(ProductDetailScreen(item: item))
+navigator.navigate {
+    ProductDetailScreen(item: item)
+}
 // OR
-navigator.navigate(ProductDetailScreen(item: item), type: .push())
+navigator.navigate(type: .push()) {
+    ProductDetailScreen(item: item)
+}
 ```
 
 > You can specify an ID for the pushed view `navigate(SomeView(), type: .push(id: "Detail Screen"))`.
@@ -238,13 +257,25 @@ navigator.navigate(ProductDetailScreen(item: item), type: .push())
 2. Present sheet
 
 ```swift
-navigator.navigate(ProductDetailScreen(item: item), type: .sheet)
+navigator.navigate(type: .sheet) {
+    ProductDetailScreen(item: item)
+}
 ```
 
 3. Present full sheet
 
 ```swift
-navigator.navigate(ProductDetailScreen(item: item), type: .fullSheet)
+navigator.navigate(type: .fullSheet) {
+    ProductDetailScreen(item: item)
+}
+```
+
+4. Present a custom sheet
+
+```swift
+navigator.navigate(type: .customSheet(height: 500), showDefaultNavBar: true) {
+    CartScreen()
+}
 ```
 
 > The navigation types are declared in NavigationType enum.
@@ -319,8 +350,20 @@ navigator.dismiss(to: .root)
 
 ### Navigation Bar
 
-The navigation bar is built-in in the library, and it's displayed by default in any pushed view. 
-And you have the full control of hiding or showing it
+The navigation bar is built-in in the library. And you have the full control of hiding or showing it.
+
+The NavBar is automatically displayed for some navigation types. In the following table, you can find the default state
+for automatically showing the navigation bar
+
+|   **Navigation Type**      |      **Automatic NavBar**      | 
+| -------------------------- | -------------------------------| 
+|   push                     |                 true           | 
+|   fullSheet                |                 true           | 
+|   sheet                    |                 false          | 
+|   customSheet              |                 false          | 
+
+> **Note**: You still can control displaying the NavBar of the navigation types.
+>
 
 #### Control Nav Bar For All Views
 
@@ -331,17 +374,31 @@ NavigatorView(showDefaultNavBar: false)
 #### Control Nav Bar For a Single View
 
 ```swift
-navigator.navigate(SomeView(), type: .push(showDefaultNavBar: false))
+navigator.navigate(showDefaultNavBar: false) {
+    SomeView()
+}
 
-// OR
+navigator.push(showDefaultNavBar: false) {
+    SomeView()
+}
 
-navigator.push(SomeView(), showDefaultNavBar: false)
+navigator.presentSheet(showDefaultNavBar: false) {
+    SomeView()
+}
+
+navigator.presentFullSheet(showDefaultNavBar: false) {
+    SomeView()
+}
+
+navigator.presentCustomSheet(showDefaultNavBar: false) {
+    SomeView()
+}
 ```
 
 > Note: The option you select for a single view overrides the selected option in `NavigatorView`
 
-In case you need a custom nav bar, you can disable the default one and implement your own one
-or use the built-in with your customizations
+In case you need a custom nav bar, you can disable the default one and implement your own one or use the built-in with
+your customizations
 
 ```swift
 SomeView()
