@@ -39,7 +39,6 @@ The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/Mhmo
     - [Transitions](#transitions)
     - [Navigation Types](#navigation-types)
     - [Navigation Transition Types](#navigation-transition-types)
-- [License](#license)
 - [Demo Project](#demo-project)
 - [Contribution](#clap-contribution)
 - [License](#license)
@@ -52,17 +51,17 @@ Let's first explore the limitation of SwiftUI then explore the awesome features 
 
 In SwiftUI, there are a lot of limitations:
 
-- [ ] Transition navigations can not be disabled or customized.
+- [ ] Can not navigate programmatically. You always have to declare the navigation links.
+
+- [ ] Inconsistent navigation when use `NavigationLink`, `.sheet` and `.fullScreenCover`
 
 - [ ] Can not ignore adding the view to the back stack.
 
-- [ ] No navigation back to root view.
+- [ ] Transition navigations can not be disabled or customized.
+
+- [ ] No navigation back to the root view.
 
 - [ ] Can not navigate to a view using a specific ID.
-
-- [ ] Inconsistent navigation when use `NavigationLinka`, `.sheet` and `.fullScreenCover`
-
-- [ ] Can not navigate programmatically.
 
 - [ ] Customizing the navigation bar is not trivial.
 
@@ -80,9 +79,9 @@ In SwiftUI, there are a lot of limitations:
 
 - [X] Present sheets without having to declare a sheet modifier.
 
-- [X] Dismiss to previous view.
+- [X] Dismiss to the previous view.
 
-- [X] Dismiss to root view.
+- [X] Dismiss to the root view.
 
 - [X] Dismiss to a specific view using its ID.
 
@@ -149,19 +148,19 @@ navigator.navigate {
 4. Dismiss (navigate back) to the previous view
    **_programmatically_** (using `Navigator`) or using a **_link_** (using `DismissLink`).
 
-- Using `NavigatorLink`.
+- Using `Navigator`
+
+```swift
+navigator.dismiss()
+```
+
+- Or using `DismissLink`.
 
 ```swift
 DismissLink {
     Label("Back", systemImage: "chevron.backward")
             .foregroundColor(.blue)
 }
-```
-
-- Or using `Navigator`
-
-```swift
-navigator.dismiss()
 ```
 
 > For more details about dismissing,
@@ -171,14 +170,14 @@ navigator.dismiss()
 
 |               **Component**               |                                                                        **Description**                                                                                                                             | 
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
-|       [NavigatorView](#navigatorview)     |   `NavigatorView` is the alternative of SwiftUI NavigationView implementing <br> stack-based navigation with mote control and flexibility <br> in handling the navigation                                          | 
-|       [Navigator](#navigator)             |   The `Navigator` class is the heart of the library. It's injected to any view as `EnvironmentObject`.                                                                                                             | 
-|       [NavigatorLink](#navigatorlink)     |   The alternative of NavigationLink. It's a wrapper of Navigator. <br> When clicked, it will navigate to the destination view with the specified navigation type.                                                  | 
+|       [NavigatorView](#navigatorview)     |   `NavigatorView` is the alternative of SwiftUI NavigationView implementing <br> stack-based navigation with more control and flexibility <br> in handling the navigation                                          | 
+|       [Navigator](#navigator)             |   The `Navigator` class is the heart of the library as it includes all the navigation APIs. It's injected to any view as `EnvironmentObject`.                                                                                                             | 
+|       [NavigatorLink](#navigatorlink)     |   The alternative of `NavigationLink`. It's a wrapper of Navigator. <br> When clicked, it will navigate to the destination view with the specified navigation type.                                                  | 
 |       [DismissLink](https://github.com/Open-Bytes/SwiftUINavigator/blob/master/SwiftUINavigator/Sources/SwiftUINavigator/DismissLink.swift)  |   DismissLink is a view which dismisses the current view when tapped. It's a wapper for `Navigator.dismiss()`   | 
 
 ### NavigatorView
 
-`NavigatorView` is the alternative of SwiftUI NavigationView implementing stack-based navigation with mote control and
+`NavigatorView` is the alternative of SwiftUI NavigationView implementing stack-based navigation with more control and
 flexibility in handling the navigation
 
 #### The public initializers
@@ -191,7 +190,7 @@ public init(
         @ViewBuilder rootView: () -> Root)
 ```
 
-As you can see, you can customize the `transition` animation and `easeAnimation`.
+As you can see, you can customize the `transition` animation, `easeAnimation` and automatic navigation bar.
 
 ```swift
 NavigatorView(
@@ -201,32 +200,18 @@ NavigatorView(
 }
 ```
 
-> **Important Note**: the second initializers supports a `Navigator` instance. This is important
-> if you need to nest a `NavigatorView` other than the root one.
-> Keep in mind that if you didn't pass the `Navigator` instance,
-> it will work, but it's recommended to pass it for consistent behavior is the whole app.
-> In this case, you should pass the instance of `Navigator` using the `EnvironmentObject` as follows:
-
-```swift
-@EnvironmentObject private var navigator: Navigator
-
-NavigatorView(navigator: navigator) {
-    SomeView()
-}
-```
-
 > For more details about `NavigatorTransitionType`,
 > see [Navigation Transition Types](#navigation-transition-types)
 
 ### Navigator
 
-The `Navigator` class is the heart of the library. It's injected to any view as `EnvironmentObject`.
+The `Navigator` class is the heart of the library as it includes all the navigation APIs. It's injected to any view as `EnvironmentObject`.
 
 ```swift
 @EnvironmentObject private var navigator: Navigator
 ```
 
-You can use `Navigator` directly to navigate programmatically to any view with 3 options
+You can use `Navigator` directly to navigate programmatically to any view with 4 options
 
 1. Push view (Regular Navigation)
 
@@ -278,7 +263,7 @@ navigator.navigate(type: .customSheet(height: 500), showDefaultNavBar: true) {
 
 ### NavigatorLink
 
-The alternative of NavigationLink. It's a wrapper of Navigator. When clicked, it will navigate to the destination view
+The alternative of `NavigationLink`. It's a wrapper of `Navigator`. When clicked, it will navigate to the destination view
 with the specified navigation type.
 
 ```swift
@@ -392,7 +377,7 @@ navigator.presentCustomSheet(showDefaultNavBar: false) {
 
 > Note: The option you select for a single view overrides the selected option in `NavigatorView`
 
-In case you need a custom nav bar, you can disable the default one and implement your own one or use the built-in with
+In case you need a custom nav bar, you can disable the automatic one and implement your own one or use the built-in with
 your customizations
 
 ```swift
@@ -461,6 +446,8 @@ is an e-commerce app demonstrates the complete usage of the library.
 All Pull Requests (PRs) are welcome. Help us make this library better.
 
 ## License
+
+**Apache License**, Version 2.0
 
 <details>
     <summary>
