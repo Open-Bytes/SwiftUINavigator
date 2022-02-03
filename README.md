@@ -89,7 +89,6 @@ In SwiftUI, there are a lot of limitations:
 
 ### Requirements
 
-- iOS 13+
 - Swift 5.3+
 
 ## Installation
