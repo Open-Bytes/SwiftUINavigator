@@ -7,6 +7,10 @@ The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/Mhmo
 </br>
 
 ![swift v5.3](https://img.shields.io/badge/swift-v5.3-orange.svg)
+![iOS 13](https://img.shields.io/badge/iOS-13.0+-865EFC.svg)
+![macOS](https://img.shields.io/badge/macOS-10.15+-179AC8.svg)
+![tvOS](https://img.shields.io/badge/tvOS-13.0+-41465B.svg)
+![License](https://img.shields.io/badge/License-Apache-blue.svg)
 
 **SwiftUINavigator** is a lightweight, flexible, and super easy library which makes `SwiftUI` navigation a trivial task.
 
