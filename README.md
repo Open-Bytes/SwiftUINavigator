@@ -94,11 +94,42 @@ In SwiftUI, there are a lot of limitations:
 
 ## Installation
 
-### 📦 Swift Package Manager
+### Xcode Projects
 
+Select `File` -> `Swift Packages` -> `Add Package Dependency` and enter `https://github.com/Open-Bytes/SwiftUINavigator`.
+
+
+### Swift Package Manager Projects
+
+You can add `
+SwiftUINavigator` as a package dependency in your `Package.swift` file:
+
+```swift
+let package = Package(
+    //...
+    dependencies: [
+      .package(url: "https://github.com/Open-Bytes/SwiftUINavigator", .upToNextMajor(from: "0.2.0"))
+    ]
+    //...
+)
 ```
-https://github.com/Open-Bytes/SwiftUINavigator.git
+
+From there, refer to `SwiftUINavigator` in target dependencies:
+
+```swift
+targets: [
+    .target(
+        name: "YourLibrary",
+        dependencies: [
+          "SwiftUINavigator"
+        ]
+        //...
+    ),
+   // ...
+]
 ```
+
+Then simply `import SwiftUINavigator` wherever you’d like to use the library.
 
 ## :zap: Usage
 
