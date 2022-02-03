@@ -481,7 +481,7 @@ is an e-commerce app demonstrates the complete usage of the library.
 All Pull Requests (PRs) are welcome. Help us make this library better.
 
 ## Changelog
-Look at [Changelog](https://github.com/ShabanKamell/SwiftUIFormValidator/blob/master/CHANGELOG.md) for release notes.
+Look at [Changelog](https://github.com/Open-Bytes/SwiftUINavigator/blob/master/CHANGELOG.md) for release notes.
 
 ## License
 
