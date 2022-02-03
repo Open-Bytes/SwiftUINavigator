@@ -45,6 +45,7 @@ The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/Mhmo
     - [Navigation Transition Types](#navigation-transition-types)
 - [Demo Project](#demo-project)
 - [Contribution](#clap-contribution)
+- [Changelog](#changelog)
 - [License](#license)
 
 ## Why?
@@ -478,6 +479,9 @@ is an e-commerce app demonstrates the complete usage of the library.
 ## :clap: Contribution
 
 All Pull Requests (PRs) are welcome. Help us make this library better.
+
+## Changelog
+Look at [Changelog](https://github.com/ShabanKamell/SwiftUIFormValidator/blob/master/CHANGELOG.md) for release notes.
 
 ## License
 
