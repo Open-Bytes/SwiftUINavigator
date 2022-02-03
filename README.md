@@ -28,6 +28,8 @@ The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/Mhmo
     - [ SwiftUINavigator is awesome](#swiftuinavigator-is-awesome)
 - [Requirements](#requirements)
 - [Installation](#installation)
+  - [Xcode Projects](#xcode-projects)
+  - [Swift Package Manager Projects](#swift-package-manager-projects)
 - [Usage](#zap-usage)
     - [Main Components](#main-components)
     - [NavigatorView](#navigatorview)
