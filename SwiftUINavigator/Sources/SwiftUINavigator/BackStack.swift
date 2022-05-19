@@ -68,11 +68,8 @@ struct BackStack {
 
     mutating func popToView(withId identifier: String) {
         var elements = views
-        for view in elements {
+        for view in elements.reversed() {
             if view.id == identifier {
-                elements.removeAll {
-                    $0.id == identifier
-                }
                 break
             }
             elements.removeLast()
