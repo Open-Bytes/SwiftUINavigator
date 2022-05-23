@@ -60,11 +60,12 @@ public struct NavBar<Content: View>: View {
 
     private func BarBackground() -> some View {
         Group {
-            if let view = background {
-                view
-            } else {
-                Color(.secondarySystemBackground).edgesIgnoringSafeArea(.top)
-            }
+            // TODO: uncomment
+//            if let view = background {
+//                view
+//            } else {
+//                Color(.secondarySystemBackground).edgesIgnoringSafeArea(.top)
+//            }
         }
     }
 }

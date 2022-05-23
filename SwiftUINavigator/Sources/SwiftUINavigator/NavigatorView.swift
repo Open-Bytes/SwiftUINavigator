@@ -57,6 +57,10 @@ public struct NavigatorView<Root>: View where Root: View {
     private func BodyContent() -> some View {
         Group {
             if #available(iOS 14.0, *) {
+                // TODO: improve
+                #if os(macOS)
+                SheetView()
+                #else
                 SheetView()
                         .fullScreenCover(
                                 isPresented: $manager.presentFullSheet,
@@ -65,6 +69,7 @@ public struct NavigatorView<Root>: View where Root: View {
                                 }) {
                             LazyView(manager.sheet)
                         }
+                #endif
             } else {
                 SheetView()
             }
