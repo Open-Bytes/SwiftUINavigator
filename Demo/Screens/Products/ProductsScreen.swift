@@ -62,8 +62,9 @@ struct ProductsScreen: View {
                     .padding()
         }
                 .padding(.bottom, 50)
-                .navigationBarTitle("Catalog", displayMode: .inline)
-                .navigationBarHidden(true)
+        // TODO: handle
+//                .navigationBarTitle("Catalog", displayMode: .inline)
+//                .navigationBarHidden(true)
     }
 
     private func NoProductsView() -> some View {
@@ -95,19 +96,21 @@ struct ProductsScreen: View {
                         }) {
                     // When this view is clicked, it will trigger the navigation
                     ProductItemView(item: item)
-                }.buttonStyle(PlainButtonStyle())
+                }
+                        .buttonStyle(PlainButtonStyle())
 
                 // It's also possible to use Navigator object directly to navigate
                 if false {
                     ProductItemView(item: item).onTapGesture {
-                        navigator.navigate(
-                                type: selectedNavigationType,
-                                onDismissSheet: {
-                                    print("Sheet dismissed.")
-                                }) {
-                            ProductDetailScreen(item: item)
-                        }
-                    }.buttonStyle(PlainButtonStyle())
+                                navigator.navigate(
+                                        type: selectedNavigationType,
+                                        onDismissSheet: {
+                                            print("Sheet dismissed.")
+                                        }) {
+                                    ProductDetailScreen(item: item)
+                                }
+                            }
+                            .buttonStyle(PlainButtonStyle())
                 }
             }
         }
@@ -125,11 +128,13 @@ struct ProductsScreen: View {
             }
             return .sheet
         case .customSheet:
+            // TODO: UIScreen.main.bounds.height * 0.75
             return .customSheet(
-                    height: UIScreen.main.bounds.height * 0.75,
+                    height: screenHeight() * 0.75,
                     isDragDismissable: true)
         }
     }
+
 }
 
 extension ProductsScreen {
@@ -143,12 +148,20 @@ extension ProductsScreen {
     }
 
     private var navigationOptions: [ChipGroup.Item] {
+        #if os(macOS)
+        [
+            ChipGroup.Item(id: NavigationOption.push.rawValue, name: "Push"),
+            ChipGroup.Item(id: NavigationOption.sheet.rawValue, name: "Sheet"),
+            ChipGroup.Item(id: NavigationOption.customSheet.rawValue, name: "Custom Sheet")
+        ]
+        #else
         [
             ChipGroup.Item(id: NavigationOption.push.rawValue, name: "Push"),
             ChipGroup.Item(id: NavigationOption.sheet.rawValue, name: "Sheet"),
             ChipGroup.Item(id: NavigationOption.fullSheet.rawValue, name: "Full Sheet"),
             ChipGroup.Item(id: NavigationOption.customSheet.rawValue, name: "Custom Sheet")
         ]
+        #endif
     }
 
 
