@@ -31,7 +31,6 @@
 		186F64D6283D026100864C52 /* AppTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243D9272779C64D00CD9FB5 /* AppTabBar.swift */; };
 		186F64D7283D026600864C52 /* ChipGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC987EECE855C5630A7BF /* ChipGroup.swift */; };
 		186F64D8283D026A00864C52 /* FlexibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC1821A545A71DC94A0CE /* FlexibleView.swift */; };
-		186F64D9283D026E00864C52 /* OSHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B8363A30D39780E01B69C0 /* OSHelper.swift */; };
 		1BCAC0ABBCF79973FD1AD387 /* View+OnDataChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCACA65F0B08F568B389C92 /* View+OnDataChange.swift */; };
 		1BCAC0D14C37484E27CCC423 /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC97FFD9D263674F06F86 /* BottomSheet.swift */; };
 		1BCAC5155B344C8293B32C57 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC6E29FD5B62D71DE6DB9 /* Navigator.swift */; };
@@ -40,7 +39,6 @@
 		1BCACC536C4A9621D93D59C2 /* ChipGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC987EECE855C5630A7BF /* ChipGroup.swift */; };
 		1BCACF9BCA9FB8635673CDEC /* FlexibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC1821A545A71DC94A0CE /* FlexibleView.swift */; };
 		58B830BC83668FC38C703AB9 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B832288582F66A2A421456 /* ScreenSize.swift */; };
-		58B839F38B162CC1079FBE57 /* OSHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B8363A30D39780E01B69C0 /* OSHelper.swift */; };
 		58B83EBD3616FF127C44A24A /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B832288582F66A2A421456 /* ScreenSize.swift */; };
 		C9BA2E642587CA26004DAEEE /* DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BA2E632587CA26004DAEEE /* DemoApp.swift */; };
 		C9BA2E682587CA29004DAEEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9BA2E672587CA29004DAEEE /* Assets.xcassets */; };
@@ -151,7 +149,6 @@
 		1BCAC987EECE855C5630A7BF /* ChipGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChipGroup.swift; sourceTree = "<group>"; };
 		1BCACA65F0B08F568B389C92 /* View+OnDataChange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+OnDataChange.swift"; sourceTree = "<group>"; };
 		58B832288582F66A2A421456 /* ScreenSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
-		58B8363A30D39780E01B69C0 /* OSHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OSHelper.swift; sourceTree = "<group>"; };
 		C9BA2E602587CA26004DAEEE /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9BA2E632587CA26004DAEEE /* DemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoApp.swift; sourceTree = "<group>"; };
 		C9BA2E672587CA29004DAEEE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -357,7 +354,6 @@
 				F243D9292779C64D00CD9FB5 /* Extensions */,
 				F243D9242779C64D00CD9FB5 /* Fake.swift */,
 				F243D9252779C64D00CD9FB5 /* View */,
-				58B8363A30D39780E01B69C0 /* OSHelper.swift */,
 				58B832288582F66A2A421456 /* ScreenSize.swift */,
 			);
 			path = Shared;
@@ -748,7 +744,6 @@
 				186F64CA283D01FB00864C52 /* ProductDetailScreen.swift in Sources */,
 				186F64D4283D025900864C52 /* Fake.swift in Sources */,
 				186F64CF283D021A00864C52 /* Product.swift in Sources */,
-				186F64D9283D026E00864C52 /* OSHelper.swift in Sources */,
 				186F64C9283D01F600864C52 /* ProductsScreen.swift in Sources */,
 				186F64D0283D021D00864C52 /* Cart.swift in Sources */,
 				186F64CB283D01FF00864C52 /* CartScreen.swift in Sources */,
@@ -823,7 +818,6 @@
 				1BCAC5155B344C8293B32C57 /* Navigator.swift in Sources */,
 				1BCAC0D14C37484E27CCC423 /* BottomSheet.swift in Sources */,
 				1BCAC0ABBCF79973FD1AD387 /* View+OnDataChange.swift in Sources */,
-				58B839F38B162CC1079FBE57 /* OSHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
