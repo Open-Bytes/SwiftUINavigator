@@ -25,7 +25,7 @@ public enum NavigatorTransition {
         case .custom(let transition):
             return transition
         case .default:
-            return AnyTransition.asymmetric(
+            return .asymmetric(
                     insertion: .move(edge: .trailing),
                     removal: .move(edge: .trailing))
         }
