@@ -7,17 +7,20 @@ import SwiftUI
 public class Navigator: ObservableObject {
     let manager: NavManager
 
-    init(manager: NavManager) {
+    public init(manager: NavManager) {
         self.manager = manager
     }
 
     static func instance(
             manager: NavManager? = nil,
             easeAnimation: Animation,
-            showDefaultNavBar: Bool) -> Navigator {
+            showDefaultNavBar: Bool,
+            transition: NavigatorTransition
+    ) -> Navigator {
         let manager = manager ?? NavManager(
                 easeAnimation: easeAnimation,
-                showDefaultNavBar: showDefaultNavBar)
+                showDefaultNavBar: showDefaultNavBar,
+                transition: transition)
         return Navigator(manager: manager)
     }
 
@@ -66,9 +69,16 @@ public class Navigator: ObservableObject {
     ///   - showDefaultNavBar: if false, no nav bar will be displayed.
     public func push<Element: View>(
             withId identifier: String? = nil,
+            addToBackStack: Bool = true,
+            showDefaultNavBar: Bool? = nil,
             delay: TimeInterval,
             _ element: () -> Element) {
-        manager.push(element(), withId: identifier, delay: delay)
+        manager.push(
+                element(),
+                withId: identifier,
+                addToBackStack: addToBackStack,
+                showDefaultNavBar: showDefaultNavBar,
+                delay: delay)
     }
 
     /// Navigates to a view.

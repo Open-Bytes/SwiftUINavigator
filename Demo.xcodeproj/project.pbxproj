@@ -39,6 +39,7 @@
 		1BCACC536C4A9621D93D59C2 /* ChipGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC987EECE855C5630A7BF /* ChipGroup.swift */; };
 		1BCACF9BCA9FB8635673CDEC /* FlexibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC1821A545A71DC94A0CE /* FlexibleView.swift */; };
 		58B830BC83668FC38C703AB9 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B832288582F66A2A421456 /* ScreenSize.swift */; };
+		58B838FDA5131796C038E8A9 /* AnyTransition+BottomUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B83549D9D6CB865EF24140 /* AnyTransition+BottomUp.swift */; };
 		58B83EBD3616FF127C44A24A /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B832288582F66A2A421456 /* ScreenSize.swift */; };
 		C9BA2E642587CA26004DAEEE /* DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BA2E632587CA26004DAEEE /* DemoApp.swift */; };
 		C9BA2E682587CA29004DAEEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9BA2E672587CA29004DAEEE /* Assets.xcassets */; };
@@ -70,7 +71,7 @@
 		F2EA00472787667D00482152 /* NavigatorLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA003D2787667D00482152 /* NavigatorLink.swift */; };
 		F2EA00482787667D00482152 /* NavigatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA003E2787667D00482152 /* NavigatorView.swift */; };
 		F2EA00492787667D00482152 /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA003F2787667D00482152 /* LazyView.swift */; };
-		F2EA004A2787667D00482152 /* NavigatorTransitionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA00402787667D00482152 /* NavigatorTransitionType.swift */; };
+		F2EA004A2787667D00482152 /* NavigatorTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA00402787667D00482152 /* NavigatorTransition.swift */; };
 		F2EA004B2787667D00482152 /* DismissLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA00412787667D00482152 /* DismissLink.swift */; };
 		F2EA004C2787667D00482152 /* NavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA00422787667D00482152 /* NavigationType.swift */; };
 		F2EA004D2787667D00482152 /* NavManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA00432787667D00482152 /* NavManager.swift */; };
@@ -149,6 +150,7 @@
 		1BCAC987EECE855C5630A7BF /* ChipGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChipGroup.swift; sourceTree = "<group>"; };
 		1BCACA65F0B08F568B389C92 /* View+OnDataChange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+OnDataChange.swift"; sourceTree = "<group>"; };
 		58B832288582F66A2A421456 /* ScreenSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
+		58B83549D9D6CB865EF24140 /* AnyTransition+BottomUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnyTransition+BottomUp.swift"; sourceTree = "<group>"; };
 		C9BA2E602587CA26004DAEEE /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9BA2E632587CA26004DAEEE /* DemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoApp.swift; sourceTree = "<group>"; };
 		C9BA2E672587CA29004DAEEE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -180,7 +182,7 @@
 		F2EA003D2787667D00482152 /* NavigatorLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorLink.swift; sourceTree = "<group>"; };
 		F2EA003E2787667D00482152 /* NavigatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorView.swift; sourceTree = "<group>"; };
 		F2EA003F2787667D00482152 /* LazyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyView.swift; sourceTree = "<group>"; };
-		F2EA00402787667D00482152 /* NavigatorTransitionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorTransitionType.swift; sourceTree = "<group>"; };
+		F2EA00402787667D00482152 /* NavigatorTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorTransition.swift; sourceTree = "<group>"; };
 		F2EA00412787667D00482152 /* DismissLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissLink.swift; sourceTree = "<group>"; };
 		F2EA00422787667D00482152 /* NavigationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationType.swift; sourceTree = "<group>"; };
 		F2EA00432787667D00482152 /* NavManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavManager.swift; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 			isa = PBXGroup;
 			children = (
 				1BCACA65F0B08F568B389C92 /* View+OnDataChange.swift */,
+				58B83549D9D6CB865EF24140 /* AnyTransition+BottomUp.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -468,7 +471,7 @@
 				F2EA003D2787667D00482152 /* NavigatorLink.swift */,
 				F2EA003E2787667D00482152 /* NavigatorView.swift */,
 				F2EA003F2787667D00482152 /* LazyView.swift */,
-				F2EA00402787667D00482152 /* NavigatorTransitionType.swift */,
+				F2EA00402787667D00482152 /* NavigatorTransition.swift */,
 				F2EA00412787667D00482152 /* DismissLink.swift */,
 				F2EA00422787667D00482152 /* NavigationType.swift */,
 				F2EA00432787667D00482152 /* NavManager.swift */,
@@ -804,7 +807,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2EA004A2787667D00482152 /* NavigatorTransitionType.swift in Sources */,
+				F2EA004A2787667D00482152 /* NavigatorTransition.swift in Sources */,
 				F2EA001E2787630A00482152 /* SwiftUINavigator.docc in Sources */,
 				F2EA00462787667D00482152 /* LargeNavBar.swift in Sources */,
 				F2EA00472787667D00482152 /* NavigatorLink.swift in Sources */,
@@ -818,6 +821,7 @@
 				1BCAC5155B344C8293B32C57 /* Navigator.swift in Sources */,
 				1BCAC0D14C37484E27CCC423 /* BottomSheet.swift in Sources */,
 				1BCAC0ABBCF79973FD1AD387 /* View+OnDataChange.swift in Sources */,
+				58B838FDA5131796C038E8A9 /* AnyTransition+BottomUp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

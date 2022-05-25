@@ -62,9 +62,6 @@ struct ProductsScreen: View {
                     .padding()
         }
                 .padding(.bottom, 50)
-        // TODO: handle
-//                .navigationBarTitle("Catalog", displayMode: .inline)
-//                .navigationBarHidden(true)
     }
 
     private func NoProductsView() -> some View {

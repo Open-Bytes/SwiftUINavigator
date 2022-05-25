@@ -8,6 +8,8 @@
 import SwiftUI
 
 public class NavManager: ObservableObject {
+    private let transition: NavigatorTransition
+
     var lastNavigationType = NavigationDirection.push
     private let easeAnimation: Animation
     @Published var currentView: BackStackElement?
@@ -17,7 +19,7 @@ public class NavManager: ObservableObject {
     var onDismissSheet: (() -> Void)? = nil
     var sheet: AnyView? = nil
     var showDefaultNavBar: Bool = true
-    private var root: NavManager?
+    var root: NavManager?
     var customSheetOptions = CustomSheetOptions(height: 0, minHeight: 0, isDismissable: false)
 
     private var backStack = BackStack() {
@@ -28,10 +30,12 @@ public class NavManager: ObservableObject {
 
     public init(root: NavManager? = nil,
                 easeAnimation: Animation,
-                showDefaultNavBar: Bool) {
+                showDefaultNavBar: Bool,
+                transition: NavigatorTransition) {
+        self.root = root
         self.easeAnimation = easeAnimation
         self.showDefaultNavBar = showDefaultNavBar
-        self.root = root
+        self.transition = transition
     }
 }
 
@@ -92,9 +96,15 @@ extension NavManager {
     public func push<Element: View>(
             _ element: Element,
             withId identifier: String?,
+            addToBackStack: Bool,
+            showDefaultNavBar: Bool?,
             delay: TimeInterval) {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            self.push(element, withId: identifier, delay: delay)
+            self.push(
+                    element,
+                    withId: identifier,
+                    addToBackStack: addToBackStack,
+                    showDefaultNavBar: showDefaultNavBar)
         }
     }
 
@@ -103,16 +113,17 @@ extension NavManager {
             withId identifier: String?,
             addToBackStack: Bool,
             showDefaultNavBar: Bool?) {
-        withAnimation(easeAnimation) {
-            lastNavigationType = .push
-            let id = identifier == nil ? UUID().uuidString : identifier!
+        lastNavigationType = .push
+        let id = identifier == nil ? UUID().uuidString : identifier!
 
-            let view = addNavBar(element, showDefaultNavBar: showDefaultNavBar)
-            let element = BackStackElement(
-                    id: id,
-                    wrappedElement: view,
-                    type: .screen,
-                    addToBackStack: addToBackStack)
+        let view = AnyView(addNavBar(element, showDefaultNavBar: showDefaultNavBar)
+                .transition(transition.transition))
+        let element = BackStackElement(
+                id: id,
+                wrappedElement: view,
+                type: .screen,
+                addToBackStack: addToBackStack)
+        withAnimation(easeAnimation) {
             backStack.push(element)
         }
     }
@@ -174,11 +185,13 @@ extension NavManager {
         let manager = NavManager(
                 root: self,
                 easeAnimation: easeAnimation,
-                showDefaultNavBar: showDefaultNavBar)
+                showDefaultNavBar: showDefaultNavBar,
+                transition: transition)
         let navigator = Navigator.instance(
                 manager: manager,
                 easeAnimation: easeAnimation,
-                showDefaultNavBar: showDefaultNavBar)
+                showDefaultNavBar: showDefaultNavBar,
+                transition: transition)
         let navigatorView = NavigatorView(
                 navigator: navigator,
                 showDefaultNavBar: showDefaultNavBar) {
@@ -224,6 +237,8 @@ extension NavManager {
     }
 
     public func dismiss(to destination: DismissDestination) {
+        lastNavigationType = .pop
+
         if backStack.isEmpty {
             dismissSheet()
             return

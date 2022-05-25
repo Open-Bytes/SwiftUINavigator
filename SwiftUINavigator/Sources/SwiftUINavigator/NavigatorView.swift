@@ -20,13 +20,14 @@ public struct NavigatorView<Root>: View where Root: View {
     ///   - showDefaultNavBar: if false, no nav bar will be displayed.
     ///   - rootView: The very first view in the Navigation.
     public init(
-            transition: NavigatorTransitionType = .default,
+            transition: NavigatorTransition = .default,
             easeAnimation: Animation = .easeOut(duration: 0.2),
             showDefaultNavBar: Bool = true,
             @ViewBuilder rootView: () -> Root) {
         let navigator = Navigator.instance(
                 easeAnimation: easeAnimation,
-                showDefaultNavBar: showDefaultNavBar)
+                showDefaultNavBar: showDefaultNavBar,
+                transition: transition)
         self.init(navigator: navigator,
                 transition: transition,
                 showDefaultNavBar: showDefaultNavBar,
@@ -35,23 +36,21 @@ public struct NavigatorView<Root>: View where Root: View {
 
     init(
             navigator: Navigator,
-            transition: NavigatorTransitionType = .default,
+            transition: NavigatorTransition = .default,
             showDefaultNavBar: Bool,
             @ViewBuilder rootView: () -> Root) {
         self.navigator = navigator
         manager = navigator.manager
-        self.transition = transition.transition
+        self.transition = transition
         self.rootView = rootView()
     }
 
     public var body: some View {
-        ZStack {
-            Group {
-                BodyContent()
-            }
-                    .transition(transition.transition(of: manager.lastNavigationType))
-                    .environmentObject(navigator)
+        Group {
+            BodyContent()
         }
+                .environmentObject(navigator)
+                .zIndex(1)
     }
 
     private func BodyContent() -> some View {
