@@ -67,9 +67,11 @@ extension NavManager {
                     element, withId: id,
                     addToBackStack: addToBackStack,
                     showDefaultNavBar: showDefaultNavBar)
-        case .sheet:
+        case let .sheet(width, height):
             presentSheet(element,
                     showDefaultNavBar: showDefaultNavBar ?? false,
+                    width: width,
+                    height: height,
                     onDismiss: onDismissSheet)
         case .fullSheet:
             if #available(iOS 14.0, *) {
@@ -148,9 +150,11 @@ extension NavManager {
     public func presentSheet<Content: View>(
             _ content: Content,
             showDefaultNavBar: Bool,
+            width: CGFloat?,
+            height: CGFloat?,
             onDismiss: (() -> Void)?) {
         let view = addNavBar(content, showDefaultNavBar: showDefaultNavBar)
-        presentSheet(view, type: .normal, onDismiss: onDismiss)
+        presentSheet(view, type: .normal, width: width, height: height, onDismiss: onDismiss)
     }
 
     @available(iOS 14.0, *)
@@ -159,7 +163,7 @@ extension NavManager {
             showDefaultNavBar: Bool?,
             onDismiss: (() -> Void)?) {
         let view = addNavBar(content, showDefaultNavBar: showDefaultNavBar)
-        presentSheet(view, type: .full, onDismiss: onDismiss)
+        presentSheet(view, type: .full, width: nil, height: nil, onDismiss: onDismiss)
     }
 
     public func presentCustomSheet<Content: View>(
@@ -174,12 +178,14 @@ extension NavManager {
                 height: height,
                 minHeight: minHeight,
                 isDismissable: isDismissable)
-        presentSheet(view, type: .custom, onDismiss: onDismiss)
+        presentSheet(view, type: .custom, width: nil, height: nil, onDismiss: onDismiss)
     }
 
     private func presentSheet<Content: View>(
             _ content: Content,
             type: SheetType,
+            width: CGFloat?,
+            height: CGFloat?,
             onDismiss: (() -> Void)?) {
         onDismissSheet = onDismiss
         let manager = NavManager(
@@ -197,7 +203,12 @@ extension NavManager {
                 showDefaultNavBar: showDefaultNavBar) {
             content
         }
-        sheet = AnyView(navigatorView)
+
+        if let width = width, let height = height {
+            sheet = navigatorView.frame(width: width, height: height).eraseToAnyView()
+        } else {
+            sheet = navigatorView.eraseToAnyView()
+        }
 
         switch type {
         case .normal:
@@ -205,7 +216,15 @@ extension NavManager {
         case .full:
             presentFullSheet = true
         case .custom:
+            #if os(macOS)
             presentCustomSheet = true
+            #else
+            withAnimation(easeAnimation) {
+                presentSheetController(content: content.environmentObject(navigator)
+                )
+            }
+            #endif
+
         }
     }
 }
@@ -237,6 +256,11 @@ extension NavManager {
     }
 
     public func dismiss(to destination: DismissDestination) {
+        #if os(iOS)
+        // For dismissing the custom sheet which is displayed in a controller
+        UIApplication.shared.topController?.dismiss(animated: true)
+        #endif
+
         lastNavigationType = .pop
 
         if backStack.isEmpty {

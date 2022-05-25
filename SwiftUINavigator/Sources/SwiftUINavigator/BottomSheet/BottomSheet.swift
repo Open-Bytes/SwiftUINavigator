@@ -50,7 +50,7 @@ public struct BottomSheet<Content: View>: View {
     public var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
-                content
+                content.disableAnimation()
             }
                     .frame(width: geometry.size.width, height: height, alignment: .top)
                     .frame(height: geometry.size.height, alignment: .bottom)

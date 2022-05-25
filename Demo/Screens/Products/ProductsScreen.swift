@@ -118,12 +118,16 @@ struct ProductsScreen: View {
         case .push:
             return .push(addToBackStack: true)
         case .sheet:
-            return .sheet
+            #if os(macOS)
+            return .sheet(width: 500, height: 500)
+            #else
+            return .sheet()
+            #endif
         case .fullSheet:
             if #available(iOS 14, *) {
                 return .fullSheet
             }
-            return .sheet
+            return .sheet()
         case .customSheet:
             // TODO: UIScreen.main.bounds.height * 0.75
             return .customSheet(

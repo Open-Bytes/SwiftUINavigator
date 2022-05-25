@@ -11,7 +11,7 @@ public enum NavigationType {
     /// and won't be displayed when dismissing the view.
     case push(id: String? = nil, addToBackStack: Bool = true)
     /// Present a sheet
-    case sheet
+    case sheet(width: CGFloat? = nil, height: CGFloat? = nil)
     /// Present a full sheet
     @available(iOS 14.0, *)
     case fullSheet

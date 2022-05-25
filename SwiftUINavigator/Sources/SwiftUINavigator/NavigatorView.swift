@@ -91,7 +91,7 @@ public struct NavigatorView<Root>: View where Root: View {
                         onDismiss: {
                             onDismissSheet()
                         }) {
-                    LazyView(manager.sheet)
+                    manager.sheet.frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
     }
 

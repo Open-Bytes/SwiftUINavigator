@@ -62,7 +62,7 @@ public struct LargeNavBar<Content: View>: View {
                     HStack {
                         Image(systemName: "chevron.backward").foregroundColor(.blue)
                         Text("Back").foregroundColor(.blue)
-                    }
+                    }.disableAnimation()
                 }
             }
         }

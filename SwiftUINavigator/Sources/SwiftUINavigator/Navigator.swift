@@ -102,13 +102,18 @@ public class Navigator: ObservableObject {
     /// - Parameters:
     ///   - content: the view
     ///   - showDefaultNavBar: if false, no nav bar will be displayed.
+
     public func presentSheet<Content: View>(
             showDefaultNavBar: Bool = false,
+            width: CGFloat? = nil,
+            height: CGFloat? = nil,
             onDismiss: (() -> Void)? = nil,
             _ content: () -> Content) {
         manager.presentSheet(
                 content(),
                 showDefaultNavBar: showDefaultNavBar,
+                width: width,
+                height: height,
                 onDismiss: onDismiss)
     }
 

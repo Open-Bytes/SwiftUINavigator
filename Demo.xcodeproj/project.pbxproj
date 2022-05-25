@@ -31,6 +31,8 @@
 		186F64D6283D026100864C52 /* AppTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243D9272779C64D00CD9FB5 /* AppTabBar.swift */; };
 		186F64D7283D026600864C52 /* ChipGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC987EECE855C5630A7BF /* ChipGroup.swift */; };
 		186F64D8283D026A00864C52 /* FlexibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC1821A545A71DC94A0CE /* FlexibleView.swift */; };
+		186F64DA283EA09000864C52 /* SwiftUINavigator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2EA001A2787630900482152 /* SwiftUINavigator.framework */; };
+		186F64DB283EA09000864C52 /* SwiftUINavigator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2EA001A2787630900482152 /* SwiftUINavigator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1BCAC0ABBCF79973FD1AD387 /* View+OnDataChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCACA65F0B08F568B389C92 /* View+OnDataChange.swift */; };
 		1BCAC0D14C37484E27CCC423 /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC97FFD9D263674F06F86 /* BottomSheet.swift */; };
 		1BCAC5155B344C8293B32C57 /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC6E29FD5B62D71DE6DB9 /* Navigator.swift */; };
@@ -39,7 +41,12 @@
 		1BCACC536C4A9621D93D59C2 /* ChipGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC987EECE855C5630A7BF /* ChipGroup.swift */; };
 		1BCACF9BCA9FB8635673CDEC /* FlexibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC1821A545A71DC94A0CE /* FlexibleView.swift */; };
 		58B830BC83668FC38C703AB9 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B832288582F66A2A421456 /* ScreenSize.swift */; };
+		58B8332FC1D16E277916EC68 /* View+EraseToAnyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B8340B463BD55577D06888 /* View+EraseToAnyView.swift */; };
+		58B83364E3DB93D0F6101E73 /* View+DisableAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B835475FC253B0DE2DAE86 /* View+DisableAnimation.swift */; };
+		58B834CA2687CFC83934809C /* CustomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B83C2FB84B15561D2F14FA /* CustomSheetView.swift */; };
 		58B838FDA5131796C038E8A9 /* AnyTransition+BottomUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B83549D9D6CB865EF24140 /* AnyTransition+BottomUp.swift */; };
+		58B83BCE4B0A9F4C1C3C85F8 /* UIApplication+TopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B8339A32023514A96A4824 /* UIApplication+TopController.swift */; };
+		58B83E88C4B892B9D523DA7F /* UISheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B83A2A01D420DD5F1AAFC6 /* UISheetController.swift */; };
 		58B83EBD3616FF127C44A24A /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B832288582F66A2A421456 /* ScreenSize.swift */; };
 		C9BA2E642587CA26004DAEEE /* DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BA2E632587CA26004DAEEE /* DemoApp.swift */; };
 		C9BA2E682587CA29004DAEEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9BA2E672587CA29004DAEEE /* Assets.xcassets */; };
@@ -92,6 +99,13 @@
 			remoteGlobalIDString = 186F649A283D01A600864C52;
 			remoteInfo = "macOS Demo";
 		};
+		186F64DC283EA09000864C52 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C9BA2E582587CA26004DAEEE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F2EA00192787630900482152;
+			remoteInfo = SwiftUINavigator;
+		};
 		F2EA00252787630A00482152 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C9BA2E582587CA26004DAEEE /* Project object */;
@@ -116,6 +130,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		186F64DE283EA09000864C52 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				186F64DB283EA09000864C52 /* SwiftUINavigator.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F2EA00342787630A00482152 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -150,7 +175,12 @@
 		1BCAC987EECE855C5630A7BF /* ChipGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChipGroup.swift; sourceTree = "<group>"; };
 		1BCACA65F0B08F568B389C92 /* View+OnDataChange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+OnDataChange.swift"; sourceTree = "<group>"; };
 		58B832288582F66A2A421456 /* ScreenSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
+		58B8339A32023514A96A4824 /* UIApplication+TopController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+TopController.swift"; sourceTree = "<group>"; };
+		58B8340B463BD55577D06888 /* View+EraseToAnyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+EraseToAnyView.swift"; sourceTree = "<group>"; };
+		58B835475FC253B0DE2DAE86 /* View+DisableAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+DisableAnimation.swift"; sourceTree = "<group>"; };
 		58B83549D9D6CB865EF24140 /* AnyTransition+BottomUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AnyTransition+BottomUp.swift"; sourceTree = "<group>"; };
+		58B83A2A01D420DD5F1AAFC6 /* UISheetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISheetController.swift; sourceTree = "<group>"; };
+		58B83C2FB84B15561D2F14FA /* CustomSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSheetView.swift; sourceTree = "<group>"; };
 		C9BA2E602587CA26004DAEEE /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9BA2E632587CA26004DAEEE /* DemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoApp.swift; sourceTree = "<group>"; };
 		C9BA2E672587CA29004DAEEE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -193,6 +223,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				186F64DA283EA09000864C52 /* SwiftUINavigator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +309,8 @@
 			children = (
 				1BCACA65F0B08F568B389C92 /* View+OnDataChange.swift */,
 				58B83549D9D6CB865EF24140 /* AnyTransition+BottomUp.swift */,
+				58B835475FC253B0DE2DAE86 /* View+DisableAnimation.swift */,
+				58B8340B463BD55577D06888 /* View+EraseToAnyView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -286,6 +319,9 @@
 			isa = PBXGroup;
 			children = (
 				1BCAC97FFD9D263674F06F86 /* BottomSheet.swift */,
+				58B83C2FB84B15561D2F14FA /* CustomSheetView.swift */,
+				58B83A2A01D420DD5F1AAFC6 /* UISheetController.swift */,
+				58B8339A32023514A96A4824 /* UIApplication+TopController.swift */,
 			);
 			path = BottomSheet;
 			sourceTree = "<group>";
@@ -297,6 +333,13 @@
 				1BCAC1821A545A71DC94A0CE /* FlexibleView.swift */,
 			);
 			path = ChipGroup;
+			sourceTree = "<group>";
+		};
+		58B83BC3351DC6DCC732372B /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		C9BA2E572587CA26004DAEEE = {
@@ -478,6 +521,7 @@
 				1BCAC6E29FD5B62D71DE6DB9 /* Navigator.swift */,
 				1BCAC98F4A33312B2D5459C1 /* BottomSheet */,
 				1BCAC51ECE714F612FF539E1 /* Extensions */,
+				58B83BC3351DC6DCC732372B /* Shared */,
 			);
 			name = SwiftUINavigator;
 			path = Sources/SwiftUINavigator;
@@ -520,10 +564,12 @@
 				186F6497283D01A600864C52 /* Sources */,
 				186F6498283D01A600864C52 /* Frameworks */,
 				186F6499283D01A600864C52 /* Resources */,
+				186F64DE283EA09000864C52 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				186F64DD283EA09000864C52 /* PBXTargetDependency */,
 			);
 			name = "macOS Demo";
 			productName = "macOS Demo";
@@ -631,7 +677,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1340;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					186F649A283D01A600864C52 = {
 						CreatedOnToolsVersion = 13.4;
@@ -822,6 +868,11 @@
 				1BCAC0D14C37484E27CCC423 /* BottomSheet.swift in Sources */,
 				1BCAC0ABBCF79973FD1AD387 /* View+OnDataChange.swift in Sources */,
 				58B838FDA5131796C038E8A9 /* AnyTransition+BottomUp.swift in Sources */,
+				58B834CA2687CFC83934809C /* CustomSheetView.swift in Sources */,
+				58B83E88C4B892B9D523DA7F /* UISheetController.swift in Sources */,
+				58B83BCE4B0A9F4C1C3C85F8 /* UIApplication+TopController.swift in Sources */,
+				58B83364E3DB93D0F6101E73 /* View+DisableAnimation.swift in Sources */,
+				58B8332FC1D16E277916EC68 /* View+EraseToAnyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -845,6 +896,11 @@
 			isa = PBXTargetDependency;
 			target = 186F649A283D01A600864C52 /* macOS Demo */;
 			targetProxy = 186F64B6283D01A800864C52 /* PBXContainerItemProxy */;
+		};
+		186F64DD283EA09000864C52 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F2EA00192787630900482152 /* SwiftUINavigator */;
+			targetProxy = 186F64DC283EA09000864C52 /* PBXContainerItemProxy */;
 		};
 		F2EA00262787630A00482152 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -871,6 +927,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = "macOS Demo/macOS_Demo.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -899,6 +956,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_ENTITLEMENTS = "macOS Demo/macOS_Demo.entitlements";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1197,7 +1255,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.open.bytes.SwiftUINavigator;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = "iphoneos macosx";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SUPPORTS_MACCATALYST = YES;
@@ -1234,7 +1292,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.open.bytes.SwiftUINavigator;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = "iphoneos macosx";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SUPPORTS_MACCATALYST = YES;
