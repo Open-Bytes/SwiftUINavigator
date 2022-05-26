@@ -100,6 +100,7 @@ public struct NavigatorView<Root>: View where Root: View {
                 item.wrappedElement
                         .id(item.id)
                         .zIndex(Double(index + 1))
+                        .background(Color.white)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }

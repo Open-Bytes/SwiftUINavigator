@@ -23,7 +23,6 @@ struct CartScreen: View {
                 CheckoutButton()
             }
         }
-                .background(Color.white)
                 .edgesIgnoringSafeArea(.bottom)
     }
 
