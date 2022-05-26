@@ -147,7 +147,7 @@ struct ProductDetailScreen: View {
     }
 
     private func navigateToCartScreen() {
-        navigator.navigate(type: .customSheet(height: 500), showDefaultNavBar: true) {
+        navigator.navigate(showDefaultNavBar: true) {
             CartScreen()
         }
     }

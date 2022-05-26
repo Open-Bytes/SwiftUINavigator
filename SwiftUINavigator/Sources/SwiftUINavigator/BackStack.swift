@@ -23,7 +23,7 @@ enum BackStackElementType {
 }
 
 struct BackStack {
-    private var views = [BackStackElement]()
+    var views = [BackStackElement]()
 
     var isEmpty: Bool {
         views.isEmpty

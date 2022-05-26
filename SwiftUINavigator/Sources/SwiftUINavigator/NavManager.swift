@@ -22,9 +22,12 @@ public class NavManager: ObservableObject {
     var root: NavManager?
     var customSheetOptions = CustomSheetOptions(height: 0, minHeight: 0, isDismissable: false)
 
+    @Published var stackItems = [BackStackElement]()
+
     private var backStack = BackStack() {
         didSet {
             currentView = backStack.peek()
+            stackItems = backStack.views
         }
     }
 

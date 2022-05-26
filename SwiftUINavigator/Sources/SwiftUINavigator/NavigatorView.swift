@@ -11,7 +11,6 @@ public struct NavigatorView<Root>: View where Root: View {
     @ObservedObject private var manager: NavManager
     private var navigator: Navigator
     private let rootView: Root
-    private let transition: NavigatorTransition
 
     /// Creates a NavigatorView.
     /// - Parameters:
@@ -29,28 +28,27 @@ public struct NavigatorView<Root>: View where Root: View {
                 showDefaultNavBar: showDefaultNavBar,
                 transition: transition)
         self.init(navigator: navigator,
-                transition: transition,
                 showDefaultNavBar: showDefaultNavBar,
                 rootView: rootView)
     }
 
     init(
             navigator: Navigator,
-            transition: NavigatorTransition = .default,
             showDefaultNavBar: Bool,
             @ViewBuilder rootView: () -> Root) {
         self.navigator = navigator
         manager = navigator.manager
-        self.transition = transition
         self.rootView = rootView()
     }
 
     public var body: some View {
-        Group {
-            BodyContent()
+        ZStack {
+            Group {
+                BodyContent()
+            }
+                    .environmentObject(navigator)
+                    .zIndex(1)
         }
-                .environmentObject(navigator)
-                .zIndex(1)
     }
 
     private func BodyContent() -> some View {
@@ -97,10 +95,12 @@ public struct NavigatorView<Root>: View where Root: View {
 
     private func Content() -> some View {
         Group {
-            if let view = manager.currentView {
-                CurrentView(view)
-            } else {
-                RootView()
+            RootView()
+            ForEach(Array(manager.stackItems.enumerated()), id: \.offset) { index, item in
+                item.wrappedElement
+                        .id(item.id)
+                        .zIndex(Double(index + 1))
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
     }

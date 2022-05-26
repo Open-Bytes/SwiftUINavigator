@@ -22,7 +22,9 @@ struct CartScreen: View {
                 FooterView()
                 CheckoutButton()
             }
-        }.background(Color.white)
+        }
+                .background(Color.white)
+                .edgesIgnoringSafeArea(.bottom)
     }
 
     private func Header() -> some View {
@@ -32,7 +34,8 @@ struct CartScreen: View {
                 Spacer()
                 EditButton()
             }
-        }.padding(.bottom, 10)
+        }
+                .padding(.bottom, 10)
     }
 
     private func HeaderTitle() -> some View {
@@ -61,7 +64,8 @@ struct CartScreen: View {
                         .padding(.trailing, 20)
             }
 
-        }.foregroundColor(Color(red: 111 / 255, green: 115 / 255, blue: 210 / 255))
+        }
+                .foregroundColor(Color(red: 111 / 255, green: 115 / 255, blue: 210 / 255))
     }
 
     private func ItemsView() -> some View {
@@ -79,7 +83,8 @@ struct CartScreen: View {
                     }) {
                         Image(systemName: "trash.fill")
                                 .padding(.trailing, 20)
-                    }.foregroundColor(Color.red)
+                    }
+                            .foregroundColor(Color.red)
                 }
             }
         }
