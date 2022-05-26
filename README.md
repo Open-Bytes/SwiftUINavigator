@@ -42,7 +42,7 @@ The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/Mhmo
     - [Navigation Bar](#navigation-bar)
     - [Transitions](#transitions)
     - [Navigation Types](#navigation-types)
-    - [Navigation Transition Types](#navigation-transition-types)
+    - [Navigation Transition Types](#navigation-transition)
 - [Demo Project](#demo-project)
 - [Contribution](#clap-contribution)
 - [Changelog](#changelog)
@@ -50,7 +50,7 @@ The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/Mhmo
 
 ## Why?
 
-Let's first explore the limitation of SwiftUI then explore the awesome features **SwiftUINavigator** provides.
+Let's first explore the limitations of SwiftUI then explore the awesome features **SwiftUINavigator** provides.
 
 ### SwiftUI Limitations
 
@@ -219,7 +219,7 @@ flexibility in handling the navigation
 
 ```swift
 public init(
-        transition: NavigatorTransitionType = .default,
+        transition: NavigatorTransition = .default,
         easeAnimation: Animation = .easeOut(duration: 0.2),
         showDefaultNavBar: Bool = true,
         @ViewBuilder rootView: () -> Root)
@@ -235,8 +235,8 @@ NavigatorView(
 }
 ```
 
-> For more details about `NavigatorTransitionType`,
-> see [Navigation Transition Types](#navigation-transition-types)
+> For more details about `NavigatorTransition`,
+> see [Navigation Transition Types](#navigation-transition)
 
 ### Navigator
 
@@ -272,7 +272,7 @@ navigator.navigate(type: .push()) {
 2. Present sheet
 
 ```swift
-navigator.navigate(type: .sheet) {
+navigator.navigate(type: .sheet()) {
     ProductDetailScreen(item: item)
 }
 ```
@@ -292,6 +292,10 @@ navigator.navigate(type: .customSheet(height: 500), showDefaultNavBar: true) {
     CartScreen()
 }
 ```
+
+> In **macOS**, you have to provide the width & height of the sheet in order to display correctly.
+> Otherwise, you'll see a blank screen.
+
 
 > The navigation types are declared in NavigationType enum.
 > See [Navigation Types](#navigation-types)
@@ -429,11 +433,16 @@ SomeView()
 
 ### Transitions
 
+You can customize the transition animation by providing `NavigatorTransition` enum.
+
 ```swift
-NavigatorView(transition: .custom(push: .scale, pop: .slide)) {
+NavigatorView(transition: .custom(push: .scale)) {
     SomeView()
 }
 ```
+
+> For more details about `NavigatorTransition`,
+> see [Navigation Transition Types](#navigation-transition)
 
 ### Navigation Types
 
@@ -447,19 +456,19 @@ public enum NavigationType {
     /// and won't be displayed when dismissing the view.
     case push(id: String? = nil, addToBackStack: Bool = true)
     /// Present a sheet
-    case sheet
+    case sheet(width: CGFloat? = nil, height: CGFloat? = nil)
     /// Present a full sheet
     @available(iOS 14.0, *)
     case fullSheet
 }
 ```
 
-### Navigation Transition Types
+### Navigation Transition
 
-`NavigatorTransitionType` enum defines the supported transition types.
+`NavigatorTransition` enum defines the supported transitions.
 
 ```swift
-public enum NavigatorTransitionType {
+public enum NavigatorTransition {
     /// Transitions won't be animated.
     case none
 
@@ -467,7 +476,7 @@ public enum NavigatorTransitionType {
     case `default`
 
     /// Use a custom transition.
-    case custom(push: AnyTransition, pop: AnyTransition)
+    case custom(transition: AnyTransition)
 }
 ```
 
