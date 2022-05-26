@@ -43,11 +43,16 @@ public struct NavigatorView<Root>: View where Root: View {
 
     public var body: some View {
         ZStack {
+//            let window = UIApplication.shared.windows[0]
+//            let topPadding = window.safeAreaInsets.top
+//            let bottomPadding = window.safeAreaInsets.bottom
+
             Group {
                 BodyContent()
+//                        .padding(.top, topPadding)
+//                        .padding(.bottom, bottomPadding)
             }
                     .environmentObject(navigator)
-                    .zIndex(1)
         }
     }
 
@@ -100,7 +105,7 @@ public struct NavigatorView<Root>: View where Root: View {
                 item.wrappedElement
                         .id(item.id)
                         .zIndex(Double(index + 1))
-                        .background(Color.white)
+                        .background(Color.white.edgesIgnoringSafeArea(.all))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }

@@ -23,7 +23,6 @@ struct CartScreen: View {
                 CheckoutButton()
             }
         }
-                .edgesIgnoringSafeArea(.bottom)
     }
 
     private func Header() -> some View {
