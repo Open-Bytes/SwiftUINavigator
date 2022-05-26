@@ -25,7 +25,6 @@ public struct ChipGroup: View {
     }
 
     public var body: some View {
-        // TODO: UIScreen.main.bounds.width - 120
         FlexibleView(
                 availableWidth: screenWidth() - 120,
                 data: items,

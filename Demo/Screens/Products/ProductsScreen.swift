@@ -129,7 +129,6 @@ struct ProductsScreen: View {
             }
             return .sheet()
         case .customSheet:
-            // TODO: UIScreen.main.bounds.height * 0.75
             return .customSheet(
                     height: screenHeight() * 0.75,
                     isDragDismissable: true)
