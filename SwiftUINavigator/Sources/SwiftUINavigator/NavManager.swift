@@ -248,6 +248,7 @@ extension NavManager {
         root?.presentFullSheet = false
         root?.presentCustomSheet = false
         root?.sheet = nil
+        dismissController()
     }
 
     public func dismiss(
@@ -259,10 +260,7 @@ extension NavManager {
     }
 
     public func dismiss(to destination: DismissDestination) {
-        #if os(iOS)
-        // For dismissing the custom sheet which is displayed in a controller
-        UIApplication.shared.topController?.dismiss(animated: true)
-        #endif
+        dismissController()
 
         lastNavigationType = .pop
 
@@ -285,6 +283,12 @@ extension NavManager {
         }
     }
 
+    private func dismissController() {
+        #if os(iOS)
+        // For dismissing the custom sheet which is displayed in a controller
+        UIApplication.shared.topController?.dismiss(animated: true)
+        #endif
+    }
 }
 
 extension NavManager {
