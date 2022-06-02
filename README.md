@@ -497,6 +497,8 @@ Look at [Changelog](https://github.com/Open-Bytes/SwiftUINavigator/blob/master/C
 
 [Shaban Kamel](https://github.com/ShabanKamell)
 
+... Waiting for our name to be here 💪
+
 ## License
 
 **Apache License**, Version 2.0
