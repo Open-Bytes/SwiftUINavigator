@@ -492,6 +492,13 @@ All Pull Requests (PRs) are welcome. Help us make this library better.
 ## Changelog
 Look at [Changelog](https://github.com/Open-Bytes/SwiftUINavigator/blob/master/CHANGELOG.md) for release notes.
 
+
+## Contributors
+
+[Shaban Kamel](https://github.com/ShabanKamell)
+
+... Waiting for our name to be here 💪
+
 ## License
 
 **Apache License**, Version 2.0
