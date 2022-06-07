@@ -15,7 +15,7 @@ public enum NavigatorTransition {
     /// The default transition if you didn't pass one.
     case `default`
 
-    /// Use a custom transition.
+    /// Use a custom transition for push & pop.
     case custom(push: AnyTransition, pop: AnyTransition)
 
     var transition: (push: AnyTransition, pop: AnyTransition) {
