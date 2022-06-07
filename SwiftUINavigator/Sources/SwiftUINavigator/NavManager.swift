@@ -227,7 +227,6 @@ extension NavManager {
                 )
             }
             #endif
-
         }
     }
 }
