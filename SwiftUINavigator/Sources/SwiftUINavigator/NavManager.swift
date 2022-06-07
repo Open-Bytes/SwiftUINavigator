@@ -8,7 +8,7 @@
 import SwiftUI
 
 public class NavManager: ObservableObject {
-    private let transition: NavigatorTransition
+    let transition: NavigatorTransition
 
     var lastNavigationType = NavigationDirection.push
     private let easeAnimation: Animation
@@ -121,8 +121,7 @@ extension NavManager {
         lastNavigationType = .push
         let id = identifier == nil ? UUID().uuidString : identifier!
 
-        let view = AnyView(addNavBar(element, showDefaultNavBar: showDefaultNavBar)
-                .transition(transition.transition))
+        let view = addNavBar(element, showDefaultNavBar: showDefaultNavBar).eraseToAnyView()
         let element = BackStackElement(
                 id: id,
                 wrappedElement: view,

@@ -95,12 +95,15 @@ public struct NavigatorView<Root>: View where Root: View {
     private func Content() -> some View {
         Group {
             RootView()
-            ForEach(Array(manager.stackItems.enumerated()), id: \.offset) { index, item in
+            if let item = manager.stackItems.last {
                 item.wrappedElement
                         .id(item.id)
-                        .zIndex(Double(index + 1))
+                        .zIndex(1)
                         .background(Color.white.edgesIgnoringSafeArea(.all))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .transition(manager.lastNavigationType == .push ?
+                                manager.transition.transition.push :
+                                manager.transition.transition.pop)
             }
         }
     }

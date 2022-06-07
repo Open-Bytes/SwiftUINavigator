@@ -16,18 +16,19 @@ public enum NavigatorTransition {
     case `default`
 
     /// Use a custom transition.
-    case custom(transition: AnyTransition)
+    case custom(push: AnyTransition, pop: AnyTransition)
 
-    var transition: AnyTransition {
+    var transition: (push: AnyTransition, pop: AnyTransition) {
         switch self {
         case .none:
-            return .identity
-        case .custom(let transition):
-            return transition
+            return (push: .identity, pop: .identity)
+        case let .custom(push, pop):
+            return (push: push, pop: pop)
         case .default:
-            return .asymmetric(
-                    insertion: .move(edge: .trailing),
-                    removal: .move(edge: .trailing))
+            return (
+                    push: AnyTransition.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)),
+                    pop: AnyTransition.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .trailing))
+            )
         }
     }
 }
