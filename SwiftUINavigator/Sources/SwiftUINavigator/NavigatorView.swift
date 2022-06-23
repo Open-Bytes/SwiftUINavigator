@@ -94,7 +94,6 @@ public struct NavigatorView<Root>: View where Root: View {
 
     private func Content() -> some View {
         Group {
-            RootView()
             if let item = manager.stackItems.last {
                 item.wrappedElement
                         .id(item.id)
@@ -104,6 +103,8 @@ public struct NavigatorView<Root>: View where Root: View {
                         .transition(manager.lastNavigationType == .push ?
                                 manager.transition.transition.push :
                                 manager.transition.transition.pop)
+            } else {
+                RootView()
             }
         }
     }

@@ -29,8 +29,6 @@ struct HomeScreen: View {
                     }
                 ])
     }
-
-
 }
 
 struct ContentView_Previews: PreviewProvider {
