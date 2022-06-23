@@ -7,7 +7,34 @@ import SwiftUI
 /// The alternative of SwiftUI NavigationView implementing
 /// stack-based navigation with mote control and flexibility in handling
 /// the navigation
+///
+@available(*, deprecated, renamed: "NavView")
 public struct NavigatorView<Root>: View where Root: View {
+    private let navView: NavView<Root>
+    /// Creates a NavigatorView.
+    /// - Parameters:
+    ///   - transition: The type of transition to apply between views in every push and pop operation.
+    ///   - easeAnimation: The easing function to apply to every push and pop operation.
+    ///   - showDefaultNavBar: if false, no nav bar will be displayed.
+    ///   - rootView: The very first view in the Navigation.
+    public init(
+            transition: NavigatorTransition = .default,
+            easeAnimation: Animation = .easeOut(duration: 0.2),
+            showDefaultNavBar: Bool = true,
+            @ViewBuilder rootView: () -> Root) {
+        navView = NavView(
+                transition: transition,
+                easeAnimation: easeAnimation,
+                showDefaultNavBar: showDefaultNavBar,
+                rootView: rootView)
+    }
+
+    public var body: some View {
+        navView
+    }
+}
+
+public struct NavView<Root>: View where Root: View {
     @ObservedObject private var manager: NavManager
     private var navigator: Navigator
     private let rootView: Root
@@ -100,13 +127,14 @@ public struct NavigatorView<Root>: View where Root: View {
                         .zIndex(1)
                         .background(Color.white.edgesIgnoringSafeArea(.all))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .transition(manager.lastNavigationType == .push ?
-                                manager.transition.transition.push :
-                                manager.transition.transition.pop)
+
             } else {
                 RootView()
             }
         }
+                .transition(manager.lastNavigationType == .push ?
+                        manager.transition.transition.push :
+                        manager.transition.transition.pop)
     }
 
     private func RootView() -> some View {
@@ -119,7 +147,7 @@ public struct NavigatorView<Root>: View where Root: View {
 
 }
 
-extension NavigatorView {
+extension NavView {
 
     private func onDismissSheet() {
         manager.onDismissSheet?()

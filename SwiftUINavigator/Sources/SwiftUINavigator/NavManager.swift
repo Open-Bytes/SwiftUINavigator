@@ -10,7 +10,7 @@ import SwiftUI
 public class NavManager: ObservableObject {
     let transition: NavigatorTransition
 
-    var lastNavigationType = NavigationDirection.push
+    var lastNavigationType = NavigationDirection.pop
     private let easeAnimation: Animation
     @Published var currentView: BackStackElement?
     @Published var presentSheet: Bool = false
@@ -200,7 +200,7 @@ extension NavManager {
                 easeAnimation: easeAnimation,
                 showDefaultNavBar: showDefaultNavBar,
                 transition: transition)
-        let navigatorView = NavigatorView(
+        let navigatorView = NavView(
                 navigator: navigator,
                 showDefaultNavBar: showDefaultNavBar) {
             content
