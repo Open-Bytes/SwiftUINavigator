@@ -401,15 +401,7 @@ navigator.push(showDefaultNavBar: false) {
     SomeView()
 }
 
-navigator.presentSheet(showDefaultNavBar: false) {
-    SomeView()
-}
-
-navigator.presentFullSheet(showDefaultNavBar: false) {
-    SomeView()
-}
-
-navigator.presentCustomSheet(showDefaultNavBar: false) {
+navigator.presentSheet(type: .normal, showDefaultNavBar: false) {
     SomeView()
 }
 ```
