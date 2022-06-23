@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-public enum NavigationType {
+public enum NavType {
     /// Regular navigation type.
     /// id: pass a custom ID to use when navigate back.
     /// addToBackStack: if false, the view won't be added to the back stack

@@ -80,7 +80,7 @@
 		F2EA00492787667D00482152 /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA003F2787667D00482152 /* LazyView.swift */; };
 		F2EA004A2787667D00482152 /* NavTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA00402787667D00482152 /* NavTransition.swift */; };
 		F2EA004B2787667D00482152 /* DismissLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA00412787667D00482152 /* DismissLink.swift */; };
-		F2EA004C2787667D00482152 /* NavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA00422787667D00482152 /* NavigationType.swift */; };
+		F2EA004C2787667D00482152 /* NavType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA00422787667D00482152 /* NavType.swift */; };
 		F2EA004D2787667D00482152 /* NavManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA00432787667D00482152 /* NavManager.swift */; };
 /* End PBXBuildFile section */
 
@@ -214,7 +214,7 @@
 		F2EA003F2787667D00482152 /* LazyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyView.swift; sourceTree = "<group>"; };
 		F2EA00402787667D00482152 /* NavTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavTransition.swift; sourceTree = "<group>"; };
 		F2EA00412787667D00482152 /* DismissLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissLink.swift; sourceTree = "<group>"; };
-		F2EA00422787667D00482152 /* NavigationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationType.swift; sourceTree = "<group>"; };
+		F2EA00422787667D00482152 /* NavType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavType.swift; sourceTree = "<group>"; };
 		F2EA00432787667D00482152 /* NavManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -516,7 +516,7 @@
 				F2EA003F2787667D00482152 /* LazyView.swift */,
 				F2EA00402787667D00482152 /* NavTransition.swift */,
 				F2EA00412787667D00482152 /* DismissLink.swift */,
-				F2EA00422787667D00482152 /* NavigationType.swift */,
+				F2EA00422787667D00482152 /* NavType.swift */,
 				F2EA00432787667D00482152 /* NavManager.swift */,
 				1BCAC6E29FD5B62D71DE6DB9 /* Navigator.swift */,
 				1BCAC98F4A33312B2D5459C1 /* BottomSheet */,
@@ -859,7 +859,7 @@
 				F2EA00472787667D00482152 /* NavLink.swift in Sources */,
 				F2EA00442787667D00482152 /* BackStack.swift in Sources */,
 				F2EA004D2787667D00482152 /* NavManager.swift in Sources */,
-				F2EA004C2787667D00482152 /* NavigationType.swift in Sources */,
+				F2EA004C2787667D00482152 /* NavType.swift in Sources */,
 				F2EA00482787667D00482152 /* NavView.swift in Sources */,
 				F2EA004B2787667D00482152 /* DismissLink.swift in Sources */,
 				F2EA00452787667D00482152 /* NavBar.swift in Sources */,

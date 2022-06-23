@@ -13,7 +13,7 @@ public struct NavigatorLink<Destination: View, Label: View>: View {
 
     public init(
             destination: @escaping @autoclosure () -> Destination,
-            type: NavigationType = .push(),
+            type: NavType = .push(),
             showDefaultNavBar: Bool? = nil,
             onDismissSheet: (() -> Void)? = nil,
             label: @escaping () -> Label) {
@@ -35,7 +35,7 @@ public struct NavigatorLink<Destination: View, Label: View>: View {
 /// with the specified navigation type.
 public struct NavLink<Destination: View, Label: View>: View {
     private let destination: () -> Destination
-    private let type: NavigationType
+    private let type: NavType
     private let showDefaultNavBar: Bool?
     private let label: () -> Label
     private let onDismissSheet: (() -> Void)?
@@ -43,7 +43,7 @@ public struct NavLink<Destination: View, Label: View>: View {
 
     public init(
             destination: @escaping @autoclosure () -> Destination,
-            type: NavigationType = .push(),
+            type: NavType = .push(),
             showDefaultNavBar: Bool? = nil,
             onDismissSheet: (() -> Void)? = nil,
             label: @escaping () -> Label) {

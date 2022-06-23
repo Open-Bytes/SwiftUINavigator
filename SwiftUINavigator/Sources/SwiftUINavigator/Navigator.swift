@@ -31,7 +31,7 @@ public class Navigator: ObservableObject {
     ///   - delay: time to navigate after
     ///   - showDefaultNavBar: if false, no nav bar will be displayed.
     public func navigate<Element: View>(
-            type: NavigationType = .push(),
+            type: NavType = .push(),
             delay: TimeInterval,
             showDefaultNavBar: Bool?,
             onDismissSheet: (() -> Void)? = nil,
@@ -50,7 +50,7 @@ public class Navigator: ObservableObject {
     ///   - type: the type of navigation
     ///   - showDefaultNavBar: if false, no nav bar will be displayed.
     public func navigate<Element: View>(
-            type: NavigationType = .push(),
+            type: NavType = .push(),
             showDefaultNavBar: Bool? = nil,
             onDismissSheet: (() -> Void)? = nil,
             _ element: () -> Element) {

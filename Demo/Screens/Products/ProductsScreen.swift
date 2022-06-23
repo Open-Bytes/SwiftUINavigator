@@ -113,7 +113,7 @@ struct ProductsScreen: View {
         }
     }
 
-    private var selectedNavigationType: NavigationType {
+    private var selectedNavigationType: NavType {
         switch vm.navigationOption {
         case .push:
             return .push(addToBackStack: true)

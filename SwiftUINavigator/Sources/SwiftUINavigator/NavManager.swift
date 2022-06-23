@@ -46,7 +46,7 @@ extension NavManager {
 
     public func navigate<Element: View>(
             _ element: Element,
-            type: NavigationType,
+            type: NavType,
             delay: TimeInterval,
             showDefaultNavBar: Bool?,
             onDismissSheet: (() -> Void)?) {
@@ -61,7 +61,7 @@ extension NavManager {
 
     public func navigate<Element: View>(
             _ element: Element,
-            type: NavigationType,
+            type: NavType,
             showDefaultNavBar: Bool?,
             onDismissSheet: (() -> Void)?) {
         switch type {
