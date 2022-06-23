@@ -26,10 +26,11 @@ public class Navigator: ObservableObject {
 
     /// Navigates to a view.
     /// - Parameters:
-    ///   - element: the view
     ///   - type: the type of navigation
     ///   - delay: time to navigate after
     ///   - showDefaultNavBar: if false, no nav bar will be displayed.
+    ///   - onDismissSheet: called when dismissed
+    ///   - element: the view
     public func navigate<Element: View>(
             type: NavType = .push(),
             delay: TimeInterval,
@@ -46,9 +47,10 @@ public class Navigator: ObservableObject {
 
     /// Navigates to a view.
     /// - Parameters:
-    ///   - element: the view
     ///   - type: the type of navigation
     ///   - showDefaultNavBar: if false, no nav bar will be displayed.
+    ///   - onDismissSheet: called when dismissed
+    ///   - element: the view
     public func navigate<Element: View>(
             type: NavType = .push(),
             showDefaultNavBar: Bool? = nil,
@@ -63,10 +65,11 @@ public class Navigator: ObservableObject {
 
     /// Navigates to a view.
     /// - Parameters:
-    ///   - element: The destination view.
     ///   - identifier: The ID of the destination view (used to easily come back to it if needed).
     ///   - addToBackStack: if false, the view won't be added to the back stack
     ///   - showDefaultNavBar: if false, no nav bar will be displayed.
+    ///   - delay: the interval to delay before triggering the navigation
+    ///   - element: The destination view.
     public func push<Element: View>(
             withId identifier: String? = nil,
             addToBackStack: Bool = true,
@@ -103,6 +106,7 @@ public class Navigator: ObservableObject {
     ///   - content: the view
     ///   - showDefaultNavBar: if false, no nav bar will be displayed.
 
+    @available(*, deprecated, message: "Use presentSheet(type: showDefaultNavBar: onDismiss: content)")
     public func presentSheet<Content: View>(
             showDefaultNavBar: Bool = false,
             width: CGFloat? = nil,
@@ -119,8 +123,13 @@ public class Navigator: ObservableObject {
 
     /// Present a custom sheet
     /// - Parameters:
-    ///   - content: the view
+    ///   - height:
+    ///   - minHeight: the minimum height
+    ///   - isDismissable: whether to dismiss or not
     ///   - showDefaultNavBar: if false, no nav bar will be displayed.
+    ///   - onDismiss: called when dismissed
+    ///   - content: the view
+    @available(*, deprecated, message: "Use presentSheet(type: showDefaultNavBar: onDismiss: content)")
     public func presentCustomSheet<Content: View>(
             height: CGFloat,
             minHeight: CGFloat = 0,
@@ -139,8 +148,10 @@ public class Navigator: ObservableObject {
 
     /// Present a full sheet
     /// - Parameters:
-    ///   - content: the view
     ///   - showDefaultNavBar: if false, no nav bar will be displayed.
+    ///   - onDismiss: called when dismissed
+    ///   - content: the view
+    @available(*, deprecated, message: "Use presentSheet(type: showDefaultNavBar: onDismiss: content)")
     @available(iOS 14.0, *)
     public func presentFullSheet<Content: View>(
             showDefaultNavBar: Bool? = nil,
@@ -175,5 +186,43 @@ public class Navigator: ObservableObject {
     /// - Parameter destination: the option for the view to dismiss to
     public func dismiss(to destination: DismissDestination = .previous) {
         manager.dismiss(to: destination)
+    }
+
+    /// Present a sheet
+    /// - Parameters:
+    ///   - type: the type of the sheet.
+    ///   - showDefaultNavBar: if false, no nav bar will be displayed.
+    ///   - onDismiss: called when dismissed.
+    ///   - content: the view.
+    public func presentSheet<Content: View>(
+            type: SheetType,
+            showDefaultNavBar: Bool = false,
+            onDismiss: (() -> Void)? = nil,
+            content: () -> Content) {
+        switch type {
+        case let .normal(width, height):
+            manager.presentSheet(
+                    content(),
+                    showDefaultNavBar: showDefaultNavBar,
+                    width: width,
+                    height: height,
+                    onDismiss: onDismiss)
+        case .full:
+            if #available(iOS 14.0, *) {
+                manager.presentFullSheet(
+                        content(),
+                        showDefaultNavBar: showDefaultNavBar,
+                        onDismiss: onDismiss)
+            }
+        case let .fixedHeight(height, minHeight, isDismissable):
+            manager.presentCustomSheet(
+                    content(),
+                    height: height,
+                    minHeight: minHeight,
+                    isDismissable: isDismissable,
+                    showDefaultNavBar: showDefaultNavBar,
+                    onDismiss: onDismiss
+            )
+        }
     }
 }
