@@ -78,7 +78,7 @@
 		F2EA00472787667D00482152 /* NavigatorLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA003D2787667D00482152 /* NavigatorLink.swift */; };
 		F2EA00482787667D00482152 /* NavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA003E2787667D00482152 /* NavView.swift */; };
 		F2EA00492787667D00482152 /* LazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA003F2787667D00482152 /* LazyView.swift */; };
-		F2EA004A2787667D00482152 /* NavigatorTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA00402787667D00482152 /* NavigatorTransition.swift */; };
+		F2EA004A2787667D00482152 /* NavTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA00402787667D00482152 /* NavTransition.swift */; };
 		F2EA004B2787667D00482152 /* DismissLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA00412787667D00482152 /* DismissLink.swift */; };
 		F2EA004C2787667D00482152 /* NavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA00422787667D00482152 /* NavigationType.swift */; };
 		F2EA004D2787667D00482152 /* NavManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA00432787667D00482152 /* NavManager.swift */; };
@@ -212,7 +212,7 @@
 		F2EA003D2787667D00482152 /* NavigatorLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorLink.swift; sourceTree = "<group>"; };
 		F2EA003E2787667D00482152 /* NavView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavView.swift; sourceTree = "<group>"; };
 		F2EA003F2787667D00482152 /* LazyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyView.swift; sourceTree = "<group>"; };
-		F2EA00402787667D00482152 /* NavigatorTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigatorTransition.swift; sourceTree = "<group>"; };
+		F2EA00402787667D00482152 /* NavTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavTransition.swift; sourceTree = "<group>"; };
 		F2EA00412787667D00482152 /* DismissLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissLink.swift; sourceTree = "<group>"; };
 		F2EA00422787667D00482152 /* NavigationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationType.swift; sourceTree = "<group>"; };
 		F2EA00432787667D00482152 /* NavManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavManager.swift; sourceTree = "<group>"; };
@@ -514,7 +514,7 @@
 				F2EA003D2787667D00482152 /* NavigatorLink.swift */,
 				F2EA003E2787667D00482152 /* NavView.swift */,
 				F2EA003F2787667D00482152 /* LazyView.swift */,
-				F2EA00402787667D00482152 /* NavigatorTransition.swift */,
+				F2EA00402787667D00482152 /* NavTransition.swift */,
 				F2EA00412787667D00482152 /* DismissLink.swift */,
 				F2EA00422787667D00482152 /* NavigationType.swift */,
 				F2EA00432787667D00482152 /* NavManager.swift */,
@@ -853,7 +853,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2EA004A2787667D00482152 /* NavigatorTransition.swift in Sources */,
+				F2EA004A2787667D00482152 /* NavTransition.swift in Sources */,
 				F2EA001E2787630A00482152 /* SwiftUINavigator.docc in Sources */,
 				F2EA00462787667D00482152 /* LargeNavBar.swift in Sources */,
 				F2EA00472787667D00482152 /* NavigatorLink.swift in Sources */,

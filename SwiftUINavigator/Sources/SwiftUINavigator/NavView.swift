@@ -18,7 +18,7 @@ public struct NavigatorView<Root>: View where Root: View {
     ///   - showDefaultNavBar: if false, no nav bar will be displayed.
     ///   - rootView: The very first view in the Navigation.
     public init(
-            transition: NavigatorTransition = .default,
+            transition: NavTransition = .default,
             easeAnimation: Animation = .easeOut(duration: 0.2),
             showDefaultNavBar: Bool = true,
             @ViewBuilder rootView: () -> Root) {
@@ -46,7 +46,7 @@ public struct NavView<Root>: View where Root: View {
     ///   - showDefaultNavBar: if false, no nav bar will be displayed.
     ///   - rootView: The very first view in the Navigation.
     public init(
-            transition: NavigatorTransition = .default,
+            transition: NavTransition = .default,
             easeAnimation: Animation = .easeOut(duration: 0.2),
             showDefaultNavBar: Bool = true,
             @ViewBuilder rootView: () -> Root) {

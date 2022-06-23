@@ -15,7 +15,7 @@ public class Navigator: ObservableObject {
             manager: NavManager? = nil,
             easeAnimation: Animation,
             showDefaultNavBar: Bool,
-            transition: NavigatorTransition
+            transition: NavTransition
     ) -> Navigator {
         let manager = manager ?? NavManager(
                 easeAnimation: easeAnimation,

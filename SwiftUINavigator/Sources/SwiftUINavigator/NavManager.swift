@@ -8,7 +8,7 @@
 import SwiftUI
 
 public class NavManager: ObservableObject {
-    let transition: NavigatorTransition
+    let transition: NavTransition
 
     var lastNavigationType = NavigationDirection.pop
     private let easeAnimation: Animation
@@ -34,7 +34,7 @@ public class NavManager: ObservableObject {
     public init(root: NavManager? = nil,
                 easeAnimation: Animation,
                 showDefaultNavBar: Bool,
-                transition: NavigatorTransition) {
+                transition: NavTransition) {
         self.root = root
         self.easeAnimation = easeAnimation
         self.showDefaultNavBar = showDefaultNavBar

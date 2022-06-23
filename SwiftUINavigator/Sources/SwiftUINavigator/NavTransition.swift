@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Defines the supported transition types.
-public enum NavigatorTransition {
+public enum NavTransition {
     /// Transitions won't be animated.
     case none
 
