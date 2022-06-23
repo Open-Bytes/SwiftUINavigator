@@ -84,7 +84,7 @@ struct ProductsScreen: View {
     private func ItemsView(items: [Product]) -> some View {
         VStack(alignment: .center, spacing: 8) {
             ForEach(items, id: \.uuid) { item in
-                NavigatorLink(
+                NavLink(
                         destination: ProductDetailScreen(item: item),
                         type: selectedNavigationType,
                         showDefaultNavBar: true,
