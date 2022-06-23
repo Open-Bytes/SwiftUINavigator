@@ -134,8 +134,8 @@ extension NavManager {
 
     private func addNavBar<Element: View>(_ element: Element, showDefaultNavBar: Bool?) -> AnyView {
         canShowDefaultNavBar(showDefaultNavBar) ?
-                AnyView(element.navBar()) :
-                AnyView(element)
+                element.navBar().eraseToAnyView() :
+                element.eraseToAnyView()
     }
 
     private func canShowDefaultNavBar(_ canShowInSingleView: Bool?) -> Bool {

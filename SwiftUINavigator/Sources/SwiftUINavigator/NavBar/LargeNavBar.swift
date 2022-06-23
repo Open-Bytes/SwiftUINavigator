@@ -47,7 +47,7 @@ public struct LargeNavBar<Content: View>: View {
 
     private func BarBackground() -> some View {
         Group {
-            background ?? AnyView(Color(.white).edgesIgnoringSafeArea(.top))
+            background ?? Color(.white).edgesIgnoringSafeArea(.top).eraseToAnyView()
         }
     }
 

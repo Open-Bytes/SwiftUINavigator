@@ -335,13 +335,6 @@
 			path = ChipGroup;
 			sourceTree = "<group>";
 		};
-		58B83BC3351DC6DCC732372B /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Shared;
-			sourceTree = "<group>";
-		};
 		C9BA2E572587CA26004DAEEE = {
 			isa = PBXGroup;
 			children = (
@@ -521,7 +514,6 @@
 				1BCAC6E29FD5B62D71DE6DB9 /* Navigator.swift */,
 				1BCAC98F4A33312B2D5459C1 /* BottomSheet */,
 				1BCAC51ECE714F612FF539E1 /* Extensions */,
-				58B83BC3351DC6DCC732372B /* Shared */,
 			);
 			name = SwiftUINavigator;
 			path = Sources/SwiftUINavigator;
