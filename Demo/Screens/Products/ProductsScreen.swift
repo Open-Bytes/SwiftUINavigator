@@ -130,7 +130,7 @@ struct ProductsScreen: View {
             return .sheet()
         case .customSheet:
             return .customSheet(
-                    height: screenHeight() * 0.75,
+                    height: screenHeight() * 0.5,
                     isDragDismissable: true)
         }
     }

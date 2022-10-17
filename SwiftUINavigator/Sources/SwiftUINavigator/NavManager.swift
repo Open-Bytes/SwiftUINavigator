@@ -180,7 +180,12 @@ extension NavManager {
                 height: height,
                 minHeight: minHeight,
                 isDismissable: isDismissable)
-        presentSheet(view, type: .custom, width: nil, height: nil, onDismiss: onDismiss)
+        presentSheet(
+                view,
+                type: .custom,
+                width: nil,
+                height: height,
+                onDismiss: onDismiss)
     }
 
     private func presentSheet<Content: View>(
@@ -208,6 +213,10 @@ extension NavManager {
 
         if let width = width, let height = height {
             sheet = navigatorView.frame(width: width, height: height).eraseToAnyView()
+        } else if let width = width {
+            sheet = navigatorView.frame(width: width).eraseToAnyView()
+        } else if let height = height {
+            sheet = navigatorView.frame(height: height).eraseToAnyView()
         } else {
             sheet = navigatorView.eraseToAnyView()
         }
@@ -222,7 +231,9 @@ extension NavManager {
             presentCustomSheet = true
             #else
             withAnimation(easeAnimation) {
-                presentSheetController(content: content.environmentObject(navigator)
+                presentSheetController(
+                        isDismissable: customSheetOptions.isDismissable,
+                        content: sheet.environmentObject(navigator)
                 )
             }
             #endif
@@ -284,7 +295,7 @@ extension NavManager {
     private func dismissController() {
         #if os(iOS)
         // For dismissing the custom sheet which is displayed in a controller
-        UIApplication.shared.topController?.dismiss(animated: true)
+        UIApplication.shared.topController?.dismiss(animated: false)
         #endif
     }
 }

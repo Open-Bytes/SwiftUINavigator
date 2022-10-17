@@ -8,28 +8,43 @@ import SwiftUI
 struct CustomSheetView<Content: View>: View {
     @Environment(\.presentationMode) var presentationMode
     private var content: Content
+    private let isDismissable: Bool
+    @State private var isContentVisible: Bool = false
 
-    init(@ViewBuilder content: @escaping () -> Content) {
+    init(isDismissable: Bool, @ViewBuilder content: @escaping () -> Content) {
         self.content = content()
+        self.isDismissable = isDismissable
     }
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            Color.black.opacity(0.5).onTapGesture {
-                presentationMode.wrappedValue.dismiss()
+            if isContentVisible {
+                Color.black.opacity(0.0001)
+                        .onTapGesture {
+                            guard isDismissable else {
+                                return
+                            }
+                            UIApplication.shared.topController?.dismiss(animated: false)
+                        }
+                        .animation(.easeInOut)
+                content.transition(.move(edge: .bottom))
             }
-            content
         }
                 .edgesIgnoringSafeArea(.bottom)
+                .onAppear {
+                    withAnimation {
+                        isContentVisible = true
+                    }
+                }
     }
 }
 
 
-func presentSheetController<Content: View>(content: Content) {
-    let view = CustomSheetView {
+func presentSheetController<Content: View>(isDismissable: Bool, content: Content) {
+    let view = CustomSheetView(isDismissable: isDismissable) {
         content
     }
-    let controller = UISheetController(rootView: view)
-    UIApplication.shared.topController?.present(controller, animated: true)
+    let controller = SheetController(rootView: view)
+    UIApplication.shared.topController?.present(controller, animated: false)
 }
 #endif

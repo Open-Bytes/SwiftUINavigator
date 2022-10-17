@@ -8,17 +8,7 @@ import SwiftUI
 extension UIApplication {
 
     var topController: UIViewController? {
-        let controller: UIViewController? = mainWindow?.rootViewController
-        if let navigationController = controller as? UINavigationController {
-            return topViewController(controller: navigationController.visibleViewController)
-        }
-        if let tabController = controller as? UITabBarController, let selected = tabController.selectedViewController {
-            return topViewController(controller: selected)
-        }
-        if let presented = controller?.presentedViewController {
-            return topViewController(controller: presented)
-        }
-        return controller
+        mainWindow?.rootViewController
     }
 
     func topViewController(controller: UIViewController? = UIApplication.shared.mainWindow?.rootViewController) -> UIViewController? {
