@@ -9,20 +9,20 @@
 import SwiftUI
 import SwiftUINavigator
 
-struct HomeScreen: View {
+struct MainScreen: View {
     @State var cart: Cart = .shared
 
     var body: some View {
         AppTabBar(
                 tabs: [
                     TabItem(image: Image(systemName: "house.fill")) {
-                        ProductsScreen(items: Fake.products).eraseToAnyView
+                        HomeScreen(items: Fake.products).eraseToAnyView
                     },
                     TabItem(image: Image(systemName: "cart.fill")) {
                         CartScreen().eraseToAnyView
                     },
                     TabItem(image: Image(systemName: "heart.fill")) {
-                        ProductsScreen(items: Favorites.shared.items).eraseToAnyView
+                        HomeScreen(items: Favorites.shared.items).eraseToAnyView
                     },
                     TabItem(image: Image(systemName: "gear")) {
                         SettingsScreen().eraseToAnyView
@@ -33,7 +33,7 @@ struct HomeScreen: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeScreen()
+        MainScreen()
     }
 }
 

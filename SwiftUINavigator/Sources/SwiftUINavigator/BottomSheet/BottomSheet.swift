@@ -10,7 +10,6 @@ fileprivate enum Constants {
 
 public struct CustomSheetOptions {
     let height: CGFloat
-    let minHeight: CGFloat
     let isDismissable: Bool
 }
 
@@ -24,23 +23,20 @@ public struct BottomSheet<Content: View>: View {
     @GestureState private var translation: CGFloat = 0
 
     private let height: CGFloat
-    private let minHeight: CGFloat
     private let isDismissable: Bool
 
     private var offset: CGFloat {
-        isPresented ? 0 : height - minHeight
+        isPresented ? 0 : height
     }
 
     public init(
             isPresented: Binding<Bool>,
             height: CGFloat,
-            minHeight: CGFloat,
             isDismissable: Bool,
             onDismiss: (() -> Void)?,
             @ViewBuilder content: () -> Content
     ) {
         self.height = height
-        self.minHeight = minHeight
         self.isDismissable = isDismissable
         self.onDismiss = onDismiss
         self.content = content()
@@ -92,7 +88,6 @@ struct BottomSheetView_Previews: PreviewProvider {
         BottomSheet(
                 isPresented: .constant(true),
                 height: 500,
-                minHeight: 0,
                 isDismissable: true,
                 onDismiss: nil) {
             Rectangle().fill(Color.red)
@@ -114,7 +109,6 @@ public extension View {
     func bottomSheet<Content: View>(
             isPresented: Binding<Bool>,
             height: CGFloat,
-            minHeight: CGFloat = 0,
             isDismissable: Bool = true,
             onDismiss: (() -> Void)? = nil,
             @ViewBuilder content: @escaping () -> Content
@@ -124,7 +118,6 @@ public extension View {
             BottomSheet(
                     isPresented: isPresented,
                     height: height,
-                    minHeight: minHeight,
                     isDismissable: isDismissable,
                     onDismiss: onDismiss
             ) {

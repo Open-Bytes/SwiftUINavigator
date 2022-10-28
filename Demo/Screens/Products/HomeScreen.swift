@@ -9,24 +9,14 @@
 import SwiftUI
 import SwiftUINavigator
 
-class ProductsVM: ObservableObject {
-    @Published var navigationOption: NavigationOption = .push
+class HomeVM: ObservableObject {
+    @Published var navigationOption: NavType = .push()
     @Published var selectedNavigationOptions: [ChipGroup.Item] = []
 }
 
-enum NavigationOption: String {
-    case push = "1"
-    case sheet = "2"
-    case fullSheet = "3"
-    case customSheet = "4"
 
-    static func from(_ value: String) -> NavigationOption {
-        NavigationOption(rawValue: value) ?? .push
-    }
-}
-
-struct ProductsScreen: View {
-    @ObservedObject var vm: ProductsVM = ProductsVM()
+struct HomeScreen: View {
+    @ObservedObject var vm: HomeVM = HomeVM()
     var cart: Cart = .shared
     private let items: [Product]
     @EnvironmentObject private var navigator: Navigator
@@ -86,7 +76,7 @@ struct ProductsScreen: View {
             ForEach(items, id: \.uuid) { item in
                 NavLink(
                         destination: ProductDetailScreen(item: item),
-                        type: selectedNavigationType,
+                        type: vm.navigationOption,
                         showDefaultNavBar: true,
                         onDismissSheet: {
                             print("Sheet dismissed.")
@@ -100,7 +90,7 @@ struct ProductsScreen: View {
                 if false {
                     ProductItemView(item: item).onTapGesture {
                                 navigator.navigate(
-                                        type: selectedNavigationType,
+                                        type: vm.navigationOption,
                                         onDismissSheet: {
                                             print("Sheet dismissed.")
                                         }) {
@@ -113,57 +103,77 @@ struct ProductsScreen: View {
         }
     }
 
-    private var selectedNavigationType: NavType {
-        switch vm.navigationOption {
-        case .push:
-            return .push(addToBackStack: true)
-        case .sheet:
-            #if os(macOS)
-            return .sheet(width: 500, height: 500)
-            #else
-            return .sheet()
-            #endif
-        case .fullSheet:
-            if #available(iOS 14, *) {
-                return .fullSheet
-            }
-            return .sheet()
-        case .customSheet:
-            return .customSheet(
-                    height: screenHeight() * 0.5,
-                    isDragDismissable: true)
-        }
-    }
-
 }
 
-extension ProductsScreen {
+extension HomeScreen {
     private func NavigationOptionsView() -> some View {
         ChipGroup(
                 items: navigationOptions,
                 selectedItems: $vm.selectedNavigationOptions
         ) { item in
-            vm.navigationOption = .from(item.id)
+            switch item.type {
+            case .push:
+                vm.navigationOption = .push()
+                break
+            case .sheet(let type):
+                vm.navigationOption = .sheet(type: type)
+            }
         }
     }
 
     private var navigationOptions: [ChipGroup.Item] {
         #if os(macOS)
         [
-            ChipGroup.Item(id: NavigationOption.push.rawValue, name: "Push"),
-            ChipGroup.Item(id: NavigationOption.sheet.rawValue, name: "Sheet"),
-            ChipGroup.Item(id: NavigationOption.customSheet.rawValue, name: "Custom Sheet")
+            ChipGroup.Item(type: .push, name: "Push"),
+            ChipGroup.Item(type: .sheet(type: .normal), name: "Normal Sheet"),
+            ChipGroup.Item(type: .sheet(type: .full), name: "Full Sheet"),
+
         ]
         #else
         [
-            ChipGroup.Item(id: NavigationOption.push.rawValue, name: "Push"),
-            ChipGroup.Item(id: NavigationOption.sheet.rawValue, name: "Sheet"),
-            ChipGroup.Item(id: NavigationOption.fullSheet.rawValue, name: "Full Sheet"),
-            ChipGroup.Item(id: NavigationOption.customSheet.rawValue, name: "Custom Sheet")
+            ChipGroup.Item(type: .push, name: "Push"),
+            ChipGroup.Item(type: .sheet(type: .normal), name: "Normal Sheet"),
+            ChipGroup.Item(type: .sheet(type: .fixedHeight(height: screenHeight() / 2)), name: "Fixed Height Sheet"),
+            ChipGroup.Item(type: .sheet(type: .fixedHeightRatio(ratio: 50)), name: "Fixed Height Sheet (Ratio)"),
         ]
         #endif
     }
 
 
 }
+
+public enum ChipGroupType: Hashable {
+    case push
+    case sheet(type: SheetType)
+
+    public func hash(into hasher: inout Hasher) {
+        switch self {
+        case .push:
+            hasher.combine("push")
+        case .sheet(let value):
+            switch value {
+            case .normal:
+                hasher.combine("normal")
+            case .full:
+                hasher.combine("full")
+            case .fixedHeight:
+                hasher.combine("fixedHeight")
+            case .fixedHeightRatio:
+                hasher.combine("fixedHeightRatio")
+            }
+        }
+    }
+
+    public static func ==(lhs: ChipGroupType, rhs: ChipGroupType) -> Bool {
+        switch (lhs, rhs) {
+        case (.push, .push),
+             (.sheet, .sheet):
+            return true
+        default:
+            return false
+        }
+    }
+}
+
+
 

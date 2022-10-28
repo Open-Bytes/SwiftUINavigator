@@ -5,7 +5,7 @@
 import Foundation
 
 import SwiftUI
-
+import SwiftUINavigator
 
 public struct ChipGroup: View {
     private let items: [Item]
@@ -72,7 +72,8 @@ public struct ChipGroup: View {
 extension ChipGroup {
 
     public struct Item: Identifiable, Hashable {
-        public let id: String
+        public let id: String = UUID().uuidString
+        public let type: ChipGroupType
         public let name: String
     }
 

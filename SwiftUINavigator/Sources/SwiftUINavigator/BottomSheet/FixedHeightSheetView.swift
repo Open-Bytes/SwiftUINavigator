@@ -5,7 +5,7 @@
 import SwiftUI
 
 #if os(iOS)
-struct CustomSheetView<Content: View>: View {
+struct FixedHeightSheetView<Content: View>: View {
     @Environment(\.presentationMode) var presentationMode
     private var content: Content
     private let isDismissable: Bool
@@ -41,7 +41,7 @@ struct CustomSheetView<Content: View>: View {
 
 
 func presentSheetController<Content: View>(isDismissable: Bool, content: Content) {
-    let view = CustomSheetView(isDismissable: isDismissable) {
+    let view = FixedHeightSheetView(isDismissable: isDismissable) {
         content
     }
     let controller = SheetController(rootView: view)

@@ -39,5 +39,5 @@ public enum DismissDestination {
     case view(withId: String)
 
     // Dismiss current presented sheet
-    case dismissSheet
+    case dismissSheet(type: DismissSheetType? = nil)
 }

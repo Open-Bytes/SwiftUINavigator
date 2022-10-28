@@ -5,8 +5,19 @@
 import SwiftUI
 
 public enum SheetType {
-    case normal(width: CGFloat? = nil, height: CGFloat? = nil)
+    case normal
     @available(iOS 14.0, *)
     case full
-    case fixedHeight(height: CGFloat, minHeight: CGFloat = 0, isDismissable: Bool = true)
+    case fixedHeight(
+            height: CGFloat,
+            isDismissable: Bool = true)
+    case fixedHeightRatio(
+            ratio: Double,
+            isDismissable: Bool = true)
+}
+
+public enum DismissSheetType {
+    case normal
+    case full
+    case fixedHeight
 }

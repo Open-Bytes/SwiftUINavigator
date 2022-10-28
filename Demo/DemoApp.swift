@@ -12,7 +12,7 @@ struct DemoApp: View {
 
     var body: some View {
         NavigatorView {
-            HomeScreen()
+            MainScreen()
         }
     }
 

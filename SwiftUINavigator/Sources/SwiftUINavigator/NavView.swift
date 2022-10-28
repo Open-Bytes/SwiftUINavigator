@@ -101,9 +101,8 @@ public struct NavView<Root>: View where Root: View {
     private func SheetView() -> some View {
         Content()
                 .bottomSheet(
-                        isPresented: $manager.presentCustomSheet,
+                        isPresented: $manager.presentFixedHeightSheet,
                         height: manager.customSheetOptions.height,
-                        minHeight: manager.customSheetOptions.minHeight,
                         isDismissable: manager.customSheetOptions.isDismissable,
                         onDismiss: {
                             onDismissSheet()

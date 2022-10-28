@@ -11,11 +11,6 @@ public enum NavType {
     /// and won't be displayed when dismissing the view.
     case push(id: String? = nil, addToBackStack: Bool = true)
     /// Present a sheet
-    case sheet(width: CGFloat? = nil, height: CGFloat? = nil)
-    /// Present a full sheet
-    @available(iOS 14.0, *)
-    case fullSheet
-
-    /// Present a custom sheet
-    case customSheet(height: CGFloat, minHeight: CGFloat = 0, isDragDismissable: Bool = true)
+    // TODO: add onDismiss
+    case sheet(type: SheetType)
 }
