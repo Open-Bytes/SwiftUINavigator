@@ -9,6 +9,7 @@ fileprivate enum Constants {
 }
 
 public struct CustomSheetOptions {
+    let presenter: FixedSheetPresenter
     let height: CGFloat
     let isDismissable: Bool
 }
@@ -91,7 +92,8 @@ struct BottomSheetView_Previews: PreviewProvider {
                 isDismissable: true,
                 onDismiss: nil) {
             Rectangle().fill(Color.red)
-        }.edgesIgnoringSafeArea(.all)
+        }
+                .edgesIgnoringSafeArea(.all)
     }
 }
 
@@ -122,7 +124,8 @@ public extension View {
                     onDismiss: onDismiss
             ) {
                 content()
-            }.edgesIgnoringSafeArea(.all)
+            }
+                    .edgesIgnoringSafeArea(.all)
         }
     }
 }

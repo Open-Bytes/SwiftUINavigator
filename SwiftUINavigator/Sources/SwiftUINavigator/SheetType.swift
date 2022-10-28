@@ -10,11 +10,32 @@ public enum SheetType {
     case full
     case fixedHeight(
             height: CGFloat,
-            isDismissable: Bool = true)
+            isDismissable: Bool = true,
+            presenter: FixedSheetPresenter = .rootController)
     case fixedHeightRatio(
             ratio: Double,
-            isDismissable: Bool = true)
+            isDismissable: Bool = true,
+            presenter: FixedSheetPresenter = .rootController)
 }
+
+
+public enum FixedSheetPresenter {
+    case rootController
+    case topController
+    case controller(UIViewController)
+
+    public var controller: UIViewController? {
+        switch self {
+        case .rootController:
+            return UIApplication.shared.rootController
+        case .topController:
+            return UIApplication.shared.topViewController()
+        case .controller(let controller):
+            return controller
+        }
+    }
+}
+
 
 public enum DismissSheetType {
     case normal

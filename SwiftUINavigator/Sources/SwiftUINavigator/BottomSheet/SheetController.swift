@@ -23,7 +23,7 @@ class SheetController<Content>: UIHostingController<Content> where Content: View
 
     override func viewDidAppear(_ animated: Bool) {
         UIView.animate(
-                withDuration: 0.5,
+                withDuration: 0.2,
                 delay: 0.0,
                 options: .curveEaseOut,
                 animations: {
@@ -33,7 +33,7 @@ class SheetController<Content>: UIHostingController<Content> where Content: View
 
     override func viewWillDisappear(_ animated: Bool) {
         UIView.animate(
-                withDuration: 0.5,
+                withDuration: 0.2,
                 delay: 0.0,
                 options: .curveEaseOut,
                 animations: {

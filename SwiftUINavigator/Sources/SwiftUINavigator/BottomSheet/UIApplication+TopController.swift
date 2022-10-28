@@ -7,7 +7,7 @@ import SwiftUI
 #if os(iOS)
 extension UIApplication {
 
-    var topController: UIViewController? {
+    var rootController: UIViewController? {
         mainWindow?.rootViewController
     }
 
