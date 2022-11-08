@@ -20,10 +20,10 @@ public class NavManager: ObservableObject {
     var sheet: AnyView? = nil
     var showDefaultNavBar: Bool = true
     var root: NavManager?
-    var customSheetOptions = CustomSheetOptions(
-            presenter: .rootController,
+    var sheetArgs = SheetArguments(
             height: 0,
             isDismissable: false)
+    private var fixedSheetPresenter: UIViewController? = nil
 
     @Published var stackItems = [BackStackElement]()
 
@@ -130,29 +130,12 @@ extension NavManager {
                         height: nil,
                         showDefaultNavBar: showDefaultNavBar)
             }
-        case let .fixedHeight(height, isDismissable, presenter):
-            customSheetOptions = CustomSheetOptions(
-                    presenter: presenter,
-                    height: height,
-                    isDismissable: isDismissable)
+        case .fixedHeight:
             presentSheet(
                     content(),
                     type: type,
                     width: nil,
-                    height: height,
-                    showDefaultNavBar: showDefaultNavBar)
-        case let .fixedHeightRatio(ratio, isDismissable, presenter):
-            let ratioPercent = ratio / 100
-            let height = UIScreen.screenHeight * ratioPercent
-            customSheetOptions = CustomSheetOptions(
-                    presenter: presenter,
-                    height: height,
-                    isDismissable: isDismissable)
-            presentSheet(
-                    content(),
-                    type: type,
-                    width: nil,
-                    height: height,
+                    height: nil,
                     showDefaultNavBar: showDefaultNavBar)
         }
     }
@@ -175,22 +158,27 @@ extension NavManager {
             presentSheet = true
         case .full:
             presentFullSheet = true
-        case let .fixedHeight(_, _, presenter):
-            presentFixedSheet(presenter: presenter)
-        case let .fixedHeightRatio(_, _, presenter):
-            presentFixedSheet(presenter: presenter)
+        case let .fixedHeight(type, isDismissable, presenter):
+            fixedSheetPresenter = presenter.controller
+            presentFixedSheet(
+                    height: type.height,
+                    isDismissable: isDismissable,
+                    presenter: presenter)
         }
     }
 
-    private func presentFixedSheet(presenter: FixedSheetPresenter) {
+    private func presentFixedSheet(
+            height: CGFloat,
+            isDismissable: Bool,
+            presenter: FixedSheetPresenter) {
         #if os(macOS)
         presentFixedHeightSheet = true
         #else
         withAnimation(easeAnimation) {
             presentSheetController(
                     presenter: presenter,
-                    isDismissable: customSheetOptions.isDismissable,
-                    content: sheet?.frame(height: customSheetOptions.height)
+                    isDismissable: isDismissable,
+                    content: sheet?.frame(height: height)
             )
         }
         #endif
@@ -272,7 +260,8 @@ extension NavManager {
     private func dismissController() {
         #if os(iOS)
         // For dismissing the custom sheet which is displayed in a controller
-        customSheetOptions.presenter.controller?.dismiss(animated: false)
+        fixedSheetPresenter?.dismiss(animated: false)
+        fixedSheetPresenter = nil
         #endif
     }
 }

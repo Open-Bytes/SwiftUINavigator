@@ -8,10 +8,13 @@ fileprivate enum Constants {
     static let snapRatio: CGFloat = 0.25
 }
 
-public struct CustomSheetOptions {
-    let presenter: FixedSheetPresenter
+ struct SheetArguments {
     let height: CGFloat
     let isDismissable: Bool
+
+    static func instance() -> SheetArguments {
+        SheetArguments(height: 0, isDismissable: false)
+    }
 }
 
 /// A customizable bottom sheet.

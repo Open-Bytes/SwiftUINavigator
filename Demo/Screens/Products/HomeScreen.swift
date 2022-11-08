@@ -133,12 +133,11 @@ extension HomeScreen {
         [
             ChipGroup.Item(type: .push, name: "Push"),
             ChipGroup.Item(type: .sheet(type: .normal), name: "Normal Sheet"),
-            ChipGroup.Item(type: .sheet(type: .fixedHeight(height: screenHeight() / 2)), name: "Fixed Height Sheet"),
-            ChipGroup.Item(type: .sheet(type: .fixedHeightRatio(ratio: 50)), name: "Fixed Height Sheet (Ratio)"),
+            ChipGroup.Item(type: .sheet(type: .fixedHeight(.value(screenHeight() / 2))), name: "Fixed Sheet"),
+            ChipGroup.Item(type: .sheet(type: .fixedHeight(.ratio(70))), name: "Fixed Sheet (Ratio)"),
         ]
         #endif
     }
-
 
 }
 
@@ -156,10 +155,13 @@ public enum ChipGroupType: Hashable {
                 hasher.combine("normal")
             case .full:
                 hasher.combine("full")
-            case .fixedHeight:
-                hasher.combine("fixedHeight")
-            case .fixedHeightRatio:
-                hasher.combine("fixedHeightRatio")
+            case let .fixedHeight(height, _, _):
+                switch height {
+                case .value:
+                    hasher.combine("fixedHeight")
+                case .ratio:
+                    hasher.combine("fixedHeightRatio")
+                }
             }
         }
     }

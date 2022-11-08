@@ -102,8 +102,8 @@ public struct NavView<Root>: View where Root: View {
         Content()
                 .bottomSheet(
                         isPresented: $manager.presentFixedHeightSheet,
-                        height: manager.customSheetOptions.height,
-                        isDismissable: manager.customSheetOptions.isDismissable,
+                        height: manager.sheetArgs.height,
+                        isDismissable: manager.sheetArgs.isDismissable,
                         onDismiss: {
                             onDismissSheet()
                         }) {

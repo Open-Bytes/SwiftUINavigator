@@ -9,15 +9,33 @@ public enum SheetType {
     @available(iOS 14.0, *)
     case full
     case fixedHeight(
-            height: CGFloat,
-            isDismissable: Bool = true,
-            presenter: FixedSheetPresenter = .rootController)
-    case fixedHeightRatio(
-            ratio: Double,
+            FixedHeightType,
             isDismissable: Bool = true,
             presenter: FixedSheetPresenter = .rootController)
 }
 
+public enum FixedHeightType {
+    case value(CGFloat)
+    case ratio(Double)
+
+    public var height: CGFloat {
+        switch self {
+        case .value(let value):
+            return value
+        case .ratio(let value):
+            var ratio = value
+            if value > 100 {
+                ratio = 100
+            }
+            if value < 1 {
+                ratio = 1
+            }
+            let percent = ratio / 100
+            let height = UIScreen.screenHeight * percent
+            return height
+        }
+    }
+}
 
 public enum FixedSheetPresenter {
     case rootController
@@ -35,7 +53,6 @@ public enum FixedSheetPresenter {
         }
     }
 }
-
 
 public enum DismissSheetType {
     case normal
