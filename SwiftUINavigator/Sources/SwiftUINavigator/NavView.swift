@@ -85,11 +85,11 @@ public struct NavView<Root>: View where Root: View {
             if #available(iOS 14.0, *) {
                 SheetView()
                         .fullScreenCover(
-                                isPresented: $manager.presentFullSheet,
+                                isPresented: $manager.sheetManager.presentFullSheet,
                                 onDismiss: {
                                     onDismissSheet()
                                 }) {
-                            LazyView(manager.sheet)
+                            LazyView(manager.sheetManager.sheet)
                         }
             } else {
                 SheetView()
@@ -101,20 +101,20 @@ public struct NavView<Root>: View where Root: View {
     private func SheetView() -> some View {
         Content()
                 .bottomSheet(
-                        isPresented: $manager.presentFixedHeightSheet,
-                        height: manager.sheetArgs.height,
-                        isDismissable: manager.sheetArgs.isDismissable,
+                        isPresented: $manager.sheetManager.presentFixedHeightSheet,
+                        height: manager.sheetManager.sheetArgs.height,
+                        isDismissable: manager.sheetManager.sheetArgs.isDismissable,
                         onDismiss: {
                             onDismissSheet()
                         }) {
-                    LazyView(manager.sheet)
+                    LazyView(manager.sheetManager.sheet)
                 }
                 .sheet(
-                        isPresented: $manager.presentSheet,
+                        isPresented: $manager.sheetManager.presentSheet,
                         onDismiss: {
                             onDismissSheet()
                         }) {
-                    manager.sheet.frame(maxWidth: .infinity, maxHeight: .infinity)
+                    manager.sheetManager.sheet.frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
     }
 
@@ -149,8 +149,8 @@ public struct NavView<Root>: View where Root: View {
 extension NavView {
 
     private func onDismissSheet() {
-        manager.onDismissSheet?()
-        manager.onDismissSheet = nil
+        manager.sheetManager.onDismissSheet?()
+        manager.sheetManager.onDismissSheet = nil
     }
 
 }

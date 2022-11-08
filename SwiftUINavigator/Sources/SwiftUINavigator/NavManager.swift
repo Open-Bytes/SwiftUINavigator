@@ -6,24 +6,19 @@
 //
 
 import SwiftUI
+import Combine
+
+public typealias CancelableBag = Set<AnyCancellable>
 
 public class NavManager: ObservableObject {
+    private var bag: CancelableBag = CancelableBag()
     let transition: NavTransition
-
     var lastNavigationType = NavigationDirection.pop
-    private let easeAnimation: Animation
+    let easeAnimation: Animation
     @Published var currentView: BackStackElement?
-    @Published var presentSheet: Bool = false
-    @Published var presentFullSheet: Bool = false
-    @Published var presentFixedHeightSheet: Bool = false
-    var onDismissSheet: (() -> Void)? = nil
-    var sheet: AnyView? = nil
-    var showDefaultNavBar: Bool = true
-    var root: NavManager?
-    var sheetArgs = SheetArguments(
-            height: 0,
-            isDismissable: false)
-    private var fixedSheetPresenter: UIViewController? = nil
+    @Published var sheetManager = SheetManager()
+    private var root: NavManager?
+    private var showDefaultNavBar: Bool = true
 
     @Published var stackItems = [BackStackElement]()
 
@@ -42,6 +37,13 @@ public class NavManager: ObservableObject {
         self.easeAnimation = easeAnimation
         self.showDefaultNavBar = showDefaultNavBar
         self.transition = transition
+        sheetManager.navManager = self
+
+        sheetManager.objectWillChange
+                .sink { [weak self] _ in
+                    self?.objectWillChange.send()
+                }
+                .store(in: &bag)
     }
 }
 
@@ -59,12 +61,24 @@ extension NavManager {
                     addToBackStack: addToBackStack,
                     showDefaultNavBar: showDefaultNavBar)
         case .sheet(let type):
-            presentSheet(
+            sheetManager.presentSheet(
                     type: type,
                     showDefaultNavBar: showDefaultNavBar ?? false,
                     onDismiss: nil,
                     content: { element })
         }
+    }
+
+    func presentSheet<Content: View>(
+            type: SheetType,
+            showDefaultNavBar: Bool,
+            onDismiss: (() -> Void)?,
+            content: () -> Content) {
+        sheetManager.presentSheet(
+                type: type,
+                showDefaultNavBar: showDefaultNavBar,
+                onDismiss: onDismiss,
+                content: content)
     }
 
 }
@@ -90,7 +104,7 @@ extension NavManager {
         }
     }
 
-    private func addNavBar<Element: View>(_ element: Element, showDefaultNavBar: Bool?) -> AnyView {
+    func addNavBar<Element: View>(_ element: Element, showDefaultNavBar: Bool?) -> AnyView {
         canShowDefaultNavBar(showDefaultNavBar) ?
                 element.navBar().eraseToAnyView() :
                 element.eraseToAnyView()
@@ -107,135 +121,15 @@ extension NavManager {
 
 extension NavManager {
 
-    public func presentSheet<Content: View>(
-            type: SheetType,
-            showDefaultNavBar: Bool,
-            onDismiss: (() -> Void)?,
-            content: () -> Content) {
-        onDismissSheet = onDismiss
-        switch type {
-        case .normal:
-            presentSheet(
-                    content(),
-                    type: type,
-                    width: nil,
-                    height: nil,
-                    showDefaultNavBar: showDefaultNavBar)
-        case .full:
-            if #available(iOS 14.0, *) {
-                presentSheet(
-                        content(),
-                        type: type,
-                        width: nil,
-                        height: nil,
-                        showDefaultNavBar: showDefaultNavBar)
-            }
-        case .fixedHeight:
-            presentSheet(
-                    content(),
-                    type: type,
-                    width: nil,
-                    height: nil,
-                    showDefaultNavBar: showDefaultNavBar)
-        }
-    }
-
-    private func presentSheet<Content: View>(
-            _ content: Content,
-            type: SheetType,
-            width: CGFloat?,
-            height: CGFloat?,
-            showDefaultNavBar: Bool) {
-        sheet = sheetView(
-                content,
-                width: width,
-                height: height,
-                showDefaultNavBar: showDefaultNavBar
-        ).eraseToAnyView()
-
-        switch type {
-        case .normal:
-            presentSheet = true
-        case .full:
-            presentFullSheet = true
-        case let .fixedHeight(type, isDismissable, presenter):
-            fixedSheetPresenter = presenter.controller
-            presentFixedSheet(
-                    height: type.height,
-                    isDismissable: isDismissable,
-                    presenter: presenter)
-        }
-    }
-
-    private func presentFixedSheet(
-            height: CGFloat,
-            isDismissable: Bool,
-            presenter: FixedSheetPresenter) {
-        #if os(macOS)
-        presentFixedHeightSheet = true
-        #else
-        withAnimation(easeAnimation) {
-            presentSheetController(
-                    presenter: presenter,
-                    isDismissable: isDismissable,
-                    content: sheet?.frame(height: height)
-            )
-        }
-        #endif
-    }
-
-    private func sheetView<Content: View>(
-            _ content: Content,
-            width: CGFloat?,
-            height: CGFloat?,
-            showDefaultNavBar: Bool) -> some View {
-        let manager = NavManager(
-                root: self,
-                easeAnimation: easeAnimation,
-                showDefaultNavBar: showDefaultNavBar,
-                transition: transition)
-        let navigator = Navigator.instance(
-                manager: manager,
-                easeAnimation: easeAnimation,
-                showDefaultNavBar: showDefaultNavBar,
-                transition: transition)
-        let content = NavView(
-                navigator: navigator,
-                showDefaultNavBar: showDefaultNavBar,
-                rootView: { content }
-        )
-                .frame(width: width, height: height)
-        return addNavBar(content, showDefaultNavBar: showDefaultNavBar)
-                .environmentObject(navigator)
-    }
 }
 
 extension NavManager {
 
     public func dismissSheet(type: DismissSheetType?) {
-        guard let type = type else {
-            root?.presentSheet = false
-            root?.presentFullSheet = false
-            root?.presentFixedHeightSheet = false
-            root?.sheet = nil
-            dismissController()
-            return
-        }
-        switch type {
-        case .normal:
-            root?.presentSheet = false
-        case .full:
-            root?.presentFullSheet = false
-        case .fixedHeight:
-            root?.presentFixedHeightSheet = false
-            dismissController()
-        }
-        root?.sheet = nil
+        root?.sheetManager.dismissSheet(type: type)
     }
 
     public func dismiss(to destination: DismissDestination) {
-        dismissController()
-
         lastNavigationType = .pop
 
         if backStack.isEmpty {
@@ -255,14 +149,6 @@ extension NavManager {
                 dismissSheet(type: type)
             }
         }
-    }
-
-    private func dismissController() {
-        #if os(iOS)
-        // For dismissing the custom sheet which is displayed in a controller
-        fixedSheetPresenter?.dismiss(animated: false)
-        fixedSheetPresenter = nil
-        #endif
     }
 }
 
