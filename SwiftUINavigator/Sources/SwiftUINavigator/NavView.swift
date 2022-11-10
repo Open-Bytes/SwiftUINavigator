@@ -70,11 +70,23 @@ public struct NavView<Root>: View where Root: View {
 
     public var body: some View {
         ZStack {
-            Group {
-                BodyContent()
-            }
-                    .environmentObject(navigator)
+            BodyContent()
         }
+                .modifier(
+                        ConfirmationDialogModifier(
+                                manager.confirmationDialogManager.titleKey,
+                                isPresented: $manager.confirmationDialogManager.isPresented,
+                                titleVisibility: manager.confirmationDialogManager.titleVisibility,
+                                actions: {
+                                    manager.confirmationDialogManager.content?.eraseToAnyView()
+                                }
+                        ))
+                .modifier(
+                        ActionSheetModifier(
+                                isPresented: $manager.actionSheetManager.isPresented,
+                                sheet: { manager.actionSheetManager.sheet }
+                        ))
+                .environmentObject(navigator)
     }
 
     private func BodyContent() -> some View {

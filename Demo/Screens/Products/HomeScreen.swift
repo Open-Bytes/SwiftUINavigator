@@ -12,6 +12,28 @@ import SwiftUINavigator
 class HomeVM: ObservableObject {
     @Published var navigationOption: NavType = .push()
     @Published var selectedNavigationOptions: [ChipGroup.Item] = []
+
+    lazy var navigationOptions: [ChipGroup.Item] = {
+        #if os(macOS)
+        [
+            ChipGroup.Item(type: .push, name: "Push"),
+            ChipGroup.Item(type: .sheet(type: .normal), name: "Normal Sheet"),
+            ChipGroup.Item(type: .sheet(type: .full), name: "Full Sheet"),
+            ChipGroup.Item(type: .actionSheet, name: "Action Sheet", isSelectable: false),
+            ChipGroup.Item(type: .confirmationDialog, name: "Confirmation Dialog", isSelectable: false)
+        ]
+        #else
+        [
+            ChipGroup.Item(type: .push, name: "Push"),
+            ChipGroup.Item(type: .sheet(type: .normal), name: "Normal Sheet"),
+            ChipGroup.Item(type: .sheet(type: .fixedHeight(.value(screenHeight() / 2))), name: "Fixed Sheet"),
+            ChipGroup.Item(type: .sheet(type: .fixedHeight(.ratio(70))), name: "Fixed Sheet (Ratio)"),
+            ChipGroup.Item(type: .actionSheet, name: "Action Sheet", isSelectable: false),
+            ChipGroup.Item(type: .confirmationDialog, name: "Confirmation Dialog", isSelectable: false)
+        ]
+        #endif
+    }()
+
 }
 
 
@@ -26,32 +48,68 @@ struct HomeScreen: View {
     }
 
     var body: some View {
-        VStack {
-            NavigationOptionsView()
-            Content()
+        ScrollView(.vertical, showsIndicators: true) {
+            VStack {
+                Spacer().frame(height: 20)
+                Text("👋 Select an option to explore the options of SwiftUINavigator 🎉")
+                        .font(.system(size: 20))
+                        .padding(.horizontal, 10)
+                NavigationOptionsView()
+                Content()
+            }
+        }
+                .padding(.bottom, 50)
+    }
+
+    private func presentActionSheet() {
+        navigator.presentActionSheet {
+            ActionSheet(
+                    title: Text("Color"),
+                    buttons: [
+                        .default(Text("Red")),
+                        .default(Text("Green")),
+                        .default(Text("Blue")),
+                        .cancel()
+                    ]
+            )
+        }
+    }
+
+    private func presentConfirmationDialog() {
+        if #available(iOS 15.0, *) {
+            navigator.presentConfirmationDialog(titleKey: "Color", titleVisibility: .visible) {
+                Group {
+                    Button(action: {}) {
+                        Text("Red")
+                    }
+                    Button(action: {}) {
+                        Text("Green")
+                    }
+                    Button(action: {}) {
+                        Text("Blue")
+                    }
+                }
+            }
         }
     }
 
     private func Content() -> some View {
-        ScrollView(.vertical, showsIndicators: true) {
-            HStack(alignment: .top, spacing: 10) {
-                let items: [[Product]] = items.split()
+        HStack(alignment: .top, spacing: 10) {
+            let items: [[Product]] = items.split()
 
-                if !items.isEmpty {
-                    ItemsView(items: items[0])
-                }
-
-                if items.count == 2 {
-                    ItemsView(items: items[1])
-                }
-
-                if items.isEmpty {
-                    NoProductsView()
-                }
+            if !items.isEmpty {
+                ItemsView(items: items[0])
             }
-                    .padding()
+
+            if items.count == 2 {
+                ItemsView(items: items[1])
+            }
+
+            if items.isEmpty {
+                NoProductsView()
+            }
         }
-                .padding(.bottom, 50)
+                .padding()
     }
 
     private func NoProductsView() -> some View {
@@ -108,7 +166,7 @@ struct HomeScreen: View {
 extension HomeScreen {
     private func NavigationOptionsView() -> some View {
         ChipGroup(
-                items: navigationOptions,
+                items: vm.navigationOptions,
                 selectedItems: $vm.selectedNavigationOptions
         ) { item in
             switch item.type {
@@ -117,26 +175,12 @@ extension HomeScreen {
                 break
             case .sheet(let type):
                 vm.navigationOption = .sheet(type: type)
+            case .actionSheet:
+                presentActionSheet()
+            case .confirmationDialog:
+                presentConfirmationDialog()
             }
         }
-    }
-
-    private var navigationOptions: [ChipGroup.Item] {
-        #if os(macOS)
-        [
-            ChipGroup.Item(type: .push, name: "Push"),
-            ChipGroup.Item(type: .sheet(type: .normal), name: "Normal Sheet"),
-            ChipGroup.Item(type: .sheet(type: .full), name: "Full Sheet"),
-
-        ]
-        #else
-        [
-            ChipGroup.Item(type: .push, name: "Push"),
-            ChipGroup.Item(type: .sheet(type: .normal), name: "Normal Sheet"),
-            ChipGroup.Item(type: .sheet(type: .fixedHeight(.value(screenHeight() / 2))), name: "Fixed Sheet"),
-            ChipGroup.Item(type: .sheet(type: .fixedHeight(.ratio(70))), name: "Fixed Sheet (Ratio)"),
-        ]
-        #endif
     }
 
 }
@@ -144,6 +188,8 @@ extension HomeScreen {
 public enum ChipGroupType: Hashable {
     case push
     case sheet(type: SheetType)
+    case actionSheet
+    case confirmationDialog
 
     public func hash(into hasher: inout Hasher) {
         switch self {
@@ -163,6 +209,10 @@ public enum ChipGroupType: Hashable {
                     hasher.combine("fixedHeightRatio")
                 }
             }
+        case .actionSheet:
+            hasher.combine("actionSheet")
+        case .confirmationDialog:
+            hasher.combine("confirmationDialog")
         }
     }
 

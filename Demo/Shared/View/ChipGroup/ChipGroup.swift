@@ -25,45 +25,47 @@ public struct ChipGroup: View {
     }
 
     public var body: some View {
-        FlexibleView(
-                availableWidth: screenWidth() - 120,
-                data: items,
-                spacing: 15,
-                alignment: .leading
-        ) { (item: Item) in
-            Button(action: {
-                selectItem(item)
-                onItemTapped(item)
-            }, label: {
-                Text(item.name)
-                        .padding(.all, 5)
-                        .foregroundColor(selectedItems.contains(item) ? Color.white : Color.gray)
-            })
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 3)
-                    .background(
-                            Capsule()
-                                    .fill(selectedItems.contains(item) ? Color.green : Color.gray.opacity(0.2))
-                    )
+        VStack {
+            ForEach(items) { item in
+                Button(action: {
+                    selectItem(item)
+                    onItemTapped(item)
+                }, label: {
+                    Text(item.name)
+                            .padding(.all, 5)
+                            .foregroundColor(isSelected(item) ? Color.white : Color.gray)
+                })
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 3)
+                        .background(
+                                Capsule()
+                                        .fill(isSelected(item) ? Color.green : Color.gray.opacity(0.2))
+                        )
+            }
         }
-                .padding(.horizontal, 30)
-                .padding(.leading, 5)
-                .padding(.trailing, 10)
+    }
+
+    private func isSelected(_ item: Item) -> Bool {
+        selectedItems.first {
+            $0.id == item.id
+        } != nil
     }
 
     private func selectItem(_ item: Item) {
+        guard item.isSelectable else {
+            return
+        }
         switch selectionType {
         case .single:
             selectedItems.removeAll()
             selectedItems.append(item)
         case .multi:
-            if selectedItems.contains(item) {
+            if isSelected(item) {
                 selectedItems.removeAll {
                     $0.id == item.id
                 }
                 return
             }
-
             selectedItems.append(item)
         }
     }
@@ -71,10 +73,11 @@ public struct ChipGroup: View {
 
 extension ChipGroup {
 
-    public struct Item: Identifiable, Hashable {
+    public struct Item: Identifiable {
         public let id: String = UUID().uuidString
         public let type: ChipGroupType
         public let name: String
+        public var isSelectable: Bool = true
     }
 
     public enum SelectionType {

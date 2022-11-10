@@ -22,6 +22,13 @@ class SheetManager: ObservableObject {
             height: 0,
             isDismissable: false)
     private var fixedSheetPresenter: UIViewController? = nil
+}
+
+extension SheetManager {
+
+}
+
+extension SheetManager {
 
     func presentSheet<Content: View>(
             type: SheetType,
@@ -124,9 +131,6 @@ class SheetManager: ObservableObject {
         return navManager.addNavBar(content, showDefaultNavBar: showDefaultNavBar)
                 .environmentObject(navigator)
     }
-}
-
-extension SheetManager {
 
     func dismissSheet(type: DismissSheetType?) {
         guard let type = type else {

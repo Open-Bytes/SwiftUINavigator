@@ -89,4 +89,49 @@ public class Navigator: ObservableObject {
     public func dismiss(to destination: DismissDestination = .previous) {
         manager.dismiss(to: destination)
     }
+
+}
+
+public extension Navigator {
+
+    /// Present confirmation dialog
+    ///
+    /// - Parameters:
+    ///   - titleKey: key
+    ///   - titleVisibility:  title visibility
+    ///   - content: view
+    @available(macCatalyst 15.0, *)
+    @available(iOS 15.0, *)
+    func presentConfirmationDialog<Content: View>(
+            titleKey: LocalizedStringKey,
+            titleVisibility: Visibility = .automatic,
+            content: () -> Content
+    ) {
+        manager.presentConfirmationDialog(
+                titleKey: titleKey,
+                titleVisibility: ConfirmationDialogVisibility.from(titleVisibility),
+                content: content().eraseToAnyView()
+        )
+    }
+
+    /// Dismiss confirmation dialog
+    func dismissConfirmationDialog() {
+        manager.dismissConfirmationDialog()
+    }
+}
+
+public extension Navigator {
+
+    /// Present action sheet
+    ///
+    /// - Parameter sheet: ActionSheet
+    func presentActionSheet(_ sheet: () -> ActionSheet) {
+        manager.presentActionSheet(sheet())
+    }
+
+    /// Dismiss action sheet
+    func dismissActionSheet() {
+        manager.dismissActionSheet()
+    }
+
 }
