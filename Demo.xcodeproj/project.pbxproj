@@ -449,7 +449,7 @@
 			children = (
 				F243D92C2779C64D00CD9FB5 /* Settings */,
 				F243D92E2779C64D00CD9FB5 /* Main */,
-				F243D9302779C64D00CD9FB5 /* Products */,
+				F243D9302779C64D00CD9FB5 /* Home */,
 				F243D9332779C64D00CD9FB5 /* ProductDetail */,
 				F243D9352779C64D00CD9FB5 /* Cart */,
 			);
@@ -472,7 +472,7 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		F243D9302779C64D00CD9FB5 /* Products */ = {
+		F243D9302779C64D00CD9FB5 /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				F243D9312779C64D00CD9FB5 /* ProductItemView.swift */,
@@ -480,7 +480,7 @@
 				58B8301E7C5E165FB0A6C04B /* HomeVM.swift */,
 				58B83318BB8D781203117109 /* ChipGroupType.swift */,
 			);
-			path = Products;
+			path = Home;
 			sourceTree = "<group>";
 		};
 		F243D9332779C64D00CD9FB5 /* ProductDetail */ = {
