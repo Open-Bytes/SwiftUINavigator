@@ -157,10 +157,12 @@ extension NavManager {
 
 extension NavManager {
 
+    @available(macOS, unavailable)
     func presentActionSheet(_ sheet: ActionSheet) {
         actionSheetManager.present(sheet)
     }
 
+    @available(macOS, unavailable)
     func dismissActionSheet() {
         actionSheetManager.dismiss()
     }

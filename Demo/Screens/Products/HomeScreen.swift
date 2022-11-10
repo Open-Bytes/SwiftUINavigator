@@ -9,34 +9,6 @@
 import SwiftUI
 import SwiftUINavigator
 
-class HomeVM: ObservableObject {
-    @Published var navigationOption: NavType = .push()
-    @Published var selectedNavigationOptions: [ChipGroup.Item] = []
-
-    lazy var navigationOptions: [ChipGroup.Item] = {
-        #if os(macOS)
-        [
-            ChipGroup.Item(type: .push, name: "Push"),
-            ChipGroup.Item(type: .sheet(type: .normal), name: "Normal Sheet"),
-            ChipGroup.Item(type: .sheet(type: .full), name: "Full Sheet"),
-            ChipGroup.Item(type: .actionSheet, name: "Action Sheet", isSelectable: false),
-            ChipGroup.Item(type: .confirmationDialog, name: "Confirmation Dialog", isSelectable: false)
-        ]
-        #else
-        [
-            ChipGroup.Item(type: .push, name: "Push"),
-            ChipGroup.Item(type: .sheet(type: .normal), name: "Normal Sheet"),
-            ChipGroup.Item(type: .sheet(type: .fixedHeight(.value(screenHeight() / 2))), name: "Fixed Sheet"),
-            ChipGroup.Item(type: .sheet(type: .fixedHeight(.ratio(70))), name: "Fixed Sheet (Ratio)"),
-            ChipGroup.Item(type: .actionSheet, name: "Action Sheet", isSelectable: false),
-            ChipGroup.Item(type: .confirmationDialog, name: "Confirmation Dialog", isSelectable: false)
-        ]
-        #endif
-    }()
-
-}
-
-
 struct HomeScreen: View {
     @ObservedObject var vm: HomeVM = HomeVM()
     var cart: Cart = .shared
@@ -62,6 +34,7 @@ struct HomeScreen: View {
     }
 
     private func presentActionSheet() {
+        #if os(iOS)
         navigator.presentActionSheet {
             ActionSheet(
                     title: Text("Color"),
@@ -73,10 +46,11 @@ struct HomeScreen: View {
                     ]
             )
         }
+        #endif
     }
 
     private func presentConfirmationDialog() {
-        if #available(iOS 15.0, *) {
+        if #available(iOS 15.0, macOS 12.0, *) {
             navigator.presentConfirmationDialog(titleKey: "Color", titleVisibility: .visible) {
                 Group {
                     Button(action: {}) {
@@ -185,47 +159,6 @@ extension HomeScreen {
 
 }
 
-public enum ChipGroupType: Hashable {
-    case push
-    case sheet(type: SheetType)
-    case actionSheet
-    case confirmationDialog
-
-    public func hash(into hasher: inout Hasher) {
-        switch self {
-        case .push:
-            hasher.combine("push")
-        case .sheet(let value):
-            switch value {
-            case .normal:
-                hasher.combine("normal")
-            case .full:
-                hasher.combine("full")
-            case let .fixedHeight(height, _, _):
-                switch height {
-                case .value:
-                    hasher.combine("fixedHeight")
-                case .ratio:
-                    hasher.combine("fixedHeightRatio")
-                }
-            }
-        case .actionSheet:
-            hasher.combine("actionSheet")
-        case .confirmationDialog:
-            hasher.combine("confirmationDialog")
-        }
-    }
-
-    public static func ==(lhs: ChipGroupType, rhs: ChipGroupType) -> Bool {
-        switch (lhs, rhs) {
-        case (.push, .push),
-             (.sheet, .sheet):
-            return true
-        default:
-            return false
-        }
-    }
-}
 
 
 

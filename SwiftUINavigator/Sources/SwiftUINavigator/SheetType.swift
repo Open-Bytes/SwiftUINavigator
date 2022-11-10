@@ -5,9 +5,14 @@
 import SwiftUI
 
 public enum SheetType {
+    #if os(macOS)
+    case normal(width: CGFloat, height: CGFloat)
+    #else
     case normal
+    #endif
     @available(iOS 14.0, *)
     case full
+    @available(macOS, unavailable)
     case fixedHeight(
             FixedHeightType,
             isDismissable: Bool = true,
@@ -31,7 +36,7 @@ public enum FixedHeightType {
                 ratio = 1
             }
             let percent = ratio / 100
-            let height = UIScreen.screenHeight * percent
+            let height = screenHeight() * percent
             return height
         }
     }
@@ -40,6 +45,7 @@ public enum FixedHeightType {
 public enum FixedSheetPresenter {
     case rootController
     case topController
+    #if os(iOS)
     case controller(UIViewController)
 
     public var controller: UIViewController? {
@@ -52,6 +58,7 @@ public enum FixedSheetPresenter {
             return controller
         }
     }
+    #endif
 }
 
 public enum DismissSheetType {

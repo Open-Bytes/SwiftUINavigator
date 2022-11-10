@@ -11,6 +11,7 @@ enum ConfirmationDialogVisibility: Hashable, CaseIterable {
 
     @available(macCatalyst 15.0, *)
     @available(iOS 15.0, *)
+    @available(macOS 12.0, *)
     var original: Visibility {
         switch self {
         case .automatic:
@@ -24,6 +25,7 @@ enum ConfirmationDialogVisibility: Hashable, CaseIterable {
 
     @available(macCatalyst 15.0, *)
     @available(iOS 15.0, *)
+    @available(macOS 12.0, *)
     static func from(_ visibility: Visibility) -> ConfirmationDialogVisibility {
         switch visibility {
         case .automatic:
@@ -54,7 +56,7 @@ struct ConfirmationDialogModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         Group {
-            if #available(iOS 15.0, *), let actions {
+            if #available(iOS 15.0, macOS 12.0, *), let actions {
                 content
                         .confirmationDialog(
                                 titleKey,

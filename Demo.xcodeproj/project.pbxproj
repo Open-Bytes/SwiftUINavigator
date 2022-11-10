@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -38,6 +38,7 @@
 		1BCAC6E200E87D7A087CEF7C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC27F1DD06BAAD7837886 /* SceneDelegate.swift */; };
 		1BCACAB8AE546C3592F044D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC766AD646B0EAA329E74 /* AppDelegate.swift */; };
 		1BCACC536C4A9621D93D59C2 /* ChipGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BCAC987EECE855C5630A7BF /* ChipGroup.swift */; };
+		58B830478D6D37488C1DA4A6 /* ChipGroupType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B83318BB8D781203117109 /* ChipGroupType.swift */; };
 		58B830BC83668FC38C703AB9 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B832288582F66A2A421456 /* ScreenSize.swift */; };
 		58B833160F693AAC823D7858 /* ConfirmationDialogModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B8394AD15AEF4F9582C4B4 /* ConfirmationDialogModifier.swift */; };
 		58B8332FC1D16E277916EC68 /* View+EraseToAnyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B8340B463BD55577D06888 /* View+EraseToAnyView.swift */; };
@@ -49,6 +50,7 @@
 		58B838130C9F25D401D2A053 /* ConfirmationDialogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B8378C7D4FE4688E21054F /* ConfirmationDialogManager.swift */; };
 		58B838FDA5131796C038E8A9 /* AnyTransition+BottomUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B83549D9D6CB865EF24140 /* AnyTransition+BottomUp.swift */; };
 		58B83BCE4B0A9F4C1C3C85F8 /* UIApplication+TopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B8339A32023514A96A4824 /* UIApplication+TopController.swift */; };
+		58B83BDAEB7E6F1CC2D3F6F3 /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B8301E7C5E165FB0A6C04B /* HomeVM.swift */; };
 		58B83CF40ADD1C5ED1DFE20B /* UIScreen+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B83814A1D346F82A02D071 /* UIScreen+Size.swift */; };
 		58B83CF9D3D80EAA231A0E7D /* ActionSheetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B83E266E7972CFF9BFE369 /* ActionSheetModifier.swift */; };
 		58B83E88C4B892B9D523DA7F /* SheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B83A2A01D420DD5F1AAFC6 /* SheetController.swift */; };
@@ -67,7 +69,7 @@
 		F243D9462779C64D00CD9FB5 /* ProductDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243D9342779C64D00CD9FB5 /* ProductDetailScreen.swift */; };
 		F243D9472779C64D00CD9FB5 /* CartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243D9362779C64D00CD9FB5 /* CartScreen.swift */; };
 		F243D9482779C64D00CD9FB5 /* CartItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243D9372779C64D00CD9FB5 /* CartItemView.swift */; };
-		F243D9492779C64D00CD9FB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F243D9392779C64D00CD9FB5 /* LaunchScreen.storyboard */; };
+		F243D9492779C64D00CD9FB5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F243D9392779C64D00CD9FB5 /* LaunchScreen.storyboard */; platformFilters = (ios, maccatalyst, ); };
 		F243D94A2779C64D00CD9FB5 /* Favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243D93A2779C64D00CD9FB5 /* Favorites.swift */; };
 		F243D94B2779C64D00CD9FB5 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243D93B2779C64D00CD9FB5 /* Product.swift */; };
 		F243D94C2779C64D00CD9FB5 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243D93C2779C64D00CD9FB5 /* Cart.swift */; };
@@ -178,8 +180,10 @@
 		1BCAC97FFD9D263674F06F86 /* BottomSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
 		1BCAC987EECE855C5630A7BF /* ChipGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChipGroup.swift; sourceTree = "<group>"; };
 		1BCACA65F0B08F568B389C92 /* View+OnDataChange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+OnDataChange.swift"; sourceTree = "<group>"; };
+		58B8301E7C5E165FB0A6C04B /* HomeVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
 		58B831CE4656CFCC8221FB7B /* SheetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetManager.swift; sourceTree = "<group>"; };
 		58B832288582F66A2A421456 /* ScreenSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
+		58B83318BB8D781203117109 /* ChipGroupType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChipGroupType.swift; sourceTree = "<group>"; };
 		58B8339A32023514A96A4824 /* UIApplication+TopController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+TopController.swift"; sourceTree = "<group>"; };
 		58B8340B463BD55577D06888 /* View+EraseToAnyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+EraseToAnyView.swift"; sourceTree = "<group>"; };
 		58B835475FC253B0DE2DAE86 /* View+DisableAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+DisableAnimation.swift"; sourceTree = "<group>"; };
@@ -444,7 +448,7 @@
 			isa = PBXGroup;
 			children = (
 				F243D92C2779C64D00CD9FB5 /* Settings */,
-				F243D92E2779C64D00CD9FB5 /* Home */,
+				F243D92E2779C64D00CD9FB5 /* Main */,
 				F243D9302779C64D00CD9FB5 /* Products */,
 				F243D9332779C64D00CD9FB5 /* ProductDetail */,
 				F243D9352779C64D00CD9FB5 /* Cart */,
@@ -460,12 +464,12 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		F243D92E2779C64D00CD9FB5 /* Home */ = {
+		F243D92E2779C64D00CD9FB5 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				F243D92F2779C64D00CD9FB5 /* MainScreen.swift */,
 			);
-			path = Home;
+			path = Main;
 			sourceTree = "<group>";
 		};
 		F243D9302779C64D00CD9FB5 /* Products */ = {
@@ -473,6 +477,8 @@
 			children = (
 				F243D9312779C64D00CD9FB5 /* ProductItemView.swift */,
 				F243D9322779C64D00CD9FB5 /* HomeScreen.swift */,
+				58B8301E7C5E165FB0A6C04B /* HomeVM.swift */,
+				58B83318BB8D781203117109 /* ChipGroupType.swift */,
 			);
 			path = Products;
 			sourceTree = "<group>";
@@ -861,6 +867,8 @@
 				1BCAC6E200E87D7A087CEF7C /* SceneDelegate.swift in Sources */,
 				1BCACAB8AE546C3592F044D3 /* AppDelegate.swift in Sources */,
 				58B830BC83668FC38C703AB9 /* ScreenSize.swift in Sources */,
+				58B83BDAEB7E6F1CC2D3F6F3 /* HomeVM.swift in Sources */,
+				58B830478D6D37488C1DA4A6 /* ChipGroupType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

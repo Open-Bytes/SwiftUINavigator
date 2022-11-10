@@ -102,6 +102,7 @@ public extension Navigator {
     ///   - content: view
     @available(macCatalyst 15.0, *)
     @available(iOS 15.0, *)
+    @available(macOS 12.0, *)
     func presentConfirmationDialog<Content: View>(
             titleKey: LocalizedStringKey,
             titleVisibility: Visibility = .automatic,
@@ -125,11 +126,13 @@ public extension Navigator {
     /// Present action sheet
     ///
     /// - Parameter sheet: ActionSheet
+    @available(macOS, unavailable)
     func presentActionSheet(_ sheet: () -> ActionSheet) {
         manager.presentActionSheet(sheet())
     }
 
     /// Dismiss action sheet
+    @available(macOS, unavailable)
     func dismissActionSheet() {
         manager.dismissActionSheet()
     }

@@ -6,15 +6,22 @@ import SwiftUI
 
 struct ActionSheetModifier: ViewModifier {
     @Binding var isPresented: Bool
+    @available(macOS, unavailable)
     let sheet: () -> ActionSheet?
 
     func body(content: Content) -> some View {
-        if let sheet = sheet() {
-            content.actionSheet(isPresented: $isPresented) {
-                sheet
-            }
-        } else {
+        Group {
+            #if os(macOS)
             content
+            #else
+            if let sheet = sheet() {
+                content.actionSheet(isPresented: $isPresented) {
+                    sheet
+                }
+            } else {
+                content
+            }
+            #endif
         }
     }
 }

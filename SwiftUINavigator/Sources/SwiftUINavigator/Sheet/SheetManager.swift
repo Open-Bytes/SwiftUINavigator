@@ -21,7 +21,10 @@ class SheetManager: ObservableObject {
     var sheetArgs = SheetArguments(
             height: 0,
             isDismissable: false)
+    #if os(iOS)
     private var fixedSheetPresenter: UIViewController? = nil
+    #endif
+
 }
 
 extension SheetManager {
@@ -37,6 +40,7 @@ extension SheetManager {
             content: () -> Content) {
         onDismissSheet = onDismiss
         switch type {
+            #if os(iOS)
         case .normal:
             presentSheet(
                     content(),
@@ -44,6 +48,15 @@ extension SheetManager {
                     width: nil,
                     height: nil,
                     showDefaultNavBar: showDefaultNavBar)
+            #else
+        case let .normal(width, height):
+            presentSheet(
+                    content(),
+                    type: type,
+                    width: width,
+                    height: height,
+                    showDefaultNavBar: showDefaultNavBar)
+            #endif
         case .full:
             if #available(iOS 14.0, *) {
                 presentSheet(
@@ -81,12 +94,14 @@ extension SheetManager {
             presentSheet = true
         case .full:
             presentFullSheet = true
+            #if os(iOS)
         case let .fixedHeight(type, isDismissable, presenter):
             fixedSheetPresenter = presenter.controller
             presentFixedSheet(
                     height: type.height,
                     isDismissable: isDismissable,
                     presenter: presenter)
+            #endif
         }
     }
 
@@ -127,9 +142,9 @@ extension SheetManager {
                 showDefaultNavBar: showDefaultNavBar,
                 rootView: { content }
         )
-                .frame(width: width, height: height)
         return navManager.addNavBar(content, showDefaultNavBar: showDefaultNavBar)
                 .environmentObject(navigator)
+                .frame(width: width, height: height)
     }
 
     func dismissSheet(type: DismissSheetType?) {

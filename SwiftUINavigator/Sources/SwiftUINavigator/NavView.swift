@@ -81,11 +81,13 @@ public struct NavView<Root>: View where Root: View {
                                     manager.confirmationDialogManager.content?.eraseToAnyView()
                                 }
                         ))
+                #if os(iOS)
                 .modifier(
                         ActionSheetModifier(
                                 isPresented: $manager.actionSheetManager.isPresented,
                                 sheet: { manager.actionSheetManager.sheet }
                         ))
+                #endif
                 .environmentObject(navigator)
     }
 

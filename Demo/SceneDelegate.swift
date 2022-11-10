@@ -2,6 +2,7 @@
 // Created by Shaban Kamel on 06/01/2022.
 //
 
+#if os(iOS)
 import UIKit
 import SwiftUI
 
@@ -66,3 +67,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 }
+
+#endif
