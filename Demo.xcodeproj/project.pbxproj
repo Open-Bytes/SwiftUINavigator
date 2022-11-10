@@ -44,6 +44,7 @@
 		58B8332FC1D16E277916EC68 /* View+EraseToAnyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B8340B463BD55577D06888 /* View+EraseToAnyView.swift */; };
 		58B83364E3DB93D0F6101E73 /* View+DisableAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B835475FC253B0DE2DAE86 /* View+DisableAnimation.swift */; };
 		58B833D23CD5F8D812DF73B6 /* ActionSheetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B83B0FEF1920CB99898F78 /* ActionSheetManager.swift */; };
+		58B8348623AF26413F410040 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B839FE1FBC366279EAE0C0 /* AlertManager.swift */; };
 		58B834CA2687CFC83934809C /* FixedHeightSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B83C2FB84B15561D2F14FA /* FixedHeightSheetView.swift */; };
 		58B8358360FC789B854EE4B2 /* SheetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B831CE4656CFCC8221FB7B /* SheetManager.swift */; };
 		58B836091808AA3C8834B2D6 /* SheetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B83F60BD32796B977087D5 /* SheetType.swift */; };
@@ -56,6 +57,7 @@
 		58B83CF9D3D80EAA231A0E7D /* ActionSheetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B83E266E7972CFF9BFE369 /* ActionSheetModifier.swift */; };
 		58B83E88C4B892B9D523DA7F /* SheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B83A2A01D420DD5F1AAFC6 /* SheetController.swift */; };
 		58B83EBD3616FF127C44A24A /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B832288582F66A2A421456 /* ScreenSize.swift */; };
+		58B83FDCCE85C706CD0ECA36 /* AlertModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B833671FC3D02F05FC3E1A /* AlertModifier.swift */; };
 		C9BA2E642587CA26004DAEEE /* DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BA2E632587CA26004DAEEE /* DemoApp.swift */; };
 		C9BA2E682587CA29004DAEEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9BA2E672587CA29004DAEEE /* Assets.xcassets */; };
 		C9BA2E6B2587CA29004DAEEE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C9BA2E6A2587CA29004DAEEE /* Preview Assets.xcassets */; };
@@ -185,6 +187,7 @@
 		58B831CE4656CFCC8221FB7B /* SheetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetManager.swift; sourceTree = "<group>"; };
 		58B832288582F66A2A421456 /* ScreenSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
 		58B83318BB8D781203117109 /* ChipGroupType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChipGroupType.swift; sourceTree = "<group>"; };
+		58B833671FC3D02F05FC3E1A /* AlertModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertModifier.swift; sourceTree = "<group>"; };
 		58B8339A32023514A96A4824 /* UIApplication+TopController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+TopController.swift"; sourceTree = "<group>"; };
 		58B8340B463BD55577D06888 /* View+EraseToAnyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+EraseToAnyView.swift"; sourceTree = "<group>"; };
 		58B835475FC253B0DE2DAE86 /* View+DisableAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+DisableAnimation.swift"; sourceTree = "<group>"; };
@@ -192,6 +195,7 @@
 		58B8378C7D4FE4688E21054F /* ConfirmationDialogManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationDialogManager.swift; sourceTree = "<group>"; };
 		58B83814A1D346F82A02D071 /* UIScreen+Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScreen+Size.swift"; sourceTree = "<group>"; };
 		58B8394AD15AEF4F9582C4B4 /* ConfirmationDialogModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmationDialogModifier.swift; sourceTree = "<group>"; };
+		58B839FE1FBC366279EAE0C0 /* AlertManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		58B83A2A01D420DD5F1AAFC6 /* SheetController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetController.swift; sourceTree = "<group>"; };
 		58B83B0FEF1920CB99898F78 /* ActionSheetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetManager.swift; sourceTree = "<group>"; };
 		58B83C2FB84B15561D2F14FA /* FixedHeightSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixedHeightSheetView.swift; sourceTree = "<group>"; };
@@ -356,6 +360,15 @@
 				1BCAC987EECE855C5630A7BF /* ChipGroup.swift */,
 			);
 			path = ChipGroup;
+			sourceTree = "<group>";
+		};
+		58B8327C4E2FD74AFBAB193D /* Dialog */ = {
+			isa = PBXGroup;
+			children = (
+				58B839FE1FBC366279EAE0C0 /* AlertManager.swift */,
+				58B833671FC3D02F05FC3E1A /* AlertModifier.swift */,
+			);
+			path = Dialog;
 			sourceTree = "<group>";
 		};
 		C9BA2E572587CA26004DAEEE = {
@@ -540,6 +553,7 @@
 				1BCAC98F4A33312B2D5459C1 /* Sheet */,
 				1BCAC51ECE714F612FF539E1 /* Extensions */,
 				58B83F60BD32796B977087D5 /* SheetType.swift */,
+				58B8327C4E2FD74AFBAB193D /* Dialog */,
 			);
 			name = SwiftUINavigator;
 			path = Sources/SwiftUINavigator;
@@ -899,6 +913,8 @@
 				58B838130C9F25D401D2A053 /* ConfirmationDialogManager.swift in Sources */,
 				58B833160F693AAC823D7858 /* ConfirmationDialogModifier.swift in Sources */,
 				58B83AED77003852352F8940 /* FullScreenCoverModifier.swift in Sources */,
+				58B8348623AF26413F410040 /* AlertManager.swift in Sources */,
+				58B83FDCCE85C706CD0ECA36 /* AlertModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,9 +16,6 @@ public class NavManager: ObservableObject {
     var lastNavigationType = NavigationDirection.pop
     let easeAnimation: Animation
     @Published var currentView: BackStackElement?
-    @Published var sheetManager = SheetManager()
-    @Published var actionSheetManager = ActionSheetManager()
-    @Published var confirmationDialogManager = ConfirmationDialogManager()
     private var root: NavManager?
     private var showDefaultNavBar: Bool = true
 
@@ -30,6 +27,11 @@ public class NavManager: ObservableObject {
             stackItems = backStack.views
         }
     }
+
+    @Published var sheetManager = SheetManager()
+    @Published var actionSheetManager = ActionSheetManager()
+    @Published var confirmationDialogManager = ConfirmationDialogManager()
+    @Published var alertManager = AlertManager()
 
     public init(root: NavManager? = nil,
                 easeAnimation: Animation,
@@ -54,6 +56,12 @@ public class NavManager: ObservableObject {
                 .store(in: &bag)
 
         confirmationDialogManager.objectWillChange
+                .sink { [weak self] _ in
+                    self?.objectWillChange.send()
+                }
+                .store(in: &bag)
+
+        alertManager.objectWillChange
                 .sink { [weak self] _ in
                     self?.objectWillChange.send()
                 }
@@ -165,6 +173,20 @@ extension NavManager {
     @available(macOS, unavailable)
     func dismissActionSheet() {
         actionSheetManager.dismiss()
+    }
+
+}
+
+// MARK:- Alert
+
+extension NavManager {
+
+    func presentAlert(_ alert: Alert) {
+        alertManager.present(alert)
+    }
+
+    func dismissAlert() {
+        alertManager.dismiss()
     }
 
 }

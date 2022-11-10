@@ -121,6 +121,7 @@ public extension Navigator {
     }
 }
 
+
 public extension Navigator {
 
     /// Present action sheet
@@ -135,6 +136,22 @@ public extension Navigator {
     @available(macOS, unavailable)
     func dismissActionSheet() {
         manager.dismissActionSheet()
+    }
+
+}
+
+public extension Navigator {
+
+    /// Present Alert
+    ///
+    /// - Parameter alert: Alert
+    func presentAlert(_ alert: () -> Alert) {
+        manager.presentAlert(alert())
+    }
+
+    /// Dismiss Alert
+    func dismissAlert() {
+        manager.dismissAlert()
     }
 
 }

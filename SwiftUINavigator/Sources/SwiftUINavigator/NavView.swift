@@ -74,6 +74,10 @@ public struct NavView<Root>: View where Root: View {
                                 sheet: { manager.actionSheetManager.sheet }
                         ))
                 #endif
+                .modifier(AlertModifier(
+                        isPresented: $manager.alertManager.isPresented,
+                        alert: { manager.alertManager.alert }
+                ))
                 .environmentObject(navigator)
     }
 

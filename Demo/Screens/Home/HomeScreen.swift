@@ -67,6 +67,17 @@ struct HomeScreen: View {
         }
     }
 
+    private func presentAlert() {
+        if #available(iOS 15.0, macOS 12.0, *) {
+            navigator.presentAlert {
+                Alert(
+                        title: Text("Alert"),
+                        message: Text("Presented on the fly with SwiftUINavigator"),
+                        dismissButton: .cancel())
+            }
+        }
+    }
+
     private func Content() -> some View {
         HStack(alignment: .top, spacing: 10) {
             let items: [[Product]] = items.split()
@@ -153,6 +164,8 @@ extension HomeScreen {
                 presentActionSheet()
             case .confirmationDialog:
                 presentConfirmationDialog()
+            case .alert:
+                presentAlert()
             }
         }
     }
