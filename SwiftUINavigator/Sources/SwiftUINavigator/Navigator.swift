@@ -155,3 +155,17 @@ public extension Navigator {
     }
 
 }
+
+// MARK:- Dialog
+
+public extension Navigator {
+
+    func presentDialog<Content: View>(dismissOnTouchOutside: Bool = true, _ view: () -> Content) {
+        manager.presentDialog(dismissOnTouchOutside: dismissOnTouchOutside, view().eraseToAnyView())
+    }
+
+    func dismissDialog() {
+        manager.dismissDialog()
+    }
+
+}

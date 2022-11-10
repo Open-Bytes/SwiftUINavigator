@@ -10,4 +10,5 @@ public enum ChipGroupType {
     case actionSheet
     case confirmationDialog
     case alert
+    case dialog
 }

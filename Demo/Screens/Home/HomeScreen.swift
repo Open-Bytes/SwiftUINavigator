@@ -78,6 +78,26 @@ struct HomeScreen: View {
         }
     }
 
+    private func presentDialog() {
+        if #available(iOS 15.0, macOS 12.0, *) {
+            navigator.presentDialog(dismissOnTouchOutside: true) {
+                VStack(spacing: 10) {
+                    Text("Dialog").bold()
+                    Text("Presented on the fly with SwiftUINavigator")
+                    Spacer().frame(height: 20)
+                    Button(action: {
+                        navigator.dismissDialog()
+                    }) {
+                        Text("Cancel")
+                    }
+                }
+                        .padding(15)
+                        .background(Color.white)
+                        .cornerRadius(10)
+            }
+        }
+    }
+
     private func Content() -> some View {
         HStack(alignment: .top, spacing: 10) {
             let items: [[Product]] = items.split()
@@ -166,6 +186,8 @@ extension HomeScreen {
                 presentConfirmationDialog()
             case .alert:
                 presentAlert()
+            case .dialog:
+                presentDialog()
             }
         }
     }

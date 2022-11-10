@@ -78,6 +78,9 @@ public struct NavView<Root>: View where Root: View {
                         isPresented: $manager.alertManager.isPresented,
                         alert: { manager.alertManager.alert }
                 ))
+                .dialog(isPresented: $manager.dialogManager.isPresented,
+                        dismissOnTouchOutside: manager.dialogManager.dismissOnTouchOutside,
+                        dialogContent: { manager.dialogManager.view })
                 .environmentObject(navigator)
     }
 

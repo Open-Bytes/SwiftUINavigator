@@ -32,6 +32,7 @@ public class NavManager: ObservableObject {
     @Published var actionSheetManager = ActionSheetManager()
     @Published var confirmationDialogManager = ConfirmationDialogManager()
     @Published var alertManager = AlertManager()
+    @Published var dialogManager = DialogManager()
 
     public init(root: NavManager? = nil,
                 easeAnimation: Animation,
@@ -62,6 +63,12 @@ public class NavManager: ObservableObject {
                 .store(in: &bag)
 
         alertManager.objectWillChange
+                .sink { [weak self] _ in
+                    self?.objectWillChange.send()
+                }
+                .store(in: &bag)
+
+        dialogManager.objectWillChange
                 .sink { [weak self] _ in
                     self?.objectWillChange.send()
                 }
@@ -187,6 +194,20 @@ extension NavManager {
 
     func dismissAlert() {
         alertManager.dismiss()
+    }
+
+}
+
+// MARK:- Dialog
+
+extension NavManager {
+
+    func presentDialog(dismissOnTouchOutside: Bool , _ alert: AnyView) {
+        dialogManager.present(dismissOnTouchOutside: dismissOnTouchOutside, alert)
+    }
+
+    func dismissDialog() {
+        dialogManager.dismiss()
     }
 
 }

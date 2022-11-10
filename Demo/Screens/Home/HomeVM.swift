@@ -15,7 +15,8 @@ class HomeVM: ObservableObject {
             ChipGroup.Item(type: .sheet(type: .normal(width: 500, height: 500)), name: "Normal Sheet"),
             ChipGroup.Item(type: .actionSheet, name: "Action Sheet", isSelectable: false),
             ChipGroup.Item(type: .confirmationDialog, name: "Confirmation Dialog", isSelectable: false),
-            ChipGroup.Item(type: .alert, name: "Alert", isSelectable: false)
+            ChipGroup.Item(type: .alert, name: "Alert", isSelectable: false),
+            ChipGroup.Item(type: .dialog, name: "Dialog", isSelectable: false)
         ]
         #else
         [
@@ -25,7 +26,8 @@ class HomeVM: ObservableObject {
             ChipGroup.Item(type: .sheet(type: .fixedHeight(.ratio(70))), name: "Fixed Sheet (Ratio)"),
             ChipGroup.Item(type: .actionSheet, name: "Action Sheet", isSelectable: false),
             ChipGroup.Item(type: .confirmationDialog, name: "Confirmation Dialog", isSelectable: false),
-            ChipGroup.Item(type: .alert, name: "Alert", isSelectable: false)
+            ChipGroup.Item(type: .alert, name: "Alert", isSelectable: false),
+            ChipGroup.Item(type: .dialog, name: "Dialog", isSelectable: false)
         ]
         #endif
     }()
