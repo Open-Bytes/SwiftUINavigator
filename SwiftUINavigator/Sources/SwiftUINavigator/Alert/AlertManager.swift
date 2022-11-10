@@ -14,16 +14,13 @@ class AlertManager: ObservableObject {
             }
         }
     }
-    @available(macOS, unavailable)
     var alert: Alert? = nil
 
-    @available(macOS, unavailable)
     func present(_ alert: Alert) {
         self.alert = alert
         isPresented = true
     }
 
-    @available(macOS, unavailable)
     func dismiss() {
         isPresented = false
         alert = nil

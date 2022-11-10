@@ -6,6 +6,7 @@ import Combine
 import SwiftUI
 
 class ActionSheetManager: ObservableObject {
+    @available(macOS, unavailable)
     @Published var isPresented: Bool = false {
         didSet {
             if !isPresented {
