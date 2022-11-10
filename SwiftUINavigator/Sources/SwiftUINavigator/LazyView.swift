@@ -15,3 +15,10 @@ struct LazyView<Content: View>: View {
         build()
     }
 }
+
+extension View {
+
+    var lazyView: some View {
+        LazyView(self)
+    }
+}

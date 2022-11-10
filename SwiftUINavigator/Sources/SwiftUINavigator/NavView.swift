@@ -103,7 +103,7 @@ public struct NavView<Root>: View where Root: View {
                                 onDismiss: {
                                     onDismissSheet()
                                 }) {
-                            LazyView(manager.sheetManager.sheet)
+                            manager.sheetManager.sheet?.lazyView
                         }
             } else {
                 SheetView()
@@ -121,14 +121,14 @@ public struct NavView<Root>: View where Root: View {
                         onDismiss: {
                             onDismissSheet()
                         }) {
-                    LazyView(manager.sheetManager.sheet)
+                    manager.sheetManager.sheet?.lazyView
                 }
                 .sheet(
                         isPresented: $manager.sheetManager.presentSheet,
                         onDismiss: {
                             onDismissSheet()
                         }) {
-                    manager.sheetManager.sheet.frame(maxWidth: .infinity, maxHeight: .infinity)
+                    manager.sheetManager.sheet?.lazyView.frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
     }
 
