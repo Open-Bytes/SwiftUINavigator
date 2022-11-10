@@ -13,10 +13,31 @@ class SheetManager: ObservableObject {
     }
     var navManager: NavManager!
 
-    @Published var presentSheet: Bool = false
-    @Published var presentFullSheet: Bool = false
-    @Published var presentFixedHeightSheet: Bool = false
-    var onDismissSheet: (() -> Void)? = nil
+    @Published var presentSheet: Bool = false {
+        didSet {
+            if !presentSheet {
+                onDismissSheet?()
+                onDismissSheet = nil
+            }
+        }
+    }
+    @Published var presentFullSheet: Bool = false {
+        didSet {
+            if !presentFullSheet {
+                onDismissSheet?()
+                onDismissSheet = nil
+            }
+        }
+    }
+    @Published var presentFixedHeightSheet: Bool = false {
+        didSet {
+            if !presentFixedHeightSheet {
+                onDismissSheet?()
+                onDismissSheet = nil
+            }
+        }
+    }
+    private var onDismissSheet: (() -> Void)? = nil
     var sheet: AnyView? = nil
     var sheetArgs = SheetArguments(
             height: 0,

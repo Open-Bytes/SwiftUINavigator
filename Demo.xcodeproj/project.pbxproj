@@ -49,6 +49,7 @@
 		58B836091808AA3C8834B2D6 /* SheetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B83F60BD32796B977087D5 /* SheetType.swift */; };
 		58B838130C9F25D401D2A053 /* ConfirmationDialogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B8378C7D4FE4688E21054F /* ConfirmationDialogManager.swift */; };
 		58B838FDA5131796C038E8A9 /* AnyTransition+BottomUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B83549D9D6CB865EF24140 /* AnyTransition+BottomUp.swift */; };
+		58B83AED77003852352F8940 /* FullScreenCoverModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B83F8C1D08BE9F1EA9501B /* FullScreenCoverModifier.swift */; };
 		58B83BCE4B0A9F4C1C3C85F8 /* UIApplication+TopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B8339A32023514A96A4824 /* UIApplication+TopController.swift */; };
 		58B83BDAEB7E6F1CC2D3F6F3 /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B8301E7C5E165FB0A6C04B /* HomeVM.swift */; };
 		58B83CF40ADD1C5ED1DFE20B /* UIScreen+Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B83814A1D346F82A02D071 /* UIScreen+Size.swift */; };
@@ -196,6 +197,7 @@
 		58B83C2FB84B15561D2F14FA /* FixedHeightSheetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FixedHeightSheetView.swift; sourceTree = "<group>"; };
 		58B83E266E7972CFF9BFE369 /* ActionSheetModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetModifier.swift; sourceTree = "<group>"; };
 		58B83F60BD32796B977087D5 /* SheetType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetType.swift; sourceTree = "<group>"; };
+		58B83F8C1D08BE9F1EA9501B /* FullScreenCoverModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenCoverModifier.swift; sourceTree = "<group>"; };
 		C9BA2E602587CA26004DAEEE /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9BA2E632587CA26004DAEEE /* DemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoApp.swift; sourceTree = "<group>"; };
 		C9BA2E672587CA29004DAEEE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 				58B83B0FEF1920CB99898F78 /* ActionSheetManager.swift */,
 				58B8378C7D4FE4688E21054F /* ConfirmationDialogManager.swift */,
 				58B8394AD15AEF4F9582C4B4 /* ConfirmationDialogModifier.swift */,
+				58B83F8C1D08BE9F1EA9501B /* FullScreenCoverModifier.swift */,
 			);
 			path = Sheet;
 			sourceTree = "<group>";
@@ -895,6 +898,7 @@
 				58B833D23CD5F8D812DF73B6 /* ActionSheetManager.swift in Sources */,
 				58B838130C9F25D401D2A053 /* ConfirmationDialogManager.swift in Sources */,
 				58B833160F693AAC823D7858 /* ConfirmationDialogModifier.swift in Sources */,
+				58B83AED77003852352F8940 /* FullScreenCoverModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
