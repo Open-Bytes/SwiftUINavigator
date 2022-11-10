@@ -339,7 +339,6 @@
 				58B83A2A01D420DD5F1AAFC6 /* SheetController.swift */,
 				58B8339A32023514A96A4824 /* UIApplication+TopController.swift */,
 				58B831CE4656CFCC8221FB7B /* SheetManager.swift */,
-				58B83ABF310FB9B82A84A087 /* ActionSheetModifier */,
 				58B83E266E7972CFF9BFE369 /* ActionSheetModifier.swift */,
 				58B83B0FEF1920CB99898F78 /* ActionSheetManager.swift */,
 				58B8378C7D4FE4688E21054F /* ConfirmationDialogManager.swift */,
@@ -354,13 +353,6 @@
 				1BCAC987EECE855C5630A7BF /* ChipGroup.swift */,
 			);
 			path = ChipGroup;
-			sourceTree = "<group>";
-		};
-		58B83ABF310FB9B82A84A087 /* ActionSheetModifier */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ActionSheetModifier;
 			sourceTree = "<group>";
 		};
 		C9BA2E572587CA26004DAEEE = {

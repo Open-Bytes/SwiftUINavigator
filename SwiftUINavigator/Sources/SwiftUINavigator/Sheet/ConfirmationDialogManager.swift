@@ -6,7 +6,13 @@ import Combine
 import SwiftUI
 
 class ConfirmationDialogManager: ObservableObject {
-    @Published var isPresented: Bool = false
+    @Published var isPresented: Bool = false {
+        didSet {
+            if !isPresented {
+                reset()
+            }
+        }
+    }
     var titleKey: LocalizedStringKey = ""
     var titleVisibility: ConfirmationDialogVisibility = .automatic
     var content: AnyView? = nil
@@ -23,6 +29,10 @@ class ConfirmationDialogManager: ObservableObject {
 
     func dismiss() {
         isPresented = false
+        reset()
+    }
+
+    private func reset() {
         content = nil
         titleKey = ""
         titleVisibility = .automatic
