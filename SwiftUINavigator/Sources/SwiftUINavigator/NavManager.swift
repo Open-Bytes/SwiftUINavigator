@@ -74,6 +74,29 @@ public class NavManager: ObservableObject {
                 }
                 .store(in: &bag)
     }
+
+    convenience init(
+            root: NavManager? = nil,
+         easeAnimation: Animation,
+         showDefaultNavBar: Bool,
+         transition: NavTransition,
+         sheetManager: SheetManager,
+         actionSheetManager: ActionSheetManager,
+         confirmationDialogManager: ConfirmationDialogManager,
+         alertManager: AlertManager,
+         dialogManager: DialogManager
+    ) {
+        self.init(root: root,
+                easeAnimation: easeAnimation,
+                showDefaultNavBar: showDefaultNavBar,
+                transition: transition)
+        self.sheetManager = sheetManager
+        self.actionSheetManager = actionSheetManager
+        self.confirmationDialogManager = confirmationDialogManager
+        self.alertManager = alertManager
+        self.dialogManager = dialogManager
+    }
+
 }
 
 public extension NavManager {
