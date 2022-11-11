@@ -11,6 +11,5 @@ public enum NavType {
     /// and won't be displayed when dismissing the view.
     case push(id: String? = nil, addToBackStack: Bool = true)
     /// Present a sheet
-    // TODO: add onDismiss
     case sheet(type: SheetType)
 }

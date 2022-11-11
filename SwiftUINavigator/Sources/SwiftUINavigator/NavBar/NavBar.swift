@@ -51,7 +51,6 @@ public struct NavBar<Content: View>: View {
                 } label: {
                     HStack {
                         Image(systemName: "chevron.backward").foregroundColor(.blue)
-                        // TODO: localize
                         Text("Back").foregroundColor(.blue)
                     }
                 }
