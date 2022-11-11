@@ -23,14 +23,14 @@ enum BackStackElementType {
 }
 
 struct BackStack {
-    var views = [BackStackElement]()
+    var elements = [BackStackElement]()
 
     var isEmpty: Bool {
-        views.isEmpty
+        elements.isEmpty
     }
 
     func peek() -> BackStackElement? {
-        views.last
+        elements.last
     }
 
     mutating func push(_ element: BackStackElement) {
@@ -38,7 +38,7 @@ struct BackStack {
             let error = "Duplicate identifier: \"\(element.id)\". You are trying to push a view with an identifier that already exists on the navigation stack."
             fatalError(error)
         }
-        views.append(element)
+        elements.append(element)
     }
 
     mutating func popToPrevious() {
@@ -49,10 +49,10 @@ struct BackStack {
     }
 
     mutating func popToPrevious(condition: (BackStackElement) -> Bool) {
-        guard !views.isEmpty else {
+        guard !elements.isEmpty else {
             return
         }
-        var elements = views
+        var elements = elements
         // Remove last view to go back to the previous one
         elements.removeLast()
         // Ignore the elements that user doesn't want to add to back stack
@@ -63,32 +63,32 @@ struct BackStack {
                 continue
             }
         }
-        views = elements
+        self.elements = elements
     }
 
     mutating func popToView(withId identifier: String) {
-        var elements = views
+        var elements = elements
         for view in elements.reversed() {
             if view.id == identifier {
                 break
             }
             elements.removeLast()
         }
-        views = elements
+        self.elements = elements
     }
 
     mutating func popToRoot() {
-        views.removeAll()
+        elements.removeAll()
     }
 
     private func currentElement(withId id: String) -> BackStackElement? {
-        views.first {
+        elements.first {
             $0.id == id
         }
     }
 
     private var lastElementAddedToBackStack: BackStackElement? {
-        views.last {
+        elements.last {
             $0.addToBackStack
         }
     }

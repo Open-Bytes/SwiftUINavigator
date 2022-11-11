@@ -15,7 +15,6 @@ public class NavManager: ObservableObject {
     let transition: NavTransition
     var lastNavigationType = NavigationDirection.pop
     let easeAnimation: Animation
-    @Published var currentView: BackStackElement?
     private var root: NavManager?
     private var showDefaultNavBar: Bool = true
 
@@ -23,8 +22,7 @@ public class NavManager: ObservableObject {
 
     private var backStack = BackStack() {
         didSet {
-            currentView = backStack.peek()
-            stackItems = backStack.views
+            stackItems = backStack.elements
         }
     }
 
