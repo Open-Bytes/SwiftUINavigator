@@ -4,7 +4,7 @@
 
 import SwiftUI
 
-enum ConfirmationDialogVisibility: Hashable, CaseIterable {
+public enum ConfirmationDialogVisibility: Hashable, CaseIterable {
     case automatic
     case visible
     case hidden

@@ -7,37 +7,39 @@ import SwiftUI
 /// DismissLink is a view which dismisses the current view when tapped.
 /// It's a wapper for `Navigator.dismiss()`
 public struct DismissLink<Label: View>: View {
-    private let destination: DismissDestination
+    private let type: DismissType
     private let label: () -> Label
     @EnvironmentObject private var navigator: Navigator
 
     public init(
-            to destination: DismissDestination = .previous,
+            type: DismissType = .toPreviousView,
             label: @escaping () -> Label) {
-        self.destination = destination
+        self.type = type
         self.label = label
     }
 
     public var body: some View {
         label()
                 .onTapGesture {
-                    navigator.dismiss(to: destination)
+                    navigator.dismiss(type: type)
                 }
     }
 }
 
 /// Defines the type of dismiss operation.
-public enum DismissDestination {
+public enum DismissType {
     /// Navigate back to the previous view.
-    case previous
+    case toPreviousView
 
     /// Navigate back to the root view (i.e. the first view added
     /// to the NavigatorView during the initialization process).
-    case root
+    case toRootView
 
     /// Navigate back to a view identified by a specific ID.
-    case view(withId: String)
+    case toView(withId: String)
 
     // Dismiss current presented sheet
-    case dismissSheet(type: DismissSheetType? = nil)
+    case sheet(type: DismissSheetType? = nil)
+
+    case dialog
 }

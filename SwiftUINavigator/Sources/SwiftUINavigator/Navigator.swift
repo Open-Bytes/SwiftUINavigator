@@ -86,8 +86,8 @@ public class Navigator: ObservableObject {
     /// If a sheet is displayed and there's no a view in its back stack,
     /// the sheet will be dismissed.
     /// - Parameter destination: the option for the view to dismiss to
-    public func dismiss(to destination: DismissDestination = .previous) {
-        manager.dismiss(to: destination)
+    public func dismiss(type: DismissType = .toPreviousView) {
+        manager.dismiss(type: type)
     }
 
 }

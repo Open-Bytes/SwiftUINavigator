@@ -76,9 +76,9 @@ public class NavManager: ObservableObject {
     }
 }
 
-extension NavManager {
+public extension NavManager {
 
-    public func navigate<Element: View>(
+    func navigate<Element: View>(
             _ element: Element,
             type: NavType,
             showDefaultNavBar: Bool?,
@@ -95,6 +95,8 @@ extension NavManager {
                     showDefaultNavBar: showDefaultNavBar ?? false,
                     onDismiss: nil,
                     content: { element })
+        case .dialog(let dismissOnTouchOutside):
+            presentDialog(dismissOnTouchOutside: dismissOnTouchOutside, element.eraseToAnyView())
         }
     }
 
@@ -112,9 +114,9 @@ extension NavManager {
 
 }
 
-extension NavManager {
+public extension NavManager {
 
-    public func push<Element: View>(
+    func push<Element: View>(
             _ element: Element,
             withId identifier: String?,
             addToBackStack: Bool,
@@ -150,7 +152,7 @@ extension NavManager {
 
 // MARK:- ConfirmationDialog
 
-extension NavManager {
+public extension NavManager {
 
     func presentConfirmationDialog(
             titleKey: LocalizedStringKey,
@@ -170,7 +172,7 @@ extension NavManager {
 
 // MARK:- ActionSheet
 
-extension NavManager {
+public extension NavManager {
 
     @available(macOS, unavailable)
     func presentActionSheet(_ sheet: ActionSheet) {
@@ -186,7 +188,7 @@ extension NavManager {
 
 // MARK:- Alert
 
-extension NavManager {
+public extension NavManager {
 
     func presentAlert(_ alert: Alert) {
         alertManager.present(alert)
@@ -200,10 +202,10 @@ extension NavManager {
 
 // MARK:- Dialog
 
-extension NavManager {
+public extension NavManager {
 
-    func presentDialog(dismissOnTouchOutside: Bool , _ alert: AnyView) {
-        dialogManager.present(dismissOnTouchOutside: dismissOnTouchOutside, alert)
+    func presentDialog(dismissOnTouchOutside: Bool, _ dialog: AnyView) {
+        dialogManager.present(dismissOnTouchOutside: dismissOnTouchOutside, dialog)
     }
 
     func dismissDialog() {
@@ -212,13 +214,13 @@ extension NavManager {
 
 }
 
-extension NavManager {
+public extension NavManager {
 
-    public func dismissSheet(type: DismissSheetType?) {
+    func dismissSheet(type: DismissSheetType?) {
         root?.sheetManager.dismissSheet(type: type)
     }
 
-    public func dismiss(to destination: DismissDestination) {
+    func dismiss(type: DismissType) {
         lastNavigationType = .pop
 
         if backStack.isEmpty {
@@ -227,15 +229,17 @@ extension NavManager {
         }
 
         withAnimation(easeAnimation) {
-            switch destination {
-            case .root:
+            switch type {
+            case .toRootView:
                 backStack.popToRoot()
-            case .view(let viewId):
+            case .toView(let viewId):
                 backStack.popToView(withId: viewId)
-            case .previous:
+            case .toPreviousView:
                 backStack.popToPrevious()
-            case .dismissSheet(let type):
+            case .sheet(let type):
                 dismissSheet(type: type)
+            case .dialog:
+                dismissDialog()
             }
         }
     }
