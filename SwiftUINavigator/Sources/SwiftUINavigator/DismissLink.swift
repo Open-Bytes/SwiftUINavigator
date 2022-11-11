@@ -42,4 +42,16 @@ public enum DismissType {
     case sheet(type: DismissSheetType? = nil)
 
     case dialog
+
+    var isStackDismiss: Bool {
+        switch self {
+        case .toPreviousView,
+             .toRootView,
+             .toView:
+            return true
+        case .sheet,
+             .dialog:
+            return false
+        }
+    }
 }

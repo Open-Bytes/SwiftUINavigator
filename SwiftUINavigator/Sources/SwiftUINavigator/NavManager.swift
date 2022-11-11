@@ -77,14 +77,14 @@ public class NavManager: ObservableObject {
 
     convenience init(
             root: NavManager? = nil,
-         easeAnimation: Animation,
-         showDefaultNavBar: Bool,
-         transition: NavTransition,
-         sheetManager: SheetManager,
-         actionSheetManager: ActionSheetManager,
-         confirmationDialogManager: ConfirmationDialogManager,
-         alertManager: AlertManager,
-         dialogManager: DialogManager
+            easeAnimation: Animation,
+            showDefaultNavBar: Bool,
+            transition: NavTransition,
+            sheetManager: SheetManager,
+            actionSheetManager: ActionSheetManager,
+            confirmationDialogManager: ConfirmationDialogManager,
+            alertManager: AlertManager,
+            dialogManager: DialogManager
     ) {
         self.init(root: root,
                 easeAnimation: easeAnimation,
@@ -246,19 +246,19 @@ public extension NavManager {
     func dismiss(type: DismissType) {
         lastNavigationType = .pop
 
-        if backStack.isEmpty {
+        if type.isStackDismiss, backStack.isEmpty {
             dismissSheet(type: nil)
             return
         }
 
         withAnimation(easeAnimation) {
             switch type {
+            case .toPreviousView:
+                backStack.popToPrevious()
             case .toRootView:
                 backStack.popToRoot()
             case .toView(let viewId):
                 backStack.popToView(withId: viewId)
-            case .toPreviousView:
-                backStack.popToPrevious()
             case .sheet(let type):
                 dismissSheet(type: type)
             case .dialog:

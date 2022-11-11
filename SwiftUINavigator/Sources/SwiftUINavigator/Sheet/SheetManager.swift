@@ -78,6 +78,8 @@ extension SheetManager {
                     height: height,
                     showDefaultNavBar: showDefaultNavBar)
             #endif
+
+            #if os(iOS)
         case .full:
             if #available(iOS 14.0, *) {
                 presentSheet(
@@ -87,6 +89,8 @@ extension SheetManager {
                         height: nil,
                         showDefaultNavBar: showDefaultNavBar)
             }
+            #endif
+
         case .fixedHeight:
             presentSheet(
                     content(),
@@ -113,8 +117,12 @@ extension SheetManager {
         switch type {
         case .normal:
             presentSheet = true
+
+            #if os(iOS)
         case .full:
             presentFullSheet = true
+            #endif
+
             #if os(iOS)
         case let .fixedHeight(type, isDismissable, presenter):
             fixedSheetPresenter = presenter.controller
@@ -130,9 +138,7 @@ extension SheetManager {
             height: CGFloat,
             isDismissable: Bool,
             presenter: FixedSheetPresenter) {
-        #if os(macOS)
         presentFixedHeightSheet = true
-        #else
         withAnimation(easeAnimation) {
             presentSheetController(
                     presenter: presenter,
@@ -140,7 +146,6 @@ extension SheetManager {
                     content: sheet?.frame(height: height)
             )
         }
-        #endif
     }
 
     private func sheetView<Content: View>(

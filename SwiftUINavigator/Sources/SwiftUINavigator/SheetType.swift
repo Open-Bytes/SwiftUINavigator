@@ -10,8 +10,12 @@ public enum SheetType {
     #else
     case normal
     #endif
+
+    #if os(iOS)
     @available(iOS 14.0, *)
     case full
+    #endif
+
     @available(macOS, unavailable)
     case fixedHeight(
             FixedHeightType,

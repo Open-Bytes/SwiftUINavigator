@@ -80,7 +80,7 @@
 		F243D94C2779C64D00CD9FB5 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = F243D93C2779C64D00CD9FB5 /* Cart.swift */; };
 		F2EA001E2787630A00482152 /* SwiftUINavigator.docc in Sources */ = {isa = PBXBuildFile; fileRef = F2EA001D2787630A00482152 /* SwiftUINavigator.docc */; };
 		F2EA00242787630A00482152 /* SwiftUINavigator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2EA001A2787630900482152 /* SwiftUINavigator.framework */; };
-		F2EA002B2787630A00482152 /* SwiftUINavigatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA002A2787630A00482152 /* SwiftUINavigatorTests.swift */; };
+		F2EA002B2787630A00482152 /* NavManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2EA002A2787630A00482152 /* NavManagerTests.swift */; };
 		F2EA002C2787630A00482152 /* SwiftUINavigator.h in Headers */ = {isa = PBXBuildFile; fileRef = F2EA001C2787630A00482152 /* SwiftUINavigator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F2EA002F2787630A00482152 /* SwiftUINavigator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2EA001A2787630900482152 /* SwiftUINavigator.framework */; };
 		F2EA00302787630A00482152 /* SwiftUINavigator.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F2EA001A2787630900482152 /* SwiftUINavigator.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -230,7 +230,7 @@
 		F2EA001C2787630A00482152 /* SwiftUINavigator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftUINavigator.h; sourceTree = "<group>"; };
 		F2EA001D2787630A00482152 /* SwiftUINavigator.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = SwiftUINavigator.docc; sourceTree = "<group>"; };
 		F2EA00232787630A00482152 /* SwiftUINavigatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftUINavigatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F2EA002A2787630A00482152 /* SwiftUINavigatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUINavigatorTests.swift; sourceTree = "<group>"; };
+		F2EA002A2787630A00482152 /* NavManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavManagerTests.swift; sourceTree = "<group>"; };
 		F2EA00392787667D00482152 /* BackStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackStack.swift; sourceTree = "<group>"; };
 		F2EA003B2787667D00482152 /* NavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBar.swift; sourceTree = "<group>"; };
 		F2EA003C2787667D00482152 /* LargeNavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargeNavBar.swift; sourceTree = "<group>"; };
@@ -561,7 +561,7 @@
 		F2EA00292787630A00482152 /* SwiftUINavigatorTests */ = {
 			isa = PBXGroup;
 			children = (
-				F2EA002A2787630A00482152 /* SwiftUINavigatorTests.swift */,
+				F2EA002A2787630A00482152 /* NavManagerTests.swift */,
 			);
 			path = SwiftUINavigatorTests;
 			sourceTree = "<group>";
@@ -954,7 +954,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2EA002B2787630A00482152 /* SwiftUINavigatorTests.swift in Sources */,
+				F2EA002B2787630A00482152 /* NavManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1385,6 +1385,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XKJKXVFT76;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1409,6 +1410,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = XKJKXVFT76;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (

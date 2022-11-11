@@ -55,7 +55,7 @@ public struct NavView<Root>: View where Root: View {
                 }
                 .modifier(
                         FullScreenCoverModifier(isPresented: $manager.sheetManager.presentFullSheet) {
-                            manager.confirmationDialogManager.content?.eraseToAnyView()
+                            manager.sheetManager.sheet?.eraseToAnyView()
                         }
                 )
                 .modifier(
