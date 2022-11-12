@@ -17,7 +17,7 @@ public struct NavView<Root>: View where Root: View {
     ///   - rootView: The very first view in the Navigation.
     public init(
             transition: NavTransition = .default,
-            easeAnimation: Animation = .easeOut(duration: 0.2),
+            easeAnimation: Animation = .easeOut,
             showDefaultNavBar: Bool = true,
             @ViewBuilder rootView: () -> Root) {
         let options = NavViewOptions(

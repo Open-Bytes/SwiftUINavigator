@@ -5,7 +5,7 @@
 import SwiftUI
 
 struct NavViewOptions {
-    var easeAnimation: Animation = .easeOut(duration: 0.01)
+    var easeAnimation: Animation = .easeOut
     var transition: NavTransition = .default
     var showDefaultNavBar: Bool = true
 }
