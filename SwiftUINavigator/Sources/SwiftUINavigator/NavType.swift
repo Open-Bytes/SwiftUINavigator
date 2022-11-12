@@ -9,7 +9,7 @@ public enum NavType {
     /// id: pass a custom ID to use when navigate back.
     /// addToBackStack: if false, the view won't be added to the back stack
     /// and won't be displayed when dismissing the view.
-    case push(id: String? = nil, addToBackStack: Bool = true)
+    case push(id: String? = nil, addToBackStack: Bool = true, showDefaultNavBar: Bool? = nil)
     /// Present a sheet
     case sheet(type: SheetType)
     case dialog(dismissOnTouchOutside: Bool = true)

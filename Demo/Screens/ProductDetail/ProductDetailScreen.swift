@@ -147,7 +147,7 @@ struct ProductDetailScreen: View {
     }
 
     private func navigateToCartScreen() {
-        navigator.navigate(showDefaultNavBar: true) {
+        navigator.navigate {
             CartScreen()
         }
     }

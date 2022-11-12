@@ -56,7 +56,6 @@ extension SheetManager {
 
     func presentSheet<Content: View>(
             type: SheetType,
-            showDefaultNavBar: Bool,
             onDismiss: (() -> Void)?,
             content: () -> Content) {
         onDismissSheet = onDismiss
@@ -67,16 +66,14 @@ extension SheetManager {
                     content(),
                     type: type,
                     width: nil,
-                    height: nil,
-                    showDefaultNavBar: showDefaultNavBar)
+                    height: nil)
             #else
         case let .normal(width, height):
             presentSheet(
                     content(),
                     type: type,
                     width: width,
-                    height: height,
-                    showDefaultNavBar: showDefaultNavBar)
+                    height: height)
             #endif
 
             #if os(iOS)
@@ -86,8 +83,7 @@ extension SheetManager {
                         content(),
                         type: type,
                         width: nil,
-                        height: nil,
-                        showDefaultNavBar: showDefaultNavBar)
+                        height: nil)
             }
             #endif
 
@@ -96,8 +92,7 @@ extension SheetManager {
                     content(),
                     type: type,
                     width: nil,
-                    height: nil,
-                    showDefaultNavBar: showDefaultNavBar)
+                    height: nil)
         }
     }
 
@@ -105,13 +100,11 @@ extension SheetManager {
             _ content: Content,
             type: SheetType,
             width: CGFloat?,
-            height: CGFloat?,
-            showDefaultNavBar: Bool) {
+            height: CGFloat?) {
         sheet = sheetView(
                 content,
                 width: width,
-                height: height,
-                showDefaultNavBar: showDefaultNavBar
+                height: height
         ).eraseToAnyView()
 
         switch type {
@@ -151,25 +144,23 @@ extension SheetManager {
     private func sheetView<Content: View>(
             _ content: Content,
             width: CGFloat?,
-            height: CGFloat?,
-            showDefaultNavBar: Bool) -> some View {
+            height: CGFloat?) -> some View {
         let manager = NavManager(
                 root: navManager,
                 easeAnimation: easeAnimation,
-                showDefaultNavBar: showDefaultNavBar,
+                showDefaultNavBar: false,
                 transition: transition)
         let navigator = Navigator.instance(
                 manager: manager,
                 easeAnimation: easeAnimation,
-                showDefaultNavBar: showDefaultNavBar,
+                showDefaultNavBar: false,
                 transition: transition)
         let content = NavView(
                 navigator: navigator,
-                showDefaultNavBar: showDefaultNavBar,
+                showDefaultNavBar: false,
                 rootView: { content }
         )
-        return navManager.addNavBar(content, showDefaultNavBar: showDefaultNavBar)
-                .environmentObject(navigator)
+        return content.environmentObject(navigator)
                 .frame(width: width, height: height)
     }
 

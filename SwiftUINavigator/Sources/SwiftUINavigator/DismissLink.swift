@@ -32,7 +32,7 @@ public enum DismissType {
     case toPreviousView
 
     /// Navigate back to the root view (i.e. the first view added
-    /// to the NavigatorView during the initialization process).
+    /// to the NavView during the initialization process).
     case toRootView
 
     /// Navigate back to a view identified by a specific ID.

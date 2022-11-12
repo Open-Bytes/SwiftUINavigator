@@ -102,10 +102,9 @@ public extension NavManager {
     func navigate<Element: View>(
             _ element: Element,
             type: NavType,
-            showDefaultNavBar: Bool?,
             onDismissSheet: (() -> Void)?) {
         switch type {
-        case let .push(id, addToBackStack):
+        case let .push(id, addToBackStack, showDefaultNavBar):
             push(
                     element, withId: id,
                     addToBackStack: addToBackStack,
@@ -113,7 +112,6 @@ public extension NavManager {
         case .sheet(let type):
             sheetManager.presentSheet(
                     type: type,
-                    showDefaultNavBar: showDefaultNavBar ?? false,
                     onDismiss: nil,
                     content: { element })
         case .dialog(let dismissOnTouchOutside):
@@ -123,12 +121,10 @@ public extension NavManager {
 
     func presentSheet<Content: View>(
             type: SheetType,
-            showDefaultNavBar: Bool,
             onDismiss: (() -> Void)?,
             content: () -> Content) {
         sheetManager.presentSheet(
                 type: type,
-                showDefaultNavBar: showDefaultNavBar,
                 onDismiss: onDismiss,
                 content: content)
     }

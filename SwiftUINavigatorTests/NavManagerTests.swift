@@ -53,7 +53,6 @@ class NavManagerTests: XCTestCase {
         manager.navigate(
                 EmptyView(),
                 type: .push(),
-                showDefaultNavBar: true,
                 onDismissSheet: {})
         XCTAssertFalse(manager.stackItems.isEmpty)
     }
@@ -62,7 +61,6 @@ class NavManagerTests: XCTestCase {
         manager.navigate(
                 EmptyView(),
                 type: .sheet(type: .normal),
-                showDefaultNavBar: true,
                 onDismissSheet: {})
         XCTAssertTrue(sheetManager.presentSheet)
     }
@@ -71,7 +69,6 @@ class NavManagerTests: XCTestCase {
         manager.navigate(
                 EmptyView(),
                 type: .sheet(type: .full),
-                showDefaultNavBar: true,
                 onDismissSheet: {})
         XCTAssertTrue(sheetManager.presentFullSheet)
     }
@@ -80,7 +77,6 @@ class NavManagerTests: XCTestCase {
         manager.navigate(
                 EmptyView(),
                 type: .sheet(type: .fixedHeight(.value(0))),
-                showDefaultNavBar: true,
                 onDismissSheet: {})
         XCTAssertTrue(sheetManager.presentFixedHeightSheet)
     }
@@ -89,7 +85,6 @@ class NavManagerTests: XCTestCase {
         manager.navigate(
                 EmptyView(),
                 type: .dialog(),
-                showDefaultNavBar: true,
                 onDismissSheet: {})
         XCTAssertTrue(dialogManager.isPresented)
     }
@@ -97,7 +92,6 @@ class NavManagerTests: XCTestCase {
     func testPresentSheet() throws {
         manager.presentSheet(
                 type: .normal,
-                showDefaultNavBar: true,
                 onDismiss: {}) {
             EmptyView()
         }

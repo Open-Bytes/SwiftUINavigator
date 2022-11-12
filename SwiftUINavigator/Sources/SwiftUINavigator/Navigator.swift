@@ -27,18 +27,15 @@ public class Navigator: ObservableObject {
     /// Navigates to a view.
     /// - Parameters:
     ///   - type: the type of navigation
-    ///   - showDefaultNavBar: if false, no nav bar will be displayed.
     ///   - onDismissSheet: called when dismissed
     ///   - element: the view
     public func navigate<Element: View>(
             type: NavType = .push(),
-            showDefaultNavBar: Bool? = nil,
             onDismissSheet: (() -> Void)? = nil,
             _ element: () -> Element) {
         manager.navigate(
                 element(),
                 type: type,
-                showDefaultNavBar: showDefaultNavBar,
                 onDismissSheet: onDismissSheet)
     }
 
@@ -62,17 +59,14 @@ public class Navigator: ObservableObject {
     /// Present a sheet
     /// - Parameters:
     ///   - type: the type of the sheet.
-    ///   - showDefaultNavBar: if false, no nav bar will be displayed.
     ///   - onDismiss: called when dismissed.
     ///   - content: the view.
     public func presentSheet<Content: View>(
             type: SheetType,
-            showDefaultNavBar: Bool = false,
             onDismiss: (() -> Void)? = nil,
             content: () -> Content) {
         manager.presentSheet(
                 type: type,
-                showDefaultNavBar: showDefaultNavBar,
                 onDismiss: onDismiss,
                 content: content)
     }

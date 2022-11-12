@@ -140,7 +140,6 @@ struct HomeScreen: View {
                 NavLink(
                         destination: ProductDetailScreen(item: item),
                         type: vm.navigationOption,
-                        showDefaultNavBar: true,
                         onDismissSheet: {
                             print("Sheet dismissed.")
                         }) {

@@ -9,7 +9,7 @@ import SwiftUI
 /// the navigation
 public struct NavView<Root>: View where Root: View {
     private let navView: NavViewContent<Root>
-    /// Creates a NavigatorView.
+    /// Creates a NavView.
     /// - Parameters:
     ///   - transition: The type of transition to apply between views in every push and pop operation.
     ///   - easeAnimation: The easing function to apply to every push and pop operation.
@@ -33,7 +33,6 @@ public struct NavView<Root>: View where Root: View {
             @ViewBuilder rootView: () -> Root) {
         navView = NavViewContent(
                 navigator: navigator,
-                showDefaultNavBar: showDefaultNavBar,
                 rootView: rootView)
     }
 
@@ -47,12 +46,6 @@ struct NavViewContent<Root>: View where Root: View {
     private var navigator: Navigator
     private let rootView: Root
 
-    /// Creates a NavigatorView.
-    /// - Parameters:
-    ///   - transition: The type of transition to apply between views in every push and pop operation.
-    ///   - easeAnimation: The easing function to apply to every push and pop operation.
-    ///   - showDefaultNavBar: if false, no nav bar will be displayed.
-    ///   - rootView: The very first view in the Navigation.
     init(
             transition: NavTransition = .default,
             easeAnimation: Animation = .easeOut(duration: 0.01),
@@ -62,15 +55,10 @@ struct NavViewContent<Root>: View where Root: View {
                 easeAnimation: easeAnimation,
                 showDefaultNavBar: showDefaultNavBar,
                 transition: transition)
-        self.init(navigator: navigator,
-                showDefaultNavBar: showDefaultNavBar,
-                rootView: rootView)
+        self.init(navigator: navigator, rootView: rootView)
     }
 
-    init(
-            navigator: Navigator,
-            showDefaultNavBar: Bool,
-            @ViewBuilder rootView: () -> Root) {
+    init(navigator: Navigator, @ViewBuilder rootView: () -> Root) {
         self.navigator = navigator
         manager = navigator.manager
         self.rootView = rootView()

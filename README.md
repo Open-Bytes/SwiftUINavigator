@@ -34,7 +34,7 @@ The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/Mhmo
   - [Swift Package Manager Projects](#swift-package-manager-projects)
 - [Usage](#zap-usage)
     - [Main Components](#main-components)
-    - [NavigatorView](#navigatorview)
+    - [NavView](#NavView)
     - [Navigator](#navigator)
     - [NavigatorLink](#navigatorlink)
     - [Dismissing (Navigation Back)](#dismissing-navigation-back)
@@ -143,16 +143,16 @@ Then simply `import SwiftUINavigator` wherever you’d like to use the library.
 import SwiftUINavigator
 ```
 
-2. Declare `NavigatorView` in the root view of the app.
+2. Declare `NavView` in the root view of the app.
 
 ```swift
-NavigatorView {
+NavView {
     HomeScreen()
 }
 ```
 
-> `NavigatorView` supports transition animations and other options.
-> See [NavigatorView](#navigatorview)
+> `NavView` supports transition animations and other options.
+> See [NavView](#NavView)
 
 3. Navigate to your destination view:
 
@@ -205,14 +205,14 @@ DismissLink {
 
 |               **Component**               |                                                                        **Description**                                                                                                                             | 
 | ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
-|       [NavigatorView](#navigatorview)     |   `NavigatorView` is the alternative of SwiftUI NavigationView implementing <br> stack-based navigation with more control and flexibility <br> in handling the navigation                                          | 
+|       [NavView](#NavView)     |   `NavView` is the alternative of SwiftUI NavigationView implementing <br> stack-based navigation with more control and flexibility <br> in handling the navigation                                          | 
 |       [Navigator](#navigator)             |   The `Navigator` class is the heart of the library as it includes all the navigation APIs. It's injected to any view as `EnvironmentObject`.                                                                                                             | 
 |       [NavigatorLink](#navigatorlink)     |   The alternative of `NavigationLink`. It's a wrapper of Navigator. <br> When clicked, it will navigate to the destination view with the specified navigation type.                                                  | 
 |       [DismissLink](https://github.com/Open-Bytes/SwiftUINavigator/blob/master/SwiftUINavigator/Sources/SwiftUINavigator/DismissLink.swift)  |   DismissLink is a view which dismisses the current view when tapped. It's a wapper for `Navigator.dismiss()`   | 
 
-### NavigatorView
+### NavView
 
-`NavigatorView` is the alternative of SwiftUI NavigationView implementing stack-based navigation with more control and
+`NavView` is the alternative of SwiftUI NavigationView implementing stack-based navigation with more control and
 flexibility in handling the navigation
 
 #### The public initializers
@@ -228,7 +228,7 @@ public init(
 As you can see, you can customize the `transition` animation, `easeAnimation` and automatic navigation bar.
 
 ```swift
-NavigatorView(
+NavView(
         transition: .custom(push: .scale, pop: .slide),
         easeAnimation: .easeInOut) {
     HomeScreen()
@@ -288,7 +288,7 @@ navigator.navigate(type: .fullSheet) {
 4. Present a custom sheet
 
 ```swift
-navigator.navigate(type: .customSheet(height: 500), showDefaultNavBar: true) {
+navigator.navigate(type: .customSheet(height: 500)) {
     CartScreen()
 }
 ```
@@ -345,7 +345,7 @@ public enum DismissDestination {
     case previous
 
     /// Navigate back to the root view (i.e. the first view added
-    /// to the NavigatorView during the initialization process).
+    /// to the NavView during the initialization process).
     case root
 
     /// Navigate back to a view identified by a specific ID.
@@ -387,26 +387,22 @@ for automatically showing the navigation bar
 #### Control Nav Bar For All Views
 
 ```swift
-NavigatorView(showDefaultNavBar: false)
+NavView(showDefaultNavBar: false)
 ```
 
 #### Control Nav Bar For a Single View
 
 ```swift
-navigator.navigate(showDefaultNavBar: false) {
+navigator.navigate(type: .push(showDefaultNavBar: false)) {
     SomeView()
 }
 
 navigator.push(showDefaultNavBar: false) {
     SomeView()
 }
-
-navigator.presentSheet(type: .normal, showDefaultNavBar: false) {
-    SomeView()
-}
 ```
 
-> Note: The option you select for a single view overrides the selected option in `NavigatorView`
+> Note: The option you select for a single view overrides the selected option in `NavView`
 
 In case you need a custom nav bar, you can disable the automatic one and implement your own one or use the built-in with
 your customizations
@@ -428,7 +424,7 @@ SomeView()
 You can customize the transition animation by providing `NavigatorTransition` enum.
 
 ```swift
-NavigatorView(transition: .custom(push: .scale)) {
+NavView(transition: .custom(push: .scale)) {
     SomeView()
 }
 ```
