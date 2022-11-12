@@ -27,8 +27,9 @@ class SheetController<Content>: UIHostingController<Content> where Content: View
                 delay: 0.0,
                 options: .curveEaseOut,
                 animations: {
-                    self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
-                }, completion: nil)
+                    self.view.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+                },
+                completion: nil)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -38,7 +39,8 @@ class SheetController<Content>: UIHostingController<Content> where Content: View
                 options: .curveEaseOut,
                 animations: {
                     self.view.backgroundColor = UIColor.black.withAlphaComponent(0.0)
-                }, completion: nil)
+                },
+                completion: nil)
     }
 }
 #endif
