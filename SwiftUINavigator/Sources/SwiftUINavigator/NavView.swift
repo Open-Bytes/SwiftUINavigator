@@ -92,19 +92,22 @@ struct NavViewContent<Root>: View where Root: View {
 
     private func Content() -> some View {
         Group {
+            let transition = manager.navigationType == .push ?
+                    manager.options.transition.transition.push :
+                    manager.options.transition.transition.pop
             if let item = manager.stackItems.last {
                 item.wrappedElement
                         .id(item.id)
                         .background(Color.white.edgesIgnoringSafeArea(.all))
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .transition(transition)
 
             } else {
                 rootView.id("ROOT")
+                        .transition(transition)
             }
         }
-                .transition(manager.lastNavigationType == .push ?
-                        manager.options.transition.transition.push :
-                        manager.options.transition.transition.pop)
+
     }
 
 }

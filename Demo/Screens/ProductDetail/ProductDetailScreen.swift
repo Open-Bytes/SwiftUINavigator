@@ -195,7 +195,7 @@ struct ProductDetailScreen: View {
 
     private func ReviewsView() -> some View {
         VStack {
-            ForEach(item.reviews.indices) { i in
+            ForEach(item.reviews.indices, id: \.self) { i in
                 HStack {
                     Text("\(item.reviews[i].name)")
                             .font(Font.system(size: 17, weight: .semibold, design: .rounded))
@@ -207,6 +207,15 @@ struct ProductDetailScreen: View {
                 }
                 Text("\(item.reviews[i].content)")
             }
+        }
+    }
+}
+
+extension ProductDetailScreen {
+
+    static func build(item: Product) -> some View {
+        Group {
+            ProductDetailScreen(item: item)
         }
     }
 }

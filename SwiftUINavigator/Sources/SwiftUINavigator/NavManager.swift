@@ -12,7 +12,27 @@ typealias CancelableBag = Set<AnyCancellable>
 
 class NavManager: ObservableObject {
     private var bag: CancelableBag = CancelableBag()
-    var lastNavigationType = NavigationDirection.pop
+    @Published var navigationType = NavigationDirection.none {
+        didSet {
+            print("navigationType: \(navigationType)")
+        }
+    }
+    var lastNavigationType: NavigationDirection {
+        get {
+            navigationType
+        }
+        set(newValue) {
+//            switch newValue {
+//            case .push:
+//                navigationType = .pop
+//            case .pop:
+//                navigationType = .push
+//            case .none:
+//                break
+//            }
+            navigationType = newValue
+        }
+    }
     private var root: NavManager?
     let options: NavViewOptions
 

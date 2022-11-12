@@ -138,7 +138,7 @@ struct HomeScreen: View {
         VStack(alignment: .center, spacing: 8) {
             ForEach(items, id: \.uuid) { item in
                 NavLink(
-                        destination: ProductDetailScreen(item: item),
+                        destination: ProductDetailScreen.build(item: item),
                         type: vm.navigationOption,
                         onDismissSheet: {
                             print("Sheet dismissed.")
