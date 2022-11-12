@@ -20,20 +20,12 @@ public struct NavView<Root>: View where Root: View {
             easeAnimation: Animation = .easeOut(duration: 0.2),
             showDefaultNavBar: Bool = true,
             @ViewBuilder rootView: () -> Root) {
-        navView = NavViewContent(
-                transition: transition,
+        let options = NavViewOptions(
                 easeAnimation: easeAnimation,
-                showDefaultNavBar: showDefaultNavBar,
-                rootView: rootView)
-    }
-
-    init(
-            navigator: Navigator,
-            showDefaultNavBar: Bool,
-            @ViewBuilder rootView: () -> Root) {
-        navView = NavViewContent(
-                navigator: navigator,
-                rootView: rootView)
+                transition: transition,
+                showDefaultNavBar: showDefaultNavBar
+        )
+        navView = NavBuilder.navViewContent(options: options, content: rootView)
     }
 
     public var body: some View {
@@ -46,21 +38,11 @@ struct NavViewContent<Root>: View where Root: View {
     private var navigator: Navigator
     private let rootView: Root
 
-    init(
-            transition: NavTransition = .default,
-            easeAnimation: Animation = .easeOut(duration: 0.01),
-            showDefaultNavBar: Bool = true,
-            @ViewBuilder rootView: () -> Root) {
-        let navigator = Navigator.instance(
-                easeAnimation: easeAnimation,
-                showDefaultNavBar: showDefaultNavBar,
-                transition: transition)
-        self.init(navigator: navigator, rootView: rootView)
-    }
-
-    init(navigator: Navigator, @ViewBuilder rootView: () -> Root) {
+    init(navigator: Navigator,
+         manager: NavManager,
+         @ViewBuilder rootView: () -> Root) {
         self.navigator = navigator
-        manager = navigator.manager
+        self.manager = manager
         self.rootView = rootView()
     }
 
@@ -121,8 +103,8 @@ struct NavViewContent<Root>: View where Root: View {
             }
         }
                 .transition(manager.lastNavigationType == .push ?
-                        manager.transition.transition.push :
-                        manager.transition.transition.pop)
+                        manager.options.transition.transition.push :
+                        manager.options.transition.transition.pop)
     }
 
 }

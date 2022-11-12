@@ -7,21 +7,8 @@ import SwiftUI
 public class Navigator: ObservableObject {
     let manager: NavManager
 
-    public init(manager: NavManager) {
+    init(manager: NavManager) {
         self.manager = manager
-    }
-
-    static func instance(
-            manager: NavManager? = nil,
-            easeAnimation: Animation,
-            showDefaultNavBar: Bool,
-            transition: NavTransition
-    ) -> Navigator {
-        let manager = manager ?? NavManager(
-                easeAnimation: easeAnimation,
-                showDefaultNavBar: showDefaultNavBar,
-                transition: transition)
-        return Navigator(manager: manager)
     }
 
     /// Navigates to a view.

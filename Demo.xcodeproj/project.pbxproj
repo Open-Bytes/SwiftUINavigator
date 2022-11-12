@@ -51,6 +51,7 @@
 		58B836091808AA3C8834B2D6 /* SheetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B83F60BD32796B977087D5 /* SheetType.swift */; };
 		58B836F257E067E1F1C00557 /* ActionSheetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B838C279F96B1C84B105CD /* ActionSheetManager.swift */; };
 		58B838FDA5131796C038E8A9 /* AnyTransition+BottomUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B83549D9D6CB865EF24140 /* AnyTransition+BottomUp.swift */; };
+		58B839ED21F271DE7C5204D3 /* NavBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B832AD4D71812408D293A9 /* NavBuilder.swift */; };
 		58B83AED77003852352F8940 /* FullScreenCoverModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B83F8C1D08BE9F1EA9501B /* FullScreenCoverModifier.swift */; };
 		58B83BCE4B0A9F4C1C3C85F8 /* UIApplication+TopController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B8339A32023514A96A4824 /* UIApplication+TopController.swift */; };
 		58B83BDAEB7E6F1CC2D3F6F3 /* HomeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B8301E7C5E165FB0A6C04B /* HomeVM.swift */; };
@@ -188,6 +189,7 @@
 		58B8301E7C5E165FB0A6C04B /* HomeVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeVM.swift; sourceTree = "<group>"; };
 		58B831CE4656CFCC8221FB7B /* SheetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetManager.swift; sourceTree = "<group>"; };
 		58B832288582F66A2A421456 /* ScreenSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
+		58B832AD4D71812408D293A9 /* NavBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavBuilder.swift; sourceTree = "<group>"; };
 		58B83318BB8D781203117109 /* ChipGroupType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChipGroupType.swift; sourceTree = "<group>"; };
 		58B833671FC3D02F05FC3E1A /* AlertModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertModifier.swift; sourceTree = "<group>"; };
 		58B8339A32023514A96A4824 /* UIApplication+TopController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+TopController.swift"; sourceTree = "<group>"; };
@@ -584,6 +586,7 @@
 				58B83F60BD32796B977087D5 /* SheetType.swift */,
 				58B8327C4E2FD74AFBAB193D /* Alert */,
 				58B83413838EC3B7F773DC46 /* Dialog */,
+				58B832AD4D71812408D293A9 /* NavBuilder.swift */,
 			);
 			name = SwiftUINavigator;
 			path = Sources/SwiftUINavigator;
@@ -947,6 +950,7 @@
 				58B83400B5D2592C0455E602 /* ConfirmationDialogModifier.swift in Sources */,
 				58B83E93165B09FD7BA52BDC /* Dialog.swift in Sources */,
 				58B83D8946CCDB91FFC9193D /* DialogManager.swift in Sources */,
+				58B839ED21F271DE7C5204D3 /* NavBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

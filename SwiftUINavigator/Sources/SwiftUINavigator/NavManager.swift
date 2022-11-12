@@ -8,15 +8,13 @@
 import SwiftUI
 import Combine
 
-public typealias CancelableBag = Set<AnyCancellable>
+typealias CancelableBag = Set<AnyCancellable>
 
-public class NavManager: ObservableObject {
+class NavManager: ObservableObject {
     private var bag: CancelableBag = CancelableBag()
-    let transition: NavTransition
     var lastNavigationType = NavigationDirection.pop
-    let easeAnimation: Animation
     private var root: NavManager?
-    private var showDefaultNavBar: Bool = true
+    let options: NavViewOptions
 
     @Published var stackItems = [BackStackElement]()
 
@@ -26,20 +24,28 @@ public class NavManager: ObservableObject {
         }
     }
 
-    @Published var sheetManager = SheetManager()
-    @Published var actionSheetManager = ActionSheetManager()
-    @Published var confirmationDialogManager = ConfirmationDialogManager()
-    @Published var alertManager = AlertManager()
-    @Published var dialogManager = DialogManager()
+    @Published var sheetManager: SheetManager
+    @Published var actionSheetManager: ActionSheetManager
+    @Published var confirmationDialogManager: ConfirmationDialogManager
+    @Published var alertManager: AlertManager
+    @Published var dialogManager: DialogManager
 
-    public init(root: NavManager? = nil,
-                easeAnimation: Animation,
-                showDefaultNavBar: Bool,
-                transition: NavTransition) {
+    init(root: NavManager? = nil,
+         options: NavViewOptions,
+         sheetManager: SheetManager = SheetManager(),
+         actionSheetManager: ActionSheetManager = ActionSheetManager(),
+         confirmationDialogManager: ConfirmationDialogManager = ConfirmationDialogManager(),
+         alertManager: AlertManager = AlertManager(),
+         dialogManager: DialogManager = DialogManager()) {
         self.root = root
-        self.easeAnimation = easeAnimation
-        self.showDefaultNavBar = showDefaultNavBar
-        self.transition = transition
+        self.options = options
+
+        self.sheetManager = sheetManager
+        self.actionSheetManager = actionSheetManager
+        self.confirmationDialogManager = confirmationDialogManager
+        self.alertManager = alertManager
+        self.dialogManager = dialogManager
+
         sheetManager.navManager = self
 
         sheetManager.objectWillChange
@@ -72,32 +78,9 @@ public class NavManager: ObservableObject {
                 }
                 .store(in: &bag)
     }
-
-    convenience init(
-            root: NavManager? = nil,
-            easeAnimation: Animation,
-            showDefaultNavBar: Bool,
-            transition: NavTransition,
-            sheetManager: SheetManager,
-            actionSheetManager: ActionSheetManager,
-            confirmationDialogManager: ConfirmationDialogManager,
-            alertManager: AlertManager,
-            dialogManager: DialogManager
-    ) {
-        self.init(root: root,
-                easeAnimation: easeAnimation,
-                showDefaultNavBar: showDefaultNavBar,
-                transition: transition)
-        self.sheetManager = sheetManager
-        self.actionSheetManager = actionSheetManager
-        self.confirmationDialogManager = confirmationDialogManager
-        self.alertManager = alertManager
-        self.dialogManager = dialogManager
-    }
-
 }
 
-public extension NavManager {
+extension NavManager {
 
     func navigate<Element: View>(
             _ element: Element,
@@ -131,7 +114,7 @@ public extension NavManager {
 
 }
 
-public extension NavManager {
+extension NavManager {
 
     func push<Element: View>(
             _ element: Element,
@@ -147,7 +130,7 @@ public extension NavManager {
                 wrappedElement: view,
                 type: .screen,
                 addToBackStack: addToBackStack)
-        withAnimation(easeAnimation) {
+        withAnimation(options.easeAnimation) {
             backStack.push(element)
         }
     }
@@ -160,7 +143,7 @@ public extension NavManager {
 
     private func canShowDefaultNavBar(_ canShowInSingleView: Bool?) -> Bool {
         guard let canShowInSingleView = canShowInSingleView else {
-            return showDefaultNavBar
+            return options.showDefaultNavBar
         }
         return canShowInSingleView
     }
@@ -169,7 +152,7 @@ public extension NavManager {
 
 // MARK:- ConfirmationDialog
 
-public extension NavManager {
+extension NavManager {
 
     func presentConfirmationDialog(
             titleKey: LocalizedStringKey,
@@ -189,7 +172,7 @@ public extension NavManager {
 
 // MARK:- ActionSheet
 
-public extension NavManager {
+extension NavManager {
 
     @available(macOS, unavailable)
     func presentActionSheet(_ sheet: ActionSheet) {
@@ -205,7 +188,7 @@ public extension NavManager {
 
 // MARK:- Alert
 
-public extension NavManager {
+extension NavManager {
 
     func presentAlert(_ alert: Alert) {
         alertManager.present(alert)
@@ -219,7 +202,7 @@ public extension NavManager {
 
 // MARK:- Dialog
 
-public extension NavManager {
+extension NavManager {
 
     func presentDialog(dismissOnTouchOutside: Bool, _ dialog: AnyView) {
         dialogManager.present(dismissOnTouchOutside: dismissOnTouchOutside, dialog)
@@ -231,7 +214,7 @@ public extension NavManager {
 
 }
 
-public extension NavManager {
+extension NavManager {
 
     func dismissSheet(type: DismissSheetType?) {
         root?.sheetManager.dismissSheet(type: type)
@@ -245,7 +228,7 @@ public extension NavManager {
             return
         }
 
-        withAnimation(easeAnimation) {
+        withAnimation(options.easeAnimation) {
             switch type {
             case .toPreviousView:
                 backStack.popToPrevious()

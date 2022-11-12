@@ -5,12 +5,6 @@
 import SwiftUI
 
 class SheetManager: ObservableObject {
-    var easeAnimation: Animation {
-        navManager.easeAnimation
-    }
-    var transition: NavTransition {
-        navManager.transition
-    }
     var navManager: NavManager!
 
     @Published var presentSheet: Bool = false {
@@ -45,10 +39,6 @@ class SheetManager: ObservableObject {
     #if os(iOS)
     private var fixedSheetPresenter: UIViewController? = nil
     #endif
-
-}
-
-extension SheetManager {
 
 }
 
@@ -132,7 +122,7 @@ extension SheetManager {
             isDismissable: Bool,
             presenter: FixedSheetPresenter) {
         presentFixedHeightSheet = true
-        withAnimation(easeAnimation) {
+        withAnimation(navManager.options.easeAnimation) {
             presentSheetController(
                     presenter: presenter,
                     isDismissable: isDismissable,
@@ -145,23 +135,11 @@ extension SheetManager {
             _ content: Content,
             width: CGFloat?,
             height: CGFloat?) -> some View {
-        let manager = NavManager(
+        let navView = NavBuilder.navView(
                 root: navManager,
-                easeAnimation: easeAnimation,
-                showDefaultNavBar: false,
-                transition: transition)
-        let navigator = Navigator.instance(
-                manager: manager,
-                easeAnimation: easeAnimation,
-                showDefaultNavBar: false,
-                transition: transition)
-        let content = NavView(
-                navigator: navigator,
-                showDefaultNavBar: false,
-                rootView: { content }
-        )
-        return content.environmentObject(navigator)
-                .frame(width: width, height: height)
+                options: navManager.options,
+                content: content)
+        return navView.frame(width: width, height: height)
     }
 
     func dismissSheet(type: DismissSheetType?) {

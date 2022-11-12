@@ -26,9 +26,7 @@ class NavManagerTests: XCTestCase {
 
         let root = NavManager(
                 root: nil,
-                easeAnimation: .easeIn,
-                showDefaultNavBar: true,
-                transition: .default,
+                options: NavViewOptions(),
                 sheetManager: sheetManager,
                 actionSheetManager: actionSheetManager,
                 confirmationDialogManager: confirmationDialogManager,
@@ -37,9 +35,7 @@ class NavManagerTests: XCTestCase {
         )
         manager = NavManager(
                 root: root,
-                easeAnimation: .easeIn,
-                showDefaultNavBar: true,
-                transition: .default,
+                options: NavViewOptions(),
                 sheetManager: sheetManager,
                 actionSheetManager: actionSheetManager,
                 confirmationDialogManager: confirmationDialogManager,
