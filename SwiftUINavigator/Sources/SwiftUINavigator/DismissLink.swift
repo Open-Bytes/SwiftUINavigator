@@ -41,6 +41,7 @@ public enum DismissType {
     // Dismiss current presented sheet
     case sheet(type: DismissSheetType? = nil)
 
+    // Dismiss current presented dialog
     case dialog
 
     var isStackDismiss: Bool {

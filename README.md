@@ -20,7 +20,7 @@ The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/Mhmo
 </a></p>
 
 <p align="center"><a href="https://github.com/Open-Bytes/SwiftUINavigator">
-<img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/develop/blob/diagram3.png?raw=true" alt="SwiftUINavigator Diagram" width="550" height="550" border="#1111"/>
+<img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/develop/blob/diagram4.png?raw=true" alt="SwiftUINavigator Diagram" width="550" height="550" border="#1111"/>
 </a></p>
 
 # Table of contents
@@ -36,9 +36,9 @@ The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/Mhmo
     - [Main Components](#main-components)
     - [NavView](#NavView)
     - [Navigator](#navigator)
-    - [NavigatorLink](#navigatorlink)
+    - [NavLink](#navlink)
     - [Dismissing (Navigation Back)](#dismissing-navigation-back)
-    - [DismissDestination](#dismissdestination)
+    - [DismissType](#dismisstype)
     - [Navigation Bar](#navigation-bar)
     - [Transitions](#transitions)
     - [Navigation Types](#navigation-types)
@@ -74,15 +74,21 @@ In SwiftUI, there are a lot of limitations:
 
 `SwiftUINavigator` has a lot of awesome features. Here's some of these features:
 
+- [X] Consistent navigation with screens, sheets, action sheets, dialogs, confirmation dialogs, and alerts.
+
 - [X] Custom navigation transitions
 
 - [X] Navigate to a view without adding it to the back stack.
 
-- [X] Direct navigation without links
-
-- [X] Direct navigation with links
+- [X] Direct navigation with or without links
 
 - [X] Present sheets without having to declare a sheet modifier.
+
+- [X] Present dialogs easily.
+
+- [X] Present alerts easily.
+
+- [X] Present action sheets easily.
 
 - [X] Dismiss to the previous view.
 
@@ -102,7 +108,6 @@ In SwiftUI, there are a lot of limitations:
 
 Select `File` -> `Swift Packages` -> `Add Package Dependency` and enter `https://github.com/Open-Bytes/SwiftUINavigator`.
 
-
 ### Swift Package Manager Projects
 
 You can add `
@@ -112,7 +117,7 @@ SwiftUINavigator` as a package dependency in your `Package.swift` file:
 let package = Package(
     //...
     dependencies: [
-      .package(url: "https://github.com/Open-Bytes/SwiftUINavigator", .upToNextMajor(from: "0.2.0"))
+      .package(url: "https://github.com/Open-Bytes/SwiftUINavigator", .upToNextMajor(from: "1.0.0"))
     ]
     //...
 )
@@ -156,17 +161,17 @@ NavView {
 
 3. Navigate to your destination view:
 
-- Using `NavigatorLink`.
+- Using `NavLink`.
 
 ```swift
-NavigatorLink(destination: SomeView()) {
+NavLink(destination: SomeView()) {
     // When this view is clicked, it will trigger 
     // the navigation and show the destination view
     ProductItemView()
 }
 ```
 
-> For more details about`Navigator`, see [NavigatorLink](#navigatorlink)
+> For more details about`Navigator`, see [NavLink](#navlink)
 
 - Or using `Navigator`
 
@@ -201,14 +206,79 @@ DismissLink {
 > For more details about dismissing,
 > see [Dismissing (Navigation Back)](#dismissing-navigation-back)
 
+## Action Sheet
+
+```swift
+navigator.presentActionSheet {
+  ActionSheet(
+          title: Text("Color"),
+          buttons: [
+            .default(Text("Red")),
+            .default(Text("Green")),
+            .default(Text("Blue")),
+            .cancel()
+          ]
+  )
+}
+```
+
+## Confirmation Dialog
+
+```swift
+navigator.presentConfirmationDialog(titleKey: "Color", titleVisibility: .visible) {
+  Group {
+    Button(action: {}) {
+      Text("Red")
+    }
+    Button(action: {}) {
+      Text("Green")
+    }
+    Button(action: {}) {
+      Text("Blue")
+    }
+  }
+}
+```
+
+## Alert
+
+```swift
+            navigator.presentAlert {
+                Alert(
+                        title: Text("Alert"),
+                        message: Text("Presented on the fly with SwiftUINavigator"),
+                        dismissButton: .cancel())
+            }
+```
+
+## Dialog
+
+```swift
+        navigator.presentDialog(dismissOnTouchOutside: true) {
+            VStack(spacing: 10) {
+                Text("Dialog").bold()
+                Text("Presented on the fly with SwiftUINavigator")
+                Spacer().frame(height: 20)
+                Button(action: {
+                    navigator.dismissDialog()
+                }) {
+                    Text("Cancel")
+                }
+            }
+                    .padding(15)
+                    .background(Color.white)
+                    .cornerRadius(10)
+        }
+```
+
 ### Main Components
 
-|               **Component**               |                                                                        **Description**                                                                                                                             | 
-| ----------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
-|       [NavView](#NavView)     |   `NavView` is the alternative of SwiftUI NavigationView implementing <br> stack-based navigation with more control and flexibility <br> in handling the navigation                                          | 
-|       [Navigator](#navigator)             |   The `Navigator` class is the heart of the library as it includes all the navigation APIs. It's injected to any view as `EnvironmentObject`.                                                                                                             | 
-|       [NavigatorLink](#navigatorlink)     |   The alternative of `NavigationLink`. It's a wrapper of Navigator. <br> When clicked, it will navigate to the destination view with the specified navigation type.                                                  | 
-|       [DismissLink](https://github.com/Open-Bytes/SwiftUINavigator/blob/master/SwiftUINavigator/Sources/SwiftUINavigator/DismissLink.swift)  |   DismissLink is a view which dismisses the current view when tapped. It's a wapper for `Navigator.dismiss()`   | 
+| **Component**                                                                                                                         | **Description**                                                                                                                                                                                  | 
+|---------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| 
+| [NavView](#NavView)                                                                                                                   | `NavView` is the alternative of SwiftUI NavigationView implementing <br> stack-based navigation with more control and flexibility <br> in handling the navigation                                | 
+| [Navigator](#navigator)                                                                                                               | The `Navigator` class is the heart of the library as it includes all the navigation APIs. It's injected to any view as `EnvironmentObject`.                                                      | 
+| [NavLink](#navlink)                                                                                                                   | The alternative of `NavigationLink`. It's a wrapper of Navigator. <br> When clicked, it will navigate to the destination view with the specified navigation type.                                | 
+| [DismissLink](https://github.com/Open-Bytes/SwiftUINavigator/blob/master/SwiftUINavigator/Sources/SwiftUINavigator/DismissLink.swift) | DismissLink is a view which dismisses the current view when tapped. It's a wapper for `Navigator.dismiss()`                                                                                      | 
 
 ### NavView
 
@@ -219,7 +289,7 @@ flexibility in handling the navigation
 
 ```swift
 public init(
-        transition: NavigatorTransition = .default,
+        transition: NavTransition = .default,
         easeAnimation: Animation = .easeOut(duration: 0.2),
         showDefaultNavBar: Bool = true,
         @ViewBuilder rootView: () -> Root)
@@ -235,7 +305,7 @@ NavView(
 }
 ```
 
-> For more details about `NavigatorTransition`,
+> For more details about `NavTransition`,
 > see [Navigation Transition Types](#navigation-transition)
 
 ### Navigator
@@ -272,41 +342,37 @@ navigator.navigate(type: .push()) {
 2. Present sheet
 
 ```swift
-navigator.navigate(type: .sheet()) {
+navigator.navigate(type: .sheet(type: .normal)) {
+    ProductDetailScreen(item: item)
+}
+// OR
+navigator.navigate(type: .sheet(type: .full)) {
+    ProductDetailScreen(item: item)
+}
+// OR
+navigator.navigate(type: .sheet(type: .fixedHeight(200))) {
     ProductDetailScreen(item: item)
 }
 ```
 
-3. Present full sheet
+3. Present Dialog
 
 ```swift
-navigator.navigate(type: .fullSheet) {
+navigator.navigate(type: .dialog) {
     ProductDetailScreen(item: item)
 }
 ```
 
-4. Present a custom sheet
-
-```swift
-navigator.navigate(type: .customSheet(height: 500)) {
-    CartScreen()
-}
-```
-
-> In **macOS**, you have to provide the width & height of the sheet in order to display correctly.
-> Otherwise, you'll see a blank screen.
-
-
-> The navigation types are declared in NavigationType enum.
+> The navigation types are declared in NavType enum.
 > See [Navigation Types](#navigation-types)
 
-### NavigatorLink
+### NavLink
 
 The alternative of `NavigationLink`. It's a wrapper of `Navigator`. When clicked, it will navigate to the destination view
 with the specified navigation type.
 
 ```swift
-NavigatorLink(destination: ProductDetailScreen(item: item)) {
+NavLink(destination: ProductDetailScreen(item: item)) {
     // When this view is clicked, it will trigger 
     // the navigation and show the destination view
     ProductItemView(item: item)
@@ -317,7 +383,7 @@ NavigatorLink(destination: ProductDetailScreen(item: item)) {
 
 You can dismiss the current view:
 
-- Using `NavigatorLink`.
+- Using `NavLink`.
 
 ```swift
 DismissLink {
@@ -333,56 +399,46 @@ navigator.dismiss()
 ```
 
 > Important Note: You have 4 options in dismissing the current view.
-> for more details, see [DismissDestination](#dismissdestination)
+> for more details, see [DismissType](#dismisstype)
 
-### DismissDestination
+### DismissType
 
-`DismissDestination` Defines the type of dismiss operation.
+`DismissType` Defines the type of dismiss operation.
 
 ```swift
-public enum DismissDestination {
+public enum DismissType {
     /// Navigate back to the previous view.
-    case previous
-
+    case toPreviousView
+  
     /// Navigate back to the root view (i.e. the first view added
     /// to the NavView during the initialization process).
-    case root
-
+    case toRootView
+  
     /// Navigate back to a view identified by a specific ID.
-    case view(withId: String)
-
+    case toView(withId: String)
+  
     // Dismiss current presented sheet
-    case dismissSheet
+    case sheet(type: DismissSheetType? = nil)
+  
+    // Dismiss current presented dialog
+    case dialog
 }
 ```
 
 You can pass your option to `DismissLink` or `Navigator.dismiss()`
 
 ```swift
-DismissLink(to: .root) {
+DismissLink(type: .toRootView) {
     Label("Back", systemImage: "chevron.backward")
             .foregroundColor(.blue)
 }
 
-navigator.dismiss(to: .root)
+navigator.dismiss(type: .toRootView)
 ```
 
 ### Navigation Bar
 
 The navigation bar is built-in in the library. And you have the full control of hiding or showing it.
-
-The NavBar is automatically displayed for some navigation types. In the following table, you can find the default state
-for automatically showing the navigation bar
-
-|   **Navigation Type**      |      **Automatic NavBar**      | 
-| -------------------------- | -------------------------------| 
-|   push                     |                 true           | 
-|   fullSheet                |                 true           | 
-|   sheet                    |                 false          | 
-|   customSheet              |                 false          | 
-
-> **Note**: You still can control displaying the NavBar of the navigation types.
->
 
 #### Control Nav Bar For All Views
 
@@ -421,15 +477,15 @@ SomeView()
 
 ### Transitions
 
-You can customize the transition animation by providing `NavigatorTransition` enum.
+You can customize the transition animation by providing `NavTransition` enum.
 
 ```swift
-NavView(transition: .custom(push: .scale)) {
+NavView(transition: .custom(push: .scale, pop: .scale)) {
     SomeView()
 }
 ```
 
-> For more details about `NavigatorTransition`,
+> For more details about `NavTransition`,
 > see [Navigation Transition Types](#navigation-transition)
 
 ### Navigation Types
@@ -437,26 +493,24 @@ NavView(transition: .custom(push: .scale)) {
 This enum defines the supported navigation types
 
 ```swift
-public enum NavigationType {
-    /// Defines the regular navigation type.
+public enum NavType {
+    /// Regular navigation type.
     /// id: pass a custom ID to use when navigate back.
-    /// addToBackStack: if false, the view won't be added to the back stack 
+    /// addToBackStack: if false, the view won't be added to the back stack
     /// and won't be displayed when dismissing the view.
-    case push(id: String? = nil, addToBackStack: Bool = true)
+    case push(id: String? = nil, addToBackStack: Bool = true, showDefaultNavBar: Bool? = nil)
     /// Present a sheet
-    case sheet(width: CGFloat? = nil, height: CGFloat? = nil)
-    /// Present a full sheet
-    @available(iOS 14.0, *)
-    case fullSheet
+    case sheet(type: SheetType)
+    case dialog(dismissOnTouchOutside: Bool = true)
 }
 ```
 
 ### Navigation Transition
 
-`NavigatorTransition` enum defines the supported transitions.
+`NavTransition` enum defines the supported transitions.
 
 ```swift
-public enum NavigatorTransition {
+public enum NavTransition {
     /// Transitions won't be animated.
     case none
 
