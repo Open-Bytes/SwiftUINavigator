@@ -539,7 +539,7 @@ Look at [Changelog](https://github.com/Open-Bytes/SwiftUINavigator/blob/master/C
 
 [Shaban Kamel](https://github.com/ShabanKamell)
 
-... Waiting for our name to be here 💪
+... Waiting for your name to be here 💪
 
 ## License
 
