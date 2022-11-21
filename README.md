@@ -23,10 +23,6 @@ The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/Mhmo
 <img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/feature/enhance-bottom-sheet/blob/diagram4.png?raw=true" alt="SwiftUINavigator Diagram" width="800" height="600" border="#1111"/>
 </a></p>
 
-<video width="500" height="500" controls>
-  <source src="blob/Demo.MP4" type="video/mp4">
-</video>
-
 # Table of contents
 
 - [Why?](#why)
