@@ -20,7 +20,7 @@ The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/Mhmo
 </a></p>
 
 <p align="center"><a href="https://github.com/Open-Bytes/SwiftUINavigator">
-<img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/develop/blob/diagram4.png?raw=true" alt="SwiftUINavigator Diagram" width="550" height="550" border="#1111"/>
+<img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/feature/enhance-bottom-sheet/blob/diagram4.png?raw=true" alt="SwiftUINavigator Diagram" width="800" height="600" border="#1111"/>
 </a></p>
 
 # Table of contents
