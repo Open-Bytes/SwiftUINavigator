@@ -16,7 +16,7 @@ The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/Mhmo
 
 
 <p align="center"><a href="https://github.com/Open-Bytes/SwiftUINavigator">
-<img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/demo.gif?raw=true" alt="SwiftUINavigator Demo" width="450" height="450" border="#1111"/>
+<img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/demo2.gif?raw=true" alt="SwiftUINavigator Demo" width="450" height="450" border="#1111"/>
 </a></p>
 
 <p align="center"><a href="https://github.com/Open-Bytes/SwiftUINavigator">
