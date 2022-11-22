@@ -75,7 +75,6 @@ struct HomeScreen: View {
                     dismissButton: .cancel())
         }
     }
-    }
 
     private func presentDialog() {
         navigator.presentDialog(dismissOnTouchOutside: true) {
