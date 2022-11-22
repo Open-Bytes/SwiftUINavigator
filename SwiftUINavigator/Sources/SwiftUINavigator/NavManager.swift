@@ -237,6 +237,7 @@ extension NavManager {
 extension NavManager {
 
     func dismissSheet(type: DismissSheetType?) {
+        sheetManager.dismissSheet(type: type)
         root?.sheetManager.dismissSheet(type: type)
     }
 
