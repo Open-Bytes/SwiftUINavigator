@@ -205,29 +205,30 @@ NavView {
 
 3. Navigate to your destination view:
 
-- Using `NavLink`.
-
 ```swift
-NavLink(destination: SomeView()) {
-    // When this view is clicked, it will trigger 
-    // the navigation and show the destination view
-    ProductItemView()
-}
-```
-
-> For more details about`Navigator`, see [NavLink](#navlink)
-
-- Or using `Navigator`
-
-```swift
+// Declare navigator
 @EnvironmentObject private var navigator: Navigator
 
+// Navigate
 navigator.navigate {
     SomeView()
 }
 ```
 
 > For more details about`Navigator`, see [Navigator](#navigator)
+
+
+- Using `NavLink`.
+
+```swift
+NavLink(destination: SomeView()) {
+    // When this view is clicked, it will trigger 
+    // the navigation and show ProductItemView
+    ProductItemView()
+}
+```
+
+> For more details about`Navigator`, see [NavLink](#navlink)
 
 4. Dismiss (navigate back) to the previous view
    **_programmatically_** (using `Navigator`) or using a **_link_** (using `DismissLink`).
