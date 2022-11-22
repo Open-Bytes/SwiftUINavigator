@@ -12,15 +12,55 @@ The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/Mhmo
 ![tvOS](https://img.shields.io/badge/tvOS-13.0+-41465B.svg)
 ![License](https://img.shields.io/badge/License-Apache-blue.svg)
 
-**SwiftUINavigator** is a lightweight, flexible, and super easy library which makes `SwiftUI` navigation a trivial task.
+**SwiftUINavigator** is on-the-fly approach for handling SwiftUI navigation. **SwiftUINavigator** is a backtrack to 
+the traditional approach of **UIKit** where you can push or present a controller on the fly without declaring links or local state variables.
 
+The approach is as simple as the following:
 
-<p align="center"><a href="https://github.com/Open-Bytes/SwiftUINavigator">
-<img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/demo2.gif?raw=true" alt="SwiftUINavigator Demo" width="450" height="450" border="#1111"/>
-</a></p>
+```swift
+@EnvironmentObject private var navigator: Navigator
+
+// Navigate to HomeScreen
+navigator.navigate { HomeScreen() }
+
+// Show sheet
+navigator.navigate(type: .sheet(type: .normal)) {
+  SheetView()
+}
+navigator.navigate(type: .sheet(type: .full)) { 
+  SheetView()
+}
+navigator.navigate(type: .sheet(type: .fixedHeight(200))) {
+  SheetView()
+}
+
+// Show dialog
+navigator.navigate(type: .dialog) {
+  DialogView()
+}
+
+// Show action sheet
+navigator.presentActionSheet {
+  ActionSheetView()
+}
+
+// Show confirmation dialog (Like action sheet starting from iOS 15)
+navigator.presentConfirmationDialog(titleKey: "Color", titleVisibility: .visible) {
+  ConfirmationDialogView()
+}
+
+// Show Alert
+navigator.presentAlert {
+  AlertView()
+}
+```
 
 <p align="center"><a href="https://github.com/Open-Bytes/SwiftUINavigator">
 <img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/feature/enhance-bottom-sheet/blob/diagram4.png?raw=true" alt="SwiftUINavigator Diagram" width="800" height="600" border="#1111"/>
+</a></p>
+
+<p align="center"><a href="https://github.com/Open-Bytes/SwiftUINavigator">
+<img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/demo2.gif?raw=true" alt="SwiftUINavigator Demo" width="450" height="450" border="#1111"/>
 </a></p>
 
 # Table of contents
@@ -56,6 +96,8 @@ Let's first explore the limitations of SwiftUI then explore the awesome features
 
 In SwiftUI, there are a lot of limitations:
 
+- [ ] Passing parameters to the view is not easy because you have to declare parameters locally and pass them to the view inside `NavigationLink`. 
+
 - [ ] Can not navigate programmatically. You always have to declare the navigation links.
 
 - [ ] Inconsistent navigation when use `NavigationLink`, `.sheet` and `.fullScreenCover`
@@ -76,6 +118,8 @@ In SwiftUI, there are a lot of limitations:
 
 - [X] Consistent navigation with screens, sheets, action sheets, dialogs, confirmation dialogs, and alerts.
 
+- [X] You are free to pass parameters on the fly and no need to declare the parameters outside the navigation site.
+- 
 - [X] Custom navigation transitions
 
 - [X] Navigate to a view without adding it to the back stack.
@@ -243,12 +287,12 @@ navigator.presentConfirmationDialog(titleKey: "Color", titleVisibility: .visible
 ## Alert
 
 ```swift
-            navigator.presentAlert {
-                Alert(
-                        title: Text("Alert"),
-                        message: Text("Presented on the fly with SwiftUINavigator"),
-                        dismissButton: .cancel())
-            }
+navigator.presentAlert {
+    Alert(
+        title: Text("Alert"),
+        message: Text("Presented on the fly with SwiftUINavigator"),
+        dismissButton: .cancel())
+}
 ```
 
 ## Dialog
@@ -343,15 +387,15 @@ navigator.navigate(type: .push()) {
 
 ```swift
 navigator.navigate(type: .sheet(type: .normal)) {
-    ProductDetailScreen(item: item)
+  SheetView()
 }
 // OR
 navigator.navigate(type: .sheet(type: .full)) {
-    ProductDetailScreen(item: item)
+  SheetView()
 }
 // OR
 navigator.navigate(type: .sheet(type: .fixedHeight(200))) {
-    ProductDetailScreen(item: item)
+  SheetView()
 }
 ```
 
