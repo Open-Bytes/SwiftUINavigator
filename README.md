@@ -60,7 +60,7 @@ navigator.presentAlert {
 </a></p>
 
 <p align="center"><a href="https://github.com/Open-Bytes/SwiftUINavigator">
-<img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/demo2.gif?raw=true" alt="SwiftUINavigator Demo" width="450" height="600" border="#1111"/>
+<img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/demo2.gif?raw=true" alt="SwiftUINavigator Demo" width="450" height="700" border="#1111"/>
 </a></p>
 
 # Table of contents
