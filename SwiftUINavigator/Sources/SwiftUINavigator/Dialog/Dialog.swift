@@ -42,7 +42,7 @@ struct Dialog: ViewModifier {
                     }
                     .opacity(animate ? 1.0 : 0.0)
             dialogContent()?
-                    .shadow(color: .black.opacity(0.2), radius: 20)
+                    .background(Color.clear.shadow(color: Color(UIColor.gray), radius: 20))
                     .scaleEffect(scaleAmount)
                     .animation(Animation.easeInOut(duration: 0.2), value: scaleAmount)
         }
