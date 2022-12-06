@@ -56,7 +56,7 @@ navigator.presentAlert {
 ```
 
 <p align="center"><a href="https://github.com/Open-Bytes/SwiftUINavigator">
-<img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/diagram5.png?raw=true" alt="SwiftUINavigator Diagram" width="700" height="600" border="#1111"/>
+<img src="https://github.com/Open-Bytes/SwiftUINavigator/blob/master/blob/diagram5.png?raw=true" alt="SwiftUINavigator Diagram" width="601" height="613" border="#1111"/>
 </a></p>
 
 <p align="center"><a href="https://github.com/Open-Bytes/SwiftUINavigator">
