@@ -222,6 +222,11 @@ extension NavManager {
         return root.parentManager()
     }
 
+}
+
+extension NavManager {
+
+
     func presentDialog(
             dismissOnTouchOutside: Bool,
             presenter: DialogPresenter,
