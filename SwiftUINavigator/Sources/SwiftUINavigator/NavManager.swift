@@ -238,6 +238,7 @@ extension NavManager {
 
     func dismissDialog() {
         dialogManager.dismiss()
+        parentManager().dialogManager.dismiss()
     }
 
 }

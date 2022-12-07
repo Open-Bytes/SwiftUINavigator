@@ -141,6 +141,12 @@ public extension Navigator {
 
 public extension Navigator {
 
+    /// Present a Dialog
+    ///
+    /// - Parameters:
+    ///   - dismissOnTouchOutside: if true, touching outside will dismiss the dialog.
+    ///   - presenter: which NavView should present the dialog. The default is root.
+    ///   - view: the content.
     func presentDialog<Content: View>(
             dismissOnTouchOutside: Bool = true,
             presenter: DialogPresenter = .root,
@@ -151,6 +157,7 @@ public extension Navigator {
                 view().eraseToAnyView())
     }
 
+    /// Dismiss the dialog.
     func dismissDialog() {
         manager.dismissDialog()
     }
