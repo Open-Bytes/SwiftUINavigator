@@ -141,8 +141,14 @@ public extension Navigator {
 
 public extension Navigator {
 
-    func presentDialog<Content: View>(dismissOnTouchOutside: Bool = true, _ view: () -> Content) {
-        manager.presentDialog(dismissOnTouchOutside: dismissOnTouchOutside, view().eraseToAnyView())
+    func presentDialog<Content: View>(
+            dismissOnTouchOutside: Bool = true,
+            presenter: DialogPresenter = .root,
+            _ view: () -> Content) {
+        manager.presentDialog(
+                dismissOnTouchOutside: dismissOnTouchOutside,
+                presenter: presenter,
+                view().eraseToAnyView())
     }
 
     func dismissDialog() {

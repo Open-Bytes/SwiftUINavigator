@@ -105,8 +105,11 @@ extension NavManager {
                     type: type,
                     onDismiss: nil,
                     content: { element })
-        case .dialog(let dismissOnTouchOutside):
-            presentDialog(dismissOnTouchOutside: dismissOnTouchOutside, element.eraseToAnyView())
+        case let .dialog(dismissOnTouchOutside, presenter):
+            presentDialog(
+                    dismissOnTouchOutside: dismissOnTouchOutside,
+                    presenter: presenter,
+                    element.eraseToAnyView())
         }
     }
 
@@ -212,8 +215,25 @@ extension NavManager {
 
 extension NavManager {
 
-    func presentDialog(dismissOnTouchOutside: Bool, _ dialog: AnyView) {
-        dialogManager.present(dismissOnTouchOutside: dismissOnTouchOutside, dialog)
+    private func parentManager() -> NavManager {
+        guard let root = root?.parentManager() else {
+            return self
+        }
+        return root.parentManager()
+    }
+
+    func presentDialog(
+            dismissOnTouchOutside: Bool,
+            presenter: DialogPresenter,
+            _ dialog: AnyView) {
+        let manager: DialogManager
+        switch presenter {
+        case .root:
+            manager = parentManager().dialogManager
+        case .last:
+            manager = dialogManager
+        }
+        manager.present(dismissOnTouchOutside: dismissOnTouchOutside, dialog)
     }
 
     func dismissDialog() {

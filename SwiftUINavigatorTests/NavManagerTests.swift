@@ -150,6 +150,7 @@ class NavManagerTests: XCTestCase {
     func testPresentDialog() throws {
         manager.presentDialog(
                 dismissOnTouchOutside: true,
+                presenter: .last,
                 Rectangle().eraseToAnyView())
         XCTAssertTrue(dialogManager.isPresented)
     }

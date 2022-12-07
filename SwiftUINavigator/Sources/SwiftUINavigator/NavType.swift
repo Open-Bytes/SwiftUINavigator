@@ -12,5 +12,5 @@ public enum NavType {
     case push(id: String? = nil, addToBackStack: Bool = true, showDefaultNavBar: Bool? = nil)
     /// Present a sheet
     case sheet(type: SheetType)
-    case dialog(dismissOnTouchOutside: Bool = true)
+    case dialog(dismissOnTouchOutside: Bool = true, presenter: DialogPresenter = .root)
 }
