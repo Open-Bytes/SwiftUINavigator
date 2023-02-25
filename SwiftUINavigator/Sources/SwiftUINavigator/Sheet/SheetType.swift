@@ -63,6 +63,8 @@ public enum FixedSheetPresenter {
         }
     }
     #endif
+
+    static var current: FixedSheetPresenter = .rootController
 }
 
 public enum DismissSheetType {

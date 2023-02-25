@@ -36,10 +36,6 @@ class SheetManager: ObservableObject {
     var sheetArgs = SheetArguments(
             height: 0,
             isDismissable: false)
-    #if os(iOS)
-    private var fixedSheetPresenter: FixedSheetPresenter = .rootController
-    #endif
-
 }
 
 extension SheetManager {
@@ -108,7 +104,7 @@ extension SheetManager {
 
             #if os(iOS)
         case let .fixedHeight(type, isDismissable, presenter):
-            fixedSheetPresenter = presenter
+            FixedSheetPresenter.current = presenter
             presentFixedSheet(
                     height: type.height,
                     isDismissable: isDismissable,
@@ -165,8 +161,8 @@ extension SheetManager {
 
     private func dismissFixedSheet() {
         #if os(iOS)
-        fixedSheetPresenter.controller?.dismiss(animated: false)
-        fixedSheetPresenter = .rootController
+        FixedSheetPresenter.current.controller?.dismiss(animated: false)
+        FixedSheetPresenter.current = .rootController
         #endif
     }
 }
