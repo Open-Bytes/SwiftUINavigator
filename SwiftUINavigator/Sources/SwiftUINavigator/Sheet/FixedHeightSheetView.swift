@@ -27,6 +27,7 @@ struct FixedHeightSheetView<Content: View>: View {
                                 return
                             }
                             presenter.controller?.dismiss(animated: false)
+                            FixedSheetPresenter.current = .rootController
                         }
                         .animation(.easeInOut)
                 content.transition(.move(edge: .bottom))
