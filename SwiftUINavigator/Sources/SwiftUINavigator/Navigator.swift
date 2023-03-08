@@ -18,12 +18,8 @@ public class Navigator: ObservableObject {
     ///   - element: the view
     public func navigate<Element: View>(
             type: NavType = .push(),
-            onDismissSheet: (() -> Void)? = nil,
             _ element: () -> Element) {
-        manager.navigate(
-                element(),
-                type: type,
-                onDismissSheet: onDismissSheet)
+        manager.navigate(element(), type: type)
     }
 
     /// Navigates to a view.
@@ -50,11 +46,9 @@ public class Navigator: ObservableObject {
     ///   - content: the view.
     public func presentSheet<Content: View>(
             type: SheetType,
-            onDismiss: (() -> Void)? = nil,
             content: () -> Content) {
         manager.presentSheet(
                 type: type,
-                onDismiss: onDismiss,
                 content: content)
     }
 

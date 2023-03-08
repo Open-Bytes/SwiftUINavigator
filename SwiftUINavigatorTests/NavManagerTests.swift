@@ -46,49 +46,32 @@ class NavManagerTests: XCTestCase {
     }
 
     func testNavigate_push_stackItemsShouldBeNotEmpty() throws {
-        manager.navigate(
-                EmptyView(),
-                type: .push(),
-                onDismissSheet: {})
+        manager.navigate(EmptyView(), type: .push())
         XCTAssertFalse(manager.stackItems.isEmpty)
     }
 
     func testNavigate_sheet_normal_shouldBePresented() throws {
-        manager.navigate(
-                EmptyView(),
-                type: .sheet(type: .normal),
-                onDismissSheet: {})
+        manager.navigate(EmptyView(), type: .sheet(type: .normal))
         XCTAssertTrue(sheetManager.presentSheet)
     }
 
     func testNavigate_sheet_full_shouldBePresented() throws {
-        manager.navigate(
-                EmptyView(),
-                type: .sheet(type: .full),
-                onDismissSheet: {})
+        manager.navigate(EmptyView(), type: .sheet(type: .full))
         XCTAssertTrue(sheetManager.presentFullSheet)
     }
 
     func testNavigate_sheet_fixedHeight_shouldBePresented() throws {
-        manager.navigate(
-                EmptyView(),
-                type: .sheet(type: .fixedHeight(.value(0))),
-                onDismissSheet: {})
+        manager.navigate(EmptyView(), type: .sheet(type: .fixedHeight(.value(0))))
         XCTAssertTrue(sheetManager.presentFixedHeightSheet)
     }
 
     func testNavigate_dialog_shouldBePresented() throws {
-        manager.navigate(
-                EmptyView(),
-                type: .dialog(),
-                onDismissSheet: {})
+        manager.navigate(EmptyView(), type: .dialog())
         XCTAssertTrue(dialogManager.isPresented)
     }
 
     func testPresentSheet() throws {
-        manager.presentSheet(
-                type: .normal,
-                onDismiss: {}) {
+        manager.presentSheet(type: .normal) {
             EmptyView()
         }
         XCTAssertTrue(sheetManager.presentSheet)

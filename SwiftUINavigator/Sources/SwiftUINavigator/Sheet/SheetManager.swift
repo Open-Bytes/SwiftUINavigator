@@ -7,31 +7,9 @@ import SwiftUI
 class SheetManager: ObservableObject {
     var navManager: NavManager!
 
-    @Published var presentSheet: Bool = false {
-        didSet {
-            if !presentSheet {
-                onDismissSheet?()
-                onDismissSheet = nil
-            }
-        }
-    }
-    @Published var presentFullSheet: Bool = false {
-        didSet {
-            if !presentFullSheet {
-                onDismissSheet?()
-                onDismissSheet = nil
-            }
-        }
-    }
-    @Published var presentFixedHeightSheet: Bool = false {
-        didSet {
-            if !presentFixedHeightSheet {
-                onDismissSheet?()
-                onDismissSheet = nil
-            }
-        }
-    }
-    private var onDismissSheet: (() -> Void)? = nil
+    @Published var presentSheet: Bool = false
+    @Published var presentFullSheet: Bool = false
+    @Published var presentFixedHeightSheet: Bool = false
     var sheet: AnyView? = nil
     var sheetArgs = SheetArguments(
             height: 0,
@@ -42,9 +20,7 @@ extension SheetManager {
 
     func presentSheet<Content: View>(
             type: SheetType,
-            onDismiss: (() -> Void)?,
             content: () -> Content) {
-        onDismissSheet = onDismiss
         switch type {
             #if os(iOS)
         case .normal:
@@ -103,24 +79,20 @@ extension SheetManager {
             #endif
 
             #if os(iOS)
-        case let .fixedHeight(type, isDismissable, presenter):
-            FixedSheetPresenter.current = presenter
+        case let .fixedHeight(type, isDismissable):
             presentFixedSheet(
                     height: type.height,
-                    isDismissable: isDismissable,
-                    presenter: presenter)
+                    isDismissable: isDismissable)
             #endif
         }
     }
 
     private func presentFixedSheet(
             height: CGFloat,
-            isDismissable: Bool,
-            presenter: FixedSheetPresenter) {
+            isDismissable: Bool) {
         presentFixedHeightSheet = true
         withAnimation(navManager.options.easeAnimation) {
             presentSheetController(
-                    presenter: presenter,
                     isDismissable: isDismissable,
                     content: sheet?.frame(height: height)
             )
@@ -161,8 +133,7 @@ extension SheetManager {
 
     private func dismissFixedSheet() {
         #if os(iOS)
-        FixedSheetPresenter.current.controller?.dismiss(animated: false)
-        FixedSheetPresenter.current = .rootController
+        UIApplication.shared.topViewController()?.dismiss(animated: false)
         #endif
     }
 }

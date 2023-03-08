@@ -90,10 +90,7 @@ class NavManager: ObservableObject {
 
 extension NavManager {
 
-    func navigate<Element: View>(
-            _ element: Element,
-            type: NavType,
-            onDismissSheet: (() -> Void)?) {
+    func navigate<Element: View>(_ element: Element, type: NavType) {
         switch type {
         case let .push(id, addToBackStack, showDefaultNavBar):
             push(
@@ -103,7 +100,6 @@ extension NavManager {
         case .sheet(let type):
             sheetManager.presentSheet(
                     type: type,
-                    onDismiss: nil,
                     content: { element })
         case let .dialog(dismissOnTouchOutside, presenter):
             presentDialog(
@@ -115,11 +111,9 @@ extension NavManager {
 
     func presentSheet<Content: View>(
             type: SheetType,
-            onDismiss: (() -> Void)?,
             content: () -> Content) {
         sheetManager.presentSheet(
                 type: type,
-                onDismiss: onDismiss,
                 content: content)
     }
 

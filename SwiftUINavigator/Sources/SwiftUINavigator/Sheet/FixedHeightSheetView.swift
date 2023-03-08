@@ -9,12 +9,11 @@ struct FixedHeightSheetView<Content: View>: View {
     @Environment(\.presentationMode) var presentationMode
     private var content: Content
     private let isDismissable: Bool
-    private let presenter: FixedSheetPresenter
     @State private var isContentVisible: Bool = false
 
-    init(presenter: FixedSheetPresenter, isDismissable: Bool, @ViewBuilder content: @escaping () -> Content) {
+    init(isDismissable: Bool,
+         @ViewBuilder content: @escaping () -> Content) {
         self.content = content()
-        self.presenter = presenter
         self.isDismissable = isDismissable
     }
 
@@ -26,8 +25,7 @@ struct FixedHeightSheetView<Content: View>: View {
                             guard isDismissable else {
                                 return
                             }
-                            presenter.controller?.dismiss(animated: false)
-                            FixedSheetPresenter.current = .rootController
+                            UIApplication.shared.topViewController()?.dismiss(animated: false)
                         }
                         .animation(.easeInOut)
                 content.transition(.move(edge: .bottom))
@@ -44,13 +42,16 @@ struct FixedHeightSheetView<Content: View>: View {
 
 
 func presentSheetController<Content: View>(
-        presenter: FixedSheetPresenter,
         isDismissable: Bool,
         content: Content) {
-    let view = FixedHeightSheetView(presenter: presenter, isDismissable: isDismissable) {
+    let view = FixedHeightSheetView(
+            isDismissable: isDismissable
+    ) {
         content
     }
     let controller = SheetController(rootView: view)
-    presenter.controller?.present(controller, animated: false)
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        UIApplication.shared.topViewController()?.present(controller, animated: false)
+    }
 }
 #endif

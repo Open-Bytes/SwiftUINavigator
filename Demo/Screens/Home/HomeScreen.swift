@@ -135,10 +135,7 @@ struct HomeScreen: View {
             ForEach(items, id: \.uuid) { item in
                 NavLink(
                         destination: ProductDetailScreen.build(item: item),
-                        type: vm.navigationOption,
-                        onDismissSheet: {
-                            print("Sheet dismissed.")
-                        }) {
+                        type: vm.navigationOption) {
                     // When this view is clicked, it will trigger the navigation
                     ProductItemView(item: item)
                 }
@@ -146,12 +143,9 @@ struct HomeScreen: View {
 
                 // It's also possible to use Navigator object directly to navigate
                 if false {
-                    ProductItemView(item: item).onTapGesture {
-                                navigator.navigate(
-                                        type: vm.navigationOption,
-                                        onDismissSheet: {
-                                            print("Sheet dismissed.")
-                                        }) {
+                    ProductItemView(item: item)
+                            .onTapGesture {
+                                navigator.navigate(type: vm.navigationOption) {
                                     ProductDetailScreen(item: item)
                                 }
                             }
