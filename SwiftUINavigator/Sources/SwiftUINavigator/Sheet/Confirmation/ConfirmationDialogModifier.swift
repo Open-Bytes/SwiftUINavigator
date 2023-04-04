@@ -42,12 +42,12 @@ struct ConfirmationDialogModifier: ViewModifier {
     private let titleKey: LocalizedStringKey
     @Binding private var isPresented: Bool
     private let titleVisibility: ConfirmationDialogVisibility
-    private let actions: () -> AnyView?
+    private let actions: () -> AnyView
 
     init(_ titleKey: LocalizedStringKey,
          isPresented: Binding<Bool>,
          titleVisibility: ConfirmationDialogVisibility = .automatic,
-         actions: @escaping () -> AnyView?) {
+         actions: @escaping () -> AnyView) {
         self.titleKey = titleKey
         _isPresented = isPresented
         self.titleVisibility = titleVisibility
@@ -56,7 +56,7 @@ struct ConfirmationDialogModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         Group {
-            if #available(iOS 15.0, macOS 12.0, *), let actions {
+            if #available(iOS 15.0, macOS 12.0, *) {
                 content
                         .confirmationDialog(
                                 titleKey,

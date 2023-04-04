@@ -69,7 +69,7 @@ struct NavViewContent<Root>: View where Root: View {
                                 isPresented: $manager.confirmationDialogManager.isPresented,
                                 titleVisibility: manager.confirmationDialogManager.titleVisibility,
                                 actions: {
-                                    manager.confirmationDialogManager.content?.eraseToAnyView()
+                                    manager.confirmationDialogManager.content?.eraseToAnyView() ?? EmptyView().eraseToAnyView()
                                 }
                         ))
                 #if os(iOS)
