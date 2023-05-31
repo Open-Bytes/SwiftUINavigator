@@ -12,10 +12,8 @@ The logo is contributed with ❤️ by [Mahmoud Hussein](https://github.com/Mhmo
 ![tvOS](https://img.shields.io/badge/tvOS-13.0+-41465B.svg)
 ![License](https://img.shields.io/badge/License-Apache-blue.svg)
 
-**SwiftUINavigator** is on-the-fly approach for handling SwiftUI navigation. **SwiftUINavigator** is a backtrack to 
-the traditional approach of **UIKit** where you can push or present a controller on the fly without declaring links or local state variables.
 
-The approach is as simple as the following:
+**SwiftUINavigator** is an on-the-fly approach for handling navigation in SwiftUI. It provides a familiar way of handling navigation similar to UIKit, where you can push or present a view controller without the need to declare links or local state variables. This approach is more flexible and allows for dynamic navigation, making it easier to build more complex navigation flows in your SwiftUI app. Unlike traditional navigation patterns in SwiftUI, SwiftUINavigator offers a more intuitive and straightforward way of managing your app's navigation hierarchy.
 
 ```swift
 @EnvironmentObject private var navigator: Navigator
